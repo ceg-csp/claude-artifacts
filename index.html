@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic CSM — Artifact Library</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+:root{--bg:#0a0e13;--surface:#111820;--card:#161f2a;--card-hover:#1c2735;--border:#1e2a38;--border-hover:#2a3a4e;--accent:#5aa8e8;--accent-glow:rgba(90,168,232,.12);--green:#4ade80;--green-glow:rgba(74,222,128,.08);--purple:#a78bfa;--amber:#fbbf24;--red:#f87171;--text:#eaf0f6;--text2:#8899aa;--text3:#556677;--font:'DM Sans',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.hero{padding:80px 40px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(90,168,232,.06) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-glow);border:1px solid rgba(90,168,232,.2);border-radius:24px;padding:6px 18px;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:24px;letter-spacing:.5px}
+.hero-badge .dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,var(--text) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:var(--text2);max-width:640px;margin:0 auto 40px;line-height:1.6}
+.stats-row{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-value{font-size:36px;font-weight:700;line-height:1}
+.stat-label{font-size:12px;font-weight:500;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+
+.section{padding:40px 40px 60px;max-width:1200px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px}
+.section-title{font-size:24px;font-weight:700;margin-bottom:8px}
+.section-sub{font-size:14px;color:var(--text2);margin-bottom:32px;max-width:600px;line-height:1.6}
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.artifact-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all .25s;cursor:pointer;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.artifact-card:hover{border-color:var(--border-hover);background:var(--card-hover);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.artifact-card .card-accent{position:absolute;top:0;left:0;right:0;height:3px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.card-agent-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.6px}
+.card-status{font-size:10px;font-weight:600;display:flex;align-items:center;gap:5px;color:var(--green)}
+.card-status .dot{width:5px;height:5px;background:var(--green);border-radius:50%}
+.card-status.coming{color:var(--text3)}
+.card-status.coming .dot{background:var(--text3)}
+.card-title{font-size:17px;font-weight:600;margin-bottom:6px}
+.card-desc{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:16px}
+.card-outcomes{display:flex;flex-wrap:wrap;gap:6px}
+.outcome-tag{font-size:10.5px;font-weight:500;padding:4px 10px;border-radius:6px;background:rgba(90,168,232,.08);color:var(--accent);border:1px solid rgba(90,168,232,.12)}
+
+.value-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.value-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center}
+.value-icon{font-size:32px;margin-bottom:12px}
+.value-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.value-desc{font-size:12.5px;color:var(--text2);line-height:1.5}
+
+.cta-section{text-align:center;padding:60px 40px 80px}
+.cta-section h2{font-size:24px;font-weight:700;margin-bottom:10px}
+.cta-section p{font-size:14px;color:var(--text2);margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);text-decoration:none;transition:all .2s}
+.cta-btn:hover{background:#74b9f2;transform:translateY(-1px)}
+.cta-btn.secondary{background:transparent;border:1px solid var(--border);color:var(--text2);margin-left:12px}
+.cta-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{text-align:center;padding:24px 40px;border-top:1px solid var(--border);font-size:11px;color:var(--text3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> CSP AI Agent Platform — Artifact Library</div>
+  <h1>Agentic CSM<br>Interactive Prototypes</h1>
+  <p>Live, interactive demos of AI agents engineered to transform Customer Success operations at scale. Every prototype built here lives permanently — nothing gets lost.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-value" style="color:var(--accent);">39</div><div class="stat-label">AI Agents Designed</div></div>
+    <div class="stat"><div class="stat-value" style="color:var(--green);">5</div><div class="stat-label">Core Sections</div></div>
+    <div class="stat"><div class="stat-value" style="color:var(--purple);">360°</div><div class="stat-label">CSM Coverage</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Live Prototypes</div>
+  <div class="section-title">Explore Agent Demos</div>
+  <div class="section-sub">Click any card to launch the full interactive prototype. Each demo is self-contained — share the link with anyone, no login required.</div>
+
+  <div class="cards-grid">
+    <a href="Agentic%20CSM/" class="artifact-card">
+      <div class="card-accent" style="background:linear-gradient(90deg,#f87171,#fbbf24);"></div>
+      <div class="card-header">
+        <span class="card-agent-badge" style="background:rgba(248,113,113,.1);color:#f87171;">Agent 13 • CRIR</span>
+        <span class="card-status"><span class="dot"></span> Live</span>
+      </div>
+      <div class="card-title">Support Notification Agent</div>
+      <div class="card-desc">Real-time case pattern detection across your portfolio. Monitors P1 concentrations, stale cases, misrouted tickets, and SLA-only responses — then recommends actions before customers escalate.</div>
+      <div class="card-outcomes">
+        <span class="outcome-tag">Real-time alerts</span>
+        <span class="outcome-tag">Pattern detection</span>
+        <span class="outcome-tag">Cross-agent triggers</span>
+        <span class="outcome-tag">Escalation workflows</span>
+      </div>
+    </a>
+
+    <div class="artifact-card" style="opacity:.55;cursor:default;">
+      <div class="card-accent" style="background:linear-gradient(90deg,#5aa8e8,#a78bfa);"></div>
+      <div class="card-header">
+        <span class="card-agent-badge" style="background:rgba(90,168,232,.1);color:#5aa8e8;">Agent 3</span>
+        <span class="card-status coming"><span class="dot"></span> Coming Soon</span>
+      </div>
+      <div class="card-title">Prioritization Heat Map</div>
+      <div class="card-desc">4-quadrant portfolio triage engine that classifies accounts by risk and value signals, ensuring CSMs always focus on highest-impact accounts first.</div>
+      <div class="card-outcomes">
+        <span class="outcome-tag">Portfolio scoring</span>
+        <span class="outcome-tag">Risk classification</span>
+        <span class="outcome-tag">Data-driven triage</span>
+      </div>
+    </div>
+
+    <div class="artifact-card" style="opacity:.55;cursor:default;">
+      <div class="card-accent" style="background:linear-gradient(90deg,#4ade80,#81b5a1);"></div>
+      <div class="card-header">
+        <span class="card-agent-badge" style="background:rgba(74,222,128,.1);color:#4ade80;">Agent 27</span>
+        <span class="card-status coming"><span class="dot"></span> Coming Soon</span>
+      </div>
+      <div class="card-title">Daily Brief Agent</div>
+      <div class="card-desc">Industry intelligence feed personalized per CSM portfolio. Delivers daily context on what's happening in your customers' industries — positioning CSMs as trusted advisors.</div>
+      <div class="card-outcomes">
+        <span class="outcome-tag">Industry signals</span>
+        <span class="outcome-tag">Per-CSM digest</span>
+        <span class="outcome-tag">Conversation starters</span>
+      </div>
+    </div>
+
+    <div class="artifact-card" style="opacity:.55;cursor:default;">
+      <div class="card-accent" style="background:linear-gradient(90deg,#fbbf24,#f97316);"></div>
+      <div class="card-header">
+        <span class="card-agent-badge" style="background:rgba(251,191,36,.1);color:#fbbf24;">Agent 1</span>
+        <span class="card-status coming"><span class="dot"></span> Coming Soon</span>
+      </div>
+      <div class="card-title">Meeting Co-Pilot Agent</div>
+      <div class="card-desc">Transforms every customer meeting into structured, actionable intelligence — auto-generating summaries, next-step assignments, and agendas for the next call.</div>
+      <div class="card-outcomes">
+        <span class="outcome-tag">Transcript analysis</span>
+        <span class="outcome-tag">Action extraction</span>
+        <span class="outcome-tag">Auto-agenda</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Why This Matters</div>
+  <div class="section-title">What the Team Gets</div>
+  <div class="section-sub">Every prototype is a clickable, shareable proof-of-concept that brings the vision to life.</div>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-icon">🔗</div>
+      <div class="value-title">One Link, Full Demo</div>
+      <div class="value-desc">Share a URL. Stakeholders see the full interactive prototype in their browser. No installs, no logins, no slides.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">📦</div>
+      <div class="value-title">Nothing Gets Lost</div>
+      <div class="value-desc">Every artifact lives permanently in this library. Version-controlled, always accessible, always up-to-date.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">⚡</div>
+      <div class="value-title">Prototype in Minutes</div>
+      <div class="value-desc">Go from idea to interactive demo in a single conversation with Claude. No engineering dependency. No sprint cycles.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <div class="value-title">Stakeholder Alignment</div>
+      <div class="value-desc">Show, don't tell. Interactive prototypes create shared understanding faster than any PRD or slide deck.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🏗️</div>
+      <div class="value-title">Team-Wide Access</div>
+      <div class="value-desc">Any PM on the team can create and deploy new prototypes. Shared repo, shared conventions, shared library.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔄</div>
+      <div class="value-title">Living Artifacts</div>
+      <div class="value-desc">Prototypes evolve with the product. Update a demo after feedback and the link stays the same — stakeholders always see the latest.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="padding-bottom:20px;">
+  <div class="section-label">5 Agent Sections</div>
+  <div class="section-title">39 Agents Across the CSM Journey</div>
+  <div class="section-sub">Each section targets a critical phase of the customer success lifecycle.</div>
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+    <div class="value-card"><div class="value-icon">🤝</div><div class="value-title">Meeting Intelligence</div><div class="value-desc">6 agents transforming interactions into actionable intelligence</div></div>
+    <div class="value-card"><div class="value-icon">🛡️</div><div class="value-title">Health, Risk & Support</div><div class="value-desc">6 agents for proactive health and support monitoring</div></div>
+    <div class="value-card"><div class="value-icon">📊</div><div class="value-title">Portfolio & Renewal</div><div class="value-desc">6 agents ensuring high-impact CSM focus and renewal success</div></div>
+    <div class="value-card"><div class="value-icon">🚀</div><div class="value-title">Onboarding & Adoption</div><div class="value-desc">6 agents for seamless customer onboarding from day one</div></div>
+    <div class="value-card"><div class="value-icon">🧠</div><div class="value-title">AI, Value & Knowledge</div><div class="value-desc">6 agents maximizing AI adoption and value communication</div></div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>Ready to Explore?</h2>
+  <p>Click into any live prototype above, or reach out to build the next one for your agent.</p>
+  <a href="Agentic%20CSM/" class="cta-btn">🔔 Launch Agent 13 Demo</a>
+  <a href="https://github.com/ceg-csp/claude-artifacts" class="cta-btn secondary" target="_blank">View on GitHub →</a>
+</div>
+
+<footer>
+  CSP AI Agent Platform • Artifact Library • Powered by Claude × ServiceNow
+</footer>
+
+</body>
+</html>
