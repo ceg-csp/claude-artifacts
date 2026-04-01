@@ -48,12 +48,14 @@ Using conversation context, infer ALL fields and present a single confirmation t
 - Ops workflows, process tools, governance → Program Management
 - Anything else → Misc
 
-**Color auto-assignment by section:**
-- Product Management: `var(--blue)` / `var(--green)` / `var(--blue-bg)`
-- Analytics: `var(--accent)` / `var(--purple)` / `var(--accent-bg)`
+**Color auto-assignment by section (must use actual CSS variable names from index.html):**
+- Product Management: `var(--accent)` / `var(--green)` / `var(--accent-bg)`
+- Analytics: `var(--purple)` / `var(--accent)` / `var(--purple-bg)`
 - GTM Tooling: `var(--amber)` / `var(--orange)` / `var(--amber-bg)`
 - Program Management: `var(--green)` / `var(--teal)` / `var(--green-bg)`
 - Misc: `var(--rose)` / `var(--orange)` / `var(--rose-bg)`
+
+**Valid CSS color variables:** `--accent`, `--green`, `--purple`, `--amber`, `--rose`, `--orange`, `--teal` and their `-bg` variants. Do NOT use `--blue` — it does not exist in the stylesheet. Use `--accent` for blue.
 
 Wait for user confirmation before proceeding. If user requests changes, update and re-confirm.
 
@@ -97,6 +99,7 @@ Parse the JSON array from Step 1 and append the new entry:
 **Field notes:**
 - `keywords`: 8-12 search terms broader than tags — think about what someone would type to find this
 - `url`: folder name, URL-encoded if spaces (prefer lowercase hyphens to avoid encoding)
+- `color1`, `color2`, `colorBg`: MUST use valid CSS variables from the color map above. Never use `var(--blue)`.
 - If updating an existing artifact, find the entry by name and update its fields
 
 Push updated artifacts.json using the sha saved from Step 1:
@@ -128,5 +131,6 @@ Always return this exact format after successful deployment:
 - The homepage dynamically reads artifacts.json — you NEVER need to edit index.html
 - Keep keywords broad — include terms users might naturally search for
 - Prefer lowercase-hyphen folder names (e.g., `csql/` not `CSQL Intelligence Hub/`)
+- NEVER use `var(--blue)` or `var(--blue-bg)` — these do not exist. Use `var(--accent)` / `var(--accent-bg)` for blue.
 - If GitHub MCP is not available (e.g., in claude.ai web), provide terminal commands instead
 - Hard refresh (Cmd+Shift+R) may be needed if user sees cached version

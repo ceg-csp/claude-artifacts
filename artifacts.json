@@ -22,9 +22,9 @@
     "url": "csql/",
     "live": true,
     "agent": "CSQL Copilot",
-    "color1": "var(--blue)",
+    "color1": "var(--accent)",
     "color2": "var(--green)",
-    "colorBg": "var(--blue-bg)",
+    "colorBg": "var(--accent-bg)",
     "added": "2026-04-01"
   }
 ]
