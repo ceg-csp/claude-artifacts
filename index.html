@@ -7,276 +7,242 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap');
 :root{
-  --bg:#06090d;--surface:#0c1117;--card:#111920;--card-h:#161f2b;
-  --bdr:#172030;--bdr-h:#253448;
-  --accent:#5aa8e8;--accent2:#74b9f2;--accent-g:rgba(90,168,232,.07);
-  --green:#4ade80;--teal:#2dd4bf;--purple:#a78bfa;--amber:#fbbf24;--rose:#fb7185;--orange:#fb923c;
-  --t1:#edf2f7;--t2:#8899aa;--t3:#4a5568;
+  --bg:#0e1525;--bg2:#121a2e;--surface:#162037;--card:#1a2641;--card-h:#1f2d4d;
+  --bdr:#243352;--bdr-h:#2f4270;
+  --accent:#6cb4f0;--accent2:#91cbff;--accent-g:rgba(108,180,240,.06);
+  --green:#5eead4;--teal:#2dd4bf;--purple:#b197fc;--amber:#fcd34d;--rose:#fda4af;--orange:#fdba74;
+  --t1:#e8edf5;--t2:#8fa3be;--t3:#506580;
   --font:'DM Sans',-apple-system,sans-serif;--mono:'Space Mono',monospace;
+  --glass:rgba(22,32,55,.65);--glass-bdr:rgba(36,51,82,.6);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--t1);overflow-x:hidden}
-::selection{background:var(--accent);color:#fff}
+body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--bg)}
 
-/* ── GRID BG ── */
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(90,168,232,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(90,168,232,.03) 1px,transparent 1px);
-  background-size:60px 60px}
-.glow-orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
-.glow-orb.a{width:600px;height:600px;background:rgba(90,168,232,.04);top:-200px;left:-100px}
-.glow-orb.b{width:500px;height:500px;background:rgba(167,139,250,.03);bottom:-150px;right:-100px}
-.glow-orb.c{width:400px;height:400px;background:rgba(45,212,191,.03);top:50%;left:50%;transform:translate(-50%,-50%)}
+/* ── BG ── */
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%,rgba(108,180,240,.06),transparent),
+    radial-gradient(ellipse 60% 50% at 80% 80%,rgba(177,151,252,.04),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(94,234,212,.03),transparent)}
+.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
 
-.page{position:relative;z-index:1}
+.shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;max-width:1400px;margin:0 auto;padding:0 32px}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(6,9,13,.7);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);transition:all .3s}
-.nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--green),var(--teal));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:var(--bg)}
-.nav-brand span{font-weight:600;font-size:14px;letter-spacing:-.2px}
-.nav-links{display:flex;gap:6px}
-.nav-link{font-size:11.5px;font-weight:500;color:var(--t3);padding:6px 14px;border-radius:8px;cursor:pointer;text-decoration:none;transition:all .15s;border:1px solid transparent}
-.nav-link:hover{color:var(--t2);background:var(--accent-g);border-color:var(--bdr)}
-.nav-link.active{color:var(--accent);background:var(--accent-g);border-color:rgba(90,168,232,.15)}
+/* ── TOP BAR ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--bdr)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:var(--bg);letter-spacing:-.5px}
+.brand-text{font-weight:600;font-size:15px;letter-spacing:-.3px}
+.brand-sub{font-size:10.5px;color:var(--t3);font-weight:500;margin-top:1px}
+.top-right{display:flex;align-items:center;gap:10px}
+.live-pill{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--green);background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.12);padding:5px 14px;border-radius:20px}
+.live-pill .dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.setup-btn{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-g);border:1px solid rgba(108,180,240,.15);padding:6px 16px;border-radius:8px;text-decoration:none;transition:all .15s}
+.setup-btn:hover{background:rgba(108,180,240,.1);border-color:rgba(108,180,240,.3)}
 
-/* ── HERO ── */
-.hero{padding:140px 40px 80px;text-align:center;position:relative}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent-g);border:1px solid rgba(90,168,232,.15);border-radius:24px;padding:5px 16px;font-size:11px;font-weight:600;color:var(--accent);margin-bottom:28px;letter-spacing:.8px;text-transform:uppercase}
-.hero-tag .pulse{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.3)}50%{opacity:.4;box-shadow:0 0 0 6px rgba(74,222,128,0)}}
-.hero h1{font-size:clamp(36px,5.5vw,64px);font-weight:700;line-height:1.1;margin-bottom:20px;letter-spacing:-1.5px}
-.hero h1 .grad{background:linear-gradient(135deg,var(--accent) 0%,var(--teal) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:17px;color:var(--t2);max-width:580px;margin:0 auto 44px;line-height:1.65}
-.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
-.h-stat{text-align:center;position:relative}
-.h-stat::after{content:'';position:absolute;right:-24px;top:50%;transform:translateY(-50%);width:1px;height:32px;background:var(--bdr)}
-.h-stat:last-child::after{display:none}
-.h-stat-val{font-family:var(--mono);font-size:32px;font-weight:700;letter-spacing:-1px}
-.h-stat-label{font-size:10.5px;font-weight:600;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:1.2px}
+/* ── HERO COMPACT ── */
+.hero{padding:36px 0 28px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.hero-left{max-width:600px}
+.hero h1{font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.15;letter-spacing:-1px;margin-bottom:8px}
+.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:14px;color:var(--t2);line-height:1.6;max-width:480px}
+.hero-stats{display:flex;gap:32px}
+.hs{text-align:center}
+.hs-val{font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-1px}
+.hs-label{font-size:9.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
 
-/* ── SECTION ── */
-.sec{padding:60px 40px 40px;max-width:1200px;margin:0 auto}
-.sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
-.sec-left{}
-.sec-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.sec-tag .bar{width:20px;height:2px;border-radius:1px}
-.sec-title{font-size:22px;font-weight:700;letter-spacing:-.5px}
-.sec-count{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--bdr)}
+/* ── SECTION TABS ── */
+.tabs{display:flex;gap:4px;padding:20px 0 0;border-bottom:1px solid var(--bdr);overflow-x:auto}
+.tab{font-size:12px;font-weight:500;color:var(--t3);padding:10px 20px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;position:relative}
+.tab:hover{color:var(--t2)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab .count{font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;margin-left:6px;background:rgba(108,180,240,.08);color:var(--accent);vertical-align:middle}
+.tab .count.zero{background:rgba(80,101,128,.15);color:var(--t3)}
 
-/* ── ARTIFACT CARDS ── */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-bottom:20px}
-.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:22px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:all .25s}
-.card:hover{border-color:var(--bdr-h);background:var(--card-h);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+/* ── CONTENT AREA ── */
+.content{flex:1;padding:24px 0 40px}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .25s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CARDS GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.card{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-bdr);border-radius:14px;padding:22px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:all .25s}
+.card:hover{border-color:var(--bdr-h);background:var(--card-h);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
 .card .bar{position:absolute;top:0;left:0;right:0;height:2px}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.card-badge{font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:16px;text-transform:uppercase;letter-spacing:.6px}
-.card-live{font-size:9.5px;font-weight:600;display:flex;align-items:center;gap:5px;color:var(--green)}
-.card-live .d{width:5px;height:5px;background:var(--green);border-radius:50%}
-.card-soon{font-size:9.5px;font-weight:500;color:var(--t3)}
-.card h3{font-size:16px;font-weight:600;margin-bottom:5px;letter-spacing:-.2px}
-.card p{font-size:12.5px;color:var(--t2);line-height:1.5;margin-bottom:14px}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.badge{font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:14px;text-transform:uppercase;letter-spacing:.5px}
+.status{font-size:9.5px;font-weight:600;display:flex;align-items:center;gap:5px}
+.status.live{color:var(--green)}
+.status.live .sd{width:5px;height:5px;background:var(--green);border-radius:50%}
+.status.soon{color:var(--t3)}
+.card h3{font-size:15.5px;font-weight:600;margin-bottom:4px;letter-spacing:-.2px}
+.card .desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:12px}
 .tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{font-size:10px;font-weight:500;padding:3px 9px;border-radius:5px;border:1px solid var(--bdr)}
-.card.placeholder{opacity:.4;cursor:default}
-.card.placeholder:hover{transform:none;border-color:var(--bdr);background:var(--card);box-shadow:none}
+.tag{font-size:9.5px;font-weight:500;padding:3px 9px;border-radius:5px;border:1px solid var(--bdr)}
+.card.ph{opacity:.35;cursor:default}
+.card.ph:hover{transform:none;border-color:var(--glass-bdr);background:var(--glass);box-shadow:none}
 
 /* ── EMPTY STATE ── */
-.empty{border:1px dashed var(--bdr);border-radius:14px;padding:40px;text-align:center;color:var(--t3);font-size:13px;line-height:1.6}
-.empty strong{color:var(--t2);display:block;margin-bottom:4px;font-size:14px}
-
-/* ── DIVIDER ── */
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);max-width:1200px;margin:20px auto}
+.empty{background:var(--glass);backdrop-filter:blur(8px);border:1px dashed var(--bdr);border-radius:14px;padding:48px 32px;text-align:center;color:var(--t3);font-size:13px;line-height:1.6}
+.empty strong{color:var(--t2);display:block;margin-bottom:4px;font-size:15px;font-weight:600}
+.empty .hint{margin-top:12px;font-size:11.5px;color:var(--t3)}
 
 /* ── FOOTER ── */
-footer{text-align:center;padding:40px;font-size:11px;color:var(--t3);border-top:1px solid var(--bdr);margin-top:40px}
-footer a{color:var(--t2);text-decoration:none}
+footer{padding:20px 0;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--t3)}
+footer a{color:var(--t2);text-decoration:none;margin-left:16px}
 footer a:hover{color:var(--accent)}
-
-/* ── ANIMS ── */
-.fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease-out forwards}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-.d1{animation-delay:.1s}.d2{animation-delay:.15s}.d3{animation-delay:.2s}.d4{animation-delay:.25s}.d5{animation-delay:.3s}
 </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-<div class="glow-orb a"></div>
-<div class="glow-orb b"></div>
-<div class="glow-orb c"></div>
+<div class="mesh"></div>
+<div class="grain"></div>
 
-<nav>
-  <div class="nav-brand">
-    <div class="nav-logo">CSP</div>
-    <span>Artifact Library</span>
-  </div>
-  <div class="nav-links">
-    <a href="#product" class="nav-link">Product Management</a>
-    <a href="#analytics" class="nav-link">Analytics</a>
-    <a href="#gtm" class="nav-link">GTM Tooling</a>
-    <a href="#program" class="nav-link">Program Management</a>
-    <a href="#misc" class="nav-link">Misc</a>
-    <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" class="nav-link" style="color:var(--accent);border-color:rgba(90,168,232,.2);background:var(--accent-g);">Get Set Up</a>
-  </div>
-</nav>
+<div class="shell">
 
-<div class="page">
-
-<!-- ═══ HERO ═══ -->
-<div class="hero">
-  <div class="hero-tag fade-up"><span class="pulse"></span> Customer Success Platform</div>
-  <h1 class="fade-up d1">CSP <span class="grad">Artifact Library</span></h1>
-  <p class="fade-up d2">The permanent home for every prototype, demo, and interactive artifact the team builds. Nothing gets lost. Everything is shareable. One link replaces a slide deck.</p>
-  <div class="hero-stats fade-up d3">
-    <div class="h-stat"><div class="h-stat-val" style="color:var(--accent);">5</div><div class="h-stat-label">Sections</div></div>
-    <div class="h-stat"><div class="h-stat-val" style="color:var(--green);">1</div><div class="h-stat-label">Live Artifact</div></div>
-    <div class="h-stat"><div class="h-stat-val" style="color:var(--purple);">&#8734;</div><div class="h-stat-label">Permanent Links</div></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- ═══ CSP PRODUCT MANAGEMENT ═══ -->
-<div class="sec" id="product">
-  <div class="sec-header fade-up">
-    <div class="sec-left">
-      <div class="sec-tag" style="color:var(--rose);"><div class="bar" style="background:var(--rose);"></div> Section 01</div>
-      <div class="sec-title">CSP Product Management</div>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">CSP</div>
+      <div><div class="brand-text">Artifact Library</div><div class="brand-sub">Customer Success Platform</div></div>
     </div>
-    <div class="sec-count" style="color:var(--rose);border-color:rgba(251,113,133,.15);">1 artifact</div>
+    <div class="top-right">
+      <div class="live-pill"><span class="dot"></span> Library Active</div>
+      <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" class="setup-btn">Get Set Up</a>
+    </div>
   </div>
-  <div class="cards">
-    <a href="Agentic%20CSM/" class="card fade-up d1">
-      <div class="bar" style="background:linear-gradient(90deg,var(--rose),var(--amber));"></div>
-      <div class="card-top">
-        <span class="card-badge" style="background:rgba(251,113,133,.1);color:var(--rose);">Agent 13 / CRIR</span>
-        <span class="card-live"><span class="d"></span> Live</span>
+
+  <!-- HERO COMPACT -->
+  <div class="hero">
+    <div class="hero-left">
+      <h1>CSP <span class="grad">Artifact Library</span></h1>
+      <p>The permanent home for every prototype and demo the team builds. One link, always live, nothing gets lost.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val" style="color:var(--accent);">5</div><div class="hs-label">Sections</div></div>
+      <div class="hs"><div class="hs-val" style="color:var(--green);">1</div><div class="hs-label">Live</div></div>
+      <div class="hs"><div class="hs-val" style="color:var(--purple);">&#8734;</div><div class="hs-label">Permanent</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab(0)">Product Management <span class="count">1</span></div>
+    <div class="tab" onclick="switchTab(1)">Analytics <span class="count zero">0</span></div>
+    <div class="tab" onclick="switchTab(2)">GTM Tooling <span class="count zero">0</span></div>
+    <div class="tab" onclick="switchTab(3)">Program Management <span class="count zero">0</span></div>
+    <div class="tab" onclick="switchTab(4)">Misc <span class="count zero">0</span></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- PRODUCT MANAGEMENT -->
+    <div class="tab-panel active" id="panel-0">
+      <div class="grid">
+        <a href="Agentic%20CSM/" class="card">
+          <div class="bar" style="background:linear-gradient(90deg,var(--rose),var(--amber));"></div>
+          <div class="card-top">
+            <span class="badge" style="background:rgba(253,164,175,.08);color:var(--rose);">Agent 13 / CRIR</span>
+            <span class="status live"><span class="sd"></span> Live</span>
+          </div>
+          <h3>Support Notification Agent</h3>
+          <div class="desc">Real-time case pattern detection. Monitors P1 concentrations, stale cases, misrouted tickets, SLA-only responses, and cross-agent escalation workflows.</div>
+          <div class="tags">
+            <span class="tag" style="color:var(--rose);border-color:rgba(253,164,175,.2);">Real-time alerts</span>
+            <span class="tag" style="color:var(--rose);border-color:rgba(253,164,175,.2);">Pattern detection</span>
+            <span class="tag" style="color:var(--rose);border-color:rgba(253,164,175,.2);">Escalation</span>
+          </div>
+        </a>
+
+        <div class="card ph">
+          <div class="bar" style="background:linear-gradient(90deg,var(--accent),var(--purple));"></div>
+          <div class="card-top">
+            <span class="badge" style="background:rgba(108,180,240,.08);color:var(--accent);">Agent 3</span>
+            <span class="status soon">Coming Soon</span>
+          </div>
+          <h3>Prioritization Heat Map</h3>
+          <div class="desc">4-quadrant portfolio triage. Classifies accounts by risk and value signals so CSMs focus on highest-impact accounts first.</div>
+          <div class="tags">
+            <span class="tag" style="color:var(--t3);">Portfolio scoring</span>
+            <span class="tag" style="color:var(--t3);">Risk matrix</span>
+          </div>
+        </div>
+
+        <div class="card ph">
+          <div class="bar" style="background:linear-gradient(90deg,var(--amber),var(--orange));"></div>
+          <div class="card-top">
+            <span class="badge" style="background:rgba(252,211,77,.08);color:var(--amber);">Agent 1</span>
+            <span class="status soon">Coming Soon</span>
+          </div>
+          <h3>Meeting Co-Pilot</h3>
+          <div class="desc">Transforms customer meetings into structured intelligence. Auto-generates summaries, next-step assignments, and follow-up agendas.</div>
+          <div class="tags">
+            <span class="tag" style="color:var(--t3);">Transcript analysis</span>
+            <span class="tag" style="color:var(--t3);">Action items</span>
+          </div>
+        </div>
       </div>
-      <h3>Support Notification Agent</h3>
-      <p>Real-time case pattern detection. Monitors P1 concentrations, stale cases, misrouted tickets, SLA-only responses, and cross-agent escalation workflows.</p>
-      <div class="tags">
-        <span class="tag" style="color:var(--rose);border-color:rgba(251,113,133,.2);">Real-time alerts</span>
-        <span class="tag" style="color:var(--rose);border-color:rgba(251,113,133,.2);">Pattern detection</span>
-        <span class="tag" style="color:var(--rose);border-color:rgba(251,113,133,.2);">Escalation</span>
-      </div>
-    </a>
+    </div>
 
-    <div class="card placeholder">
-      <div class="bar" style="background:linear-gradient(90deg,var(--accent),var(--purple));"></div>
-      <div class="card-top">
-        <span class="card-badge" style="background:rgba(90,168,232,.1);color:var(--accent);">Agent 3</span>
-        <span class="card-soon">Coming Soon</span>
-      </div>
-      <h3>Prioritization Heat Map</h3>
-      <p>4-quadrant portfolio triage. Classifies accounts by risk and value signals so CSMs always focus on highest-impact accounts first.</p>
-      <div class="tags">
-        <span class="tag" style="color:var(--t3);border-color:var(--bdr);">Portfolio scoring</span>
-        <span class="tag" style="color:var(--t3);border-color:var(--bdr);">Risk matrix</span>
+    <!-- ANALYTICS -->
+    <div class="tab-panel" id="panel-1">
+      <div class="empty">
+        <strong>No artifacts yet</strong>
+        Account 360 dashboards, CSQL scorecards, portfolio health views, adoption analytics — build something with Claude and publish it here.
+        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="divider"></div>
-
-<!-- ═══ ANALYTICS ═══ -->
-<div class="sec" id="analytics">
-  <div class="sec-header fade-up">
-    <div class="sec-left">
-      <div class="sec-tag" style="color:var(--teal);"><div class="bar" style="background:var(--teal);"></div> Section 02</div>
-      <div class="sec-title">Analytics</div>
+    <!-- GTM TOOLING -->
+    <div class="tab-panel" id="panel-2">
+      <div class="empty">
+        <strong>No artifacts yet</strong>
+        CEG play planners, competitive analysis tools, sales enablement demos, talk track generators — anything the GTM team builds.
+        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+      </div>
     </div>
-    <div class="sec-count" style="color:var(--teal);border-color:rgba(45,212,191,.15);">0 artifacts</div>
-  </div>
-  <div class="empty fade-up d1">
-    <strong>No artifacts yet</strong>
-    Build something with Claude and publish it here.<br>Account 360 dashboards, CSQL scorecards, portfolio views — anything interactive.
-  </div>
-</div>
 
-<div class="divider"></div>
-
-<!-- ═══ GTM TOOLING ═══ -->
-<div class="sec" id="gtm">
-  <div class="sec-header fade-up">
-    <div class="sec-left">
-      <div class="sec-tag" style="color:var(--amber);"><div class="bar" style="background:var(--amber);"></div> Section 03</div>
-      <div class="sec-title">GTM Tooling</div>
+    <!-- PROGRAM MANAGEMENT -->
+    <div class="tab-panel" id="panel-3">
+      <div class="empty">
+        <strong>No artifacts yet</strong>
+        Onboarding playbooks, journey trackers, program dashboards, capacity planners, process simulators — all welcome here.
+        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+      </div>
     </div>
-    <div class="sec-count" style="color:var(--amber);border-color:rgba(251,191,36,.15);">0 artifacts</div>
-  </div>
-  <div class="empty fade-up d1">
-    <strong>No artifacts yet</strong>
-    CEG play planners, sales enablement demos, competitive analysis tools — publish anything the GTM team builds.
-  </div>
-</div>
 
-<div class="divider"></div>
-
-<!-- ═══ CSP PROGRAM MANAGEMENT ═══ -->
-<div class="sec" id="program">
-  <div class="sec-header fade-up">
-    <div class="sec-left">
-      <div class="sec-tag" style="color:var(--purple);"><div class="bar" style="background:var(--purple);"></div> Section 04</div>
-      <div class="sec-title">CSP Program Management</div>
+    <!-- MISC -->
+    <div class="tab-panel" id="panel-4">
+      <div class="empty">
+        <strong>No artifacts yet</strong>
+        Experiments, hackathon projects, internal tools, concept proofs — if it does not fit elsewhere, it lives here.
+        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+      </div>
     </div>
-    <div class="sec-count" style="color:var(--purple);border-color:rgba(167,139,250,.15);">0 artifacts</div>
-  </div>
-  <div class="empty fade-up d1">
-    <strong>No artifacts yet</strong>
-    Onboarding playbooks, journey trackers, program dashboards, capacity planners — all welcome here.
-  </div>
-</div>
 
-<div class="divider"></div>
+  </div>
 
-<!-- ═══ MISC ═══ -->
-<div class="sec" id="misc">
-  <div class="sec-header fade-up">
-    <div class="sec-left">
-      <div class="sec-tag" style="color:var(--orange);"><div class="bar" style="background:var(--orange);"></div> Section 05</div>
-      <div class="sec-title">Misc</div>
+  <!-- FOOTER -->
+  <footer>
+    <span>CSP Artifact Library</span>
+    <div>
+      <a href="https://github.com/ceg-csp/claude-artifacts" target="_blank">GitHub</a>
+      <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup Guide</a>
     </div>
-    <div class="sec-count" style="color:var(--orange);border-color:rgba(251,146,60,.15);">0 artifacts</div>
-  </div>
-  <div class="empty fade-up d1">
-    <strong>No artifacts yet</strong>
-    Experiments, prototypes, internal tools, hackathon projects — if it does not fit elsewhere, it lives here.
-  </div>
-</div>
-
-<footer>
-  CSP Artifact Library &middot; <a href="https://github.com/ceg-csp/claude-artifacts" target="_blank">GitHub</a> &middot; <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup Guide</a>
-</footer>
+  </footer>
 
 </div>
 
 <script>
-// Scroll-based nav highlighting
-const sections = document.querySelectorAll('.sec');
-const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const id = e.target.id;
-      const link = document.querySelector(`.nav-link[href="#${id}"]`);
-      if (link) link.classList.add('active');
-    }
-  });
-}, { threshold: 0.3 });
-sections.forEach(s => observer.observe(s));
-
-// Fade-in on scroll
-const faders = document.querySelectorAll('.fade-up');
-const fadeObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; fadeObs.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-faders.forEach(f => { f.style.animationPlayState = 'paused'; fadeObs.observe(f); });
+function switchTab(idx) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i === idx));
+}
 </script>
 </body>
 </html>
