@@ -6,15 +6,15 @@ This skill automates publishing interactive artifacts to the CSP team's shared A
 
 After you build any interactive prototype or demo with Claude, this skill:
 
-1. Asks if you want to publish it to the team library
-2. Collects the artifact name and description
-3. Pushes it to our shared repo
-4. Updates the library index page with a new card
+1. Infers artifact details (name, section, description, tags) from conversation context
+2. Presents a single confirmation table for you to approve or edit
+3. Pushes the artifact to our shared repo
+4. Updates the library registry (artifacts.json) so the homepage picks it up automatically
 5. Returns a permanent, shareable URL
 
 ## Prerequisites (before you start)
 
-You need three things before the setup will work. If you are missing any of these, complete them first.
+You need four things before the setup will work. If you are missing any of these, complete them first.
 
 ### A GitHub account
 
@@ -87,10 +87,10 @@ If you do not add the skill, the workflow still works. Just tell Claude "publish
 ## How to use it
 
 1. Build any interactive artifact with Claude the way you normally would
-2. When it is ready, say "publish this to the artifact library" (or Claude will ask you if the skill is active)
-3. Claude will ask for the artifact name and a short description
-4. It pushes the artifact and gives you a permanent URL
-5. Share that URL with anyone — it works in any browser, no login needed
+2. When it is ready, say "deploy this to GitHub Pages" or Claude will ask you if the skill is active
+3. Claude infers the name, section, tags, and description from context and shows you a confirmation table
+4. Confirm or edit, and it pushes the artifact and registers it in the library
+5. You get a permanent URL — share it with anyone, no login needed
 
 ## Troubleshooting
 
