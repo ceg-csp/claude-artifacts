@@ -99,6 +99,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 .cmd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .cmd-info h4{font-size:13px;font-weight:600;margin-bottom:1px}
 .cmd-info p{font-size:11px;color:var(--t2)}
+.cmd-sec{font-size:8.5px;font-weight:600;color:var(--t3);opacity:.7;margin-right:4px}
 .cmd-footer{padding:10px 20px;border-top:1px solid var(--bdr);display:flex;gap:16px;font-size:10px;color:var(--t3)}
 .cmd-footer span{display:flex;align-items:center;gap:4px}
 .cmd-footer .k{font-family:var(--mono);background:var(--bg);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;font-size:9px}
@@ -119,7 +120,7 @@ footer a:hover{color:var(--accent)}
       <div class="live-pill"><span class="dot"></span> Active</div>
       <div class="icon-btn" onclick="openCmd()" title="Search (Cmd+K)">&#9906;</div>
       <div class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">&#9790;</div>
-      <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" class="btn-setup">Get Set Up</a>
+      <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/README.md" target="_blank" class="btn-setup">Get Set Up</a>
     </div>
   </div>
   <div class="hero">
@@ -141,7 +142,7 @@ footer a:hover{color:var(--accent)}
     </div>
   </div>
   <div class="content" id="contentArea"></div>
-  <footer><span>CSP Artifact Library &middot; <span style="font-size:9px;font-weight:600;color:var(--t3);background:var(--bg);border:1px solid var(--bdr);padding:2px 6px;border-radius:4px;font-family:var(--mono);margin-left:4px;">&#8984;K</span> to search</span><div><a href="https://github.com/ceg-csp/claude-artifacts" target="_blank">GitHub</a><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup</a></div></footer>
+  <footer><span>CSP Artifact Library &middot; <span style="font-size:9px;font-weight:600;color:var(--t3);background:var(--bg);border:1px solid var(--bdr);padding:2px 6px;border-radius:4px;font-family:var(--mono);margin-left:4px;">&#8984;K</span> to search</span><div><a href="https://github.com/ceg-csp/claude-artifacts" target="_blank">GitHub</a><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/README.md" target="_blank">Setup</a></div></footer>
 </div>
 <div class="cmd-overlay" id="cmdOverlay" onclick="if(event.target===this)closeCmd()">
   <div class="cmd-box">
@@ -153,6 +154,7 @@ footer a:hover{color:var(--accent)}
 <script>
 const SECTIONS=['Product Management','Analytics','GTM Tooling','Program Management','Misc'];
 const SECTION_HINTS=['Agent prototypes, workspace demos, CSP features.','Account 360, CSQL scorecards, portfolio views, adoption analytics.','CEG play planners, competitive tools, enablement demos.','Onboarding playbooks, journey trackers, program dashboards.','Experiments, hackathon projects, internal tools.'];
+const SETUP_URL='https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/README.md';
 let artifacts=[];
 let currentView='grid';
 async function init(){
@@ -176,7 +178,7 @@ function renderPanels(){
     const liveItems=artifacts.filter(a=>a.section===s&&a.live);
     html+=`<div class="panel${i===0?' active':''}" id="p${i}">`;
     if(liveItems.length===0){
-      html+=`<div class="empty"><strong>No artifacts yet</strong><div class="sub">${SECTION_HINTS[i]}</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div></div>`;
+      html+=`<div class="empty"><strong>No artifacts yet</strong><div class="sub">${SECTION_HINTS[i]}</div><div class="hint"><a href="${SETUP_URL}" target="_blank">Setup guide</a> to get started</div></div>`;
     }else{
       html+=`<div class="grid" id="grid-${i}">`;
       liveItems.forEach(a=>{
@@ -208,7 +210,7 @@ document.addEventListener('mousemove',e=>{const x=Math.round(e.clientX/window.in
 let cmdIdx=-1;
 function openCmd(){document.getElementById('cmdOverlay').classList.add('visible');document.getElementById('cmdInput').value='';document.getElementById('cmdInput').focus();cmdIdx=-1;showAllCmd();}
 function closeCmd(){document.getElementById('cmdOverlay').classList.remove('visible');}
-function showAllCmd(){const live=artifacts.filter(a=>a.live);document.getElementById('cmdResults').innerHTML=live.length?live.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name} <span style="font-size:9px;color:var(--t3);font-weight:400;">${a.agent}</span></h4><p>${a.desc.slice(0,70)}...</p></div><span class="st live" style="margin-left:auto;font-size:9px;">Live</span></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No live artifacts yet</div>';}
+function showAllCmd(){const live=artifacts.filter(a=>a.live);document.getElementById('cmdResults').innerHTML=live.length?live.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name} <span style="font-size:9px;color:var(--t3);font-weight:400;">${a.agent}</span></h4><p><span class="cmd-sec">${a.section}</span>${a.desc.slice(0,55)}...</p></div><span class="st live" style="margin-left:auto;font-size:9px;">Live</span></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No live artifacts yet</div>';}
 function cmdSearch(){
   const q=document.getElementById('cmdInput').value.trim().toLowerCase();cmdIdx=-1;
   if(!q){showAllCmd();return;}
@@ -218,7 +220,7 @@ function cmdSearch(){
     const score=words.reduce((s,w)=>s+(hay.includes(w)?1:0),0);
     return{...a,score};
   }).filter(a=>a.score>0).sort((a,b)=>b.score-a.score);
-  document.getElementById('cmdResults').innerHTML=scored.length?scored.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name}</h4><p>${a.desc.slice(0,70)}...</p></div></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found. Try different keywords.</div>';
+  document.getElementById('cmdResults').innerHTML=scored.length?scored.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name}</h4><p><span class="cmd-sec">${a.section}</span>${a.desc.slice(0,55)}...</p></div></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found. Try different keywords.</div>';
 }
 function cmdKey(e){const items=document.querySelectorAll('.cmd-item');if(e.key==='Escape')closeCmd();if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=Math.min(cmdIdx+1,items.length-1);items.forEach((it,i)=>it.classList.toggle('sel',i===cmdIdx));}if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=Math.max(cmdIdx-1,0);items.forEach((it,i)=>it.classList.toggle('sel',i===cmdIdx));}if(e.key==='Enter'&&cmdIdx>=0&&items[cmdIdx]){const h=items[cmdIdx].getAttribute('href');if(h)window.location.href=h;}}
 document.addEventListener('keydown',e=>{if(e.metaKey&&e.key==='k'){e.preventDefault();openCmd();}if(!e.metaKey&&!e.ctrlKey&&!document.querySelector('.cmd-overlay.visible')){const n=+e.key;if(n>=1&&n<=7){e.preventDefault();switchTab(n-1);}}});
