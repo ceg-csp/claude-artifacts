@@ -7,8 +7,8 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap');
 :root{--font:'DM Sans',-apple-system,sans-serif;--mono:'Space Mono',monospace}
-[data-theme="light"]{--bg:#f4f6fa;--surface:#fff;--card-h:#f7f8fc;--bdr:#dfe4ed;--bdr-h:#c5ccda;--accent:#2563eb;--accent2:#3b82f6;--accent-bg:rgba(37,99,235,.05);--green:#059669;--green-bg:rgba(5,150,105,.06);--purple:#7c3aed;--purple-bg:rgba(124,58,237,.05);--amber:#d97706;--amber-bg:rgba(217,119,6,.06);--rose:#e11d48;--rose-bg:rgba(225,29,72,.05);--orange:#ea580c;--orange-bg:rgba(234,88,12,.05);--teal:#0d9488;--teal-bg:rgba(13,148,136,.05);--t1:#0f172a;--t2:#475569;--t3:#94a3b8;--sh:0 1px 3px rgba(0,0,0,.04);--sh-md:0 4px 16px rgba(0,0,0,.06);--sh-lg:0 8px 30px rgba(0,0,0,.08);--overlay:rgba(15,23,42,.4);--dot:rgba(148,163,184,.2);--mesh1:rgba(37,99,235,.04);--mesh2:rgba(124,58,237,.03);--mesh3:rgba(5,150,105,.02)}
-[data-theme="dark"]{--bg:#0e1525;--surface:#162037;--card-h:#1c2a42;--bdr:#243352;--bdr-h:#2f4270;--accent:#6cb4f0;--accent2:#91cbff;--accent-bg:rgba(108,180,240,.07);--green:#5eead4;--green-bg:rgba(94,234,212,.06);--purple:#b197fc;--purple-bg:rgba(177,151,252,.06);--amber:#fcd34d;--amber-bg:rgba(252,211,77,.06);--rose:#fda4af;--rose-bg:rgba(253,164,175,.06);--orange:#fdba74;--orange-bg:rgba(251,146,60,.06);--teal:#5eead4;--teal-bg:rgba(94,234,212,.06);--t1:#e8edf5;--t2:#8fa3be;--t3:#506580;--sh:0 1px 3px rgba(0,0,0,.1);--sh-md:0 4px 16px rgba(0,0,0,.15);--sh-lg:0 8px 30px rgba(0,0,0,.2);--overlay:rgba(6,9,13,.6);--dot:rgba(108,180,240,.06);--mesh1:rgba(108,180,240,.04);--mesh2:rgba(177,151,252,.03);--mesh3:rgba(94,234,212,.02)}
+[data-theme="light"]{--bg:#f4f6fa;--surface:#fff;--card-h:#f7f8fc;--bdr:#dfe4ed;--bdr-h:#c5ccda;--accent:#2563eb;--accent2:#3b82f6;--accent-bg:rgba(37,99,235,.05);--green:#059669;--green-bg:rgba(5,150,105,.06);--purple:#7c3aed;--purple-bg:rgba(124,58,237,.05);--amber:#d97706;--amber-bg:rgba(217,119,6,.06);--rose:#e11d48;--rose-bg:rgba(225,29,72,.05);--orange:#ea580c;--orange-bg:rgba(234,88,12,.05);--teal:#0d9488;--teal-bg:rgba(13,148,136,.05);--blue:#2563eb;--blue-bg:rgba(37,99,235,.05);--t1:#0f172a;--t2:#475569;--t3:#94a3b8;--sh:0 1px 3px rgba(0,0,0,.04);--sh-md:0 4px 16px rgba(0,0,0,.06);--sh-lg:0 8px 30px rgba(0,0,0,.08);--overlay:rgba(15,23,42,.4);--dot:rgba(148,163,184,.2);--mesh1:rgba(37,99,235,.04);--mesh2:rgba(124,58,237,.03);--mesh3:rgba(5,150,105,.02)}
+[data-theme="dark"]{--bg:#0e1525;--surface:#162037;--card-h:#1c2a42;--bdr:#243352;--bdr-h:#2f4270;--accent:#6cb4f0;--accent2:#91cbff;--accent-bg:rgba(108,180,240,.07);--green:#5eead4;--green-bg:rgba(94,234,212,.06);--purple:#b197fc;--purple-bg:rgba(177,151,252,.06);--amber:#fcd34d;--amber-bg:rgba(252,211,77,.06);--rose:#fda4af;--rose-bg:rgba(253,164,175,.06);--orange:#fdba74;--orange-bg:rgba(251,146,60,.06);--teal:#5eead4;--teal-bg:rgba(94,234,212,.06);--blue:#6cb4f0;--blue-bg:rgba(108,180,240,.07);--t1:#e8edf5;--t2:#8fa3be;--t3:#506580;--sh:0 1px 3px rgba(0,0,0,.1);--sh-md:0 4px 16px rgba(0,0,0,.15);--sh-lg:0 8px 30px rgba(0,0,0,.2);--overlay:rgba(6,9,13,.6);--dot:rgba(108,180,240,.06);--mesh1:rgba(108,180,240,.04);--mesh2:rgba(177,151,252,.03);--mesh3:rgba(94,234,212,.02)}
 *{margin:0;padding:0;box-sizing:border-box;transition:background-color .3s,border-color .3s,color .3s,box-shadow .3s}
 body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
 ::selection{background:var(--accent);color:#fff}
@@ -155,36 +155,25 @@ const SECTIONS=['Product Management','Analytics','GTM Tooling','Program Manageme
 const SECTION_HINTS=['Agent prototypes, workspace demos, CSP features.','Account 360, CSQL scorecards, portfolio views, adoption analytics.','CEG play planners, competitive tools, enablement demos.','Onboarding playbooks, journey trackers, program dashboards.','Experiments, hackathon projects, internal tools.'];
 let artifacts=[];
 let currentView='grid';
-
-// ── LOAD ARTIFACTS FROM JSON ──
 async function init(){
-  try{
-    const r=await fetch('artifacts.json?t='+Date.now());
-    artifacts=await r.json();
-  }catch(e){artifacts=[];}
-  renderTabs();
-  renderPanels();
-  updateStats();
+  try{const r=await fetch('artifacts.json?t='+Date.now());artifacts=await r.json();}catch(e){artifacts=[];}
+  renderTabs();renderPanels();updateStats();
 }
-
 function renderTabs(){
   const counts=SECTIONS.map(s=>artifacts.filter(a=>a.section===s&&a.live).length);
   let html=SECTIONS.map((s,i)=>{
     const short=s.replace('Product Management','Product Mgmt').replace('Program Management','Program Mgmt').replace('GTM Tooling','GTM');
-    const c=counts[i];
-    return `<div class="tab${i===0?' active':''}" onclick="switchTab(${i})">${short} <span class="ct ${c>0?'has':'zero'}">${c}</span></div>`;
+    return `<div class="tab${i===0?' active':''}" onclick="switchTab(${i})">${short} <span class="ct ${counts[i]>0?'has':'zero'}">${counts[i]}</span></div>`;
   }).join('');
   html+=`<div class="tab" onclick="switchTab(5)" style="color:var(--purple);">Contributors</div>`;
   html+=`<div class="tab" onclick="switchTab(6)">Activity</div>`;
   document.getElementById('tabBar').innerHTML=html;
 }
-
 function renderPanels(){
   const area=document.getElementById('contentArea');
   let html='';
   SECTIONS.forEach((s,i)=>{
-    const items=artifacts.filter(a=>a.section===s);
-    const liveItems=items.filter(a=>a.live);
+    const liveItems=artifacts.filter(a=>a.section===s&&a.live);
     html+=`<div class="panel${i===0?' active':''}" id="p${i}">`;
     if(liveItems.length===0){
       html+=`<div class="empty"><strong>No artifacts yet</strong><div class="sub">${SECTION_HINTS[i]}</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div></div>`;
@@ -201,36 +190,21 @@ function renderPanels(){
   html+=`<div class="panel" id="p6"><div id="activityContent" class="empty"><strong>Loading activity...</strong><div class="sub"><span class="spinner"></span></div></div></div>`;
   area.innerHTML=html;
 }
-
 function updateStats(){
   const live=artifacts.filter(a=>a.live).length;
-  const total=artifacts.length;
   animateCounter('statLive',live);
-  animateCounter('statTotal',total);
+  animateCounter('statTotal',artifacts.length);
 }
-
 function animateCounter(id,target){
-  const el=document.getElementById(id);
-  if(!el)return;
-  let cur=0;
-  const step=()=>{cur+=Math.ceil(target/15);if(cur>=target){el.textContent=target;return;}el.textContent=cur;requestAnimationFrame(step);};
+  const el=document.getElementById(id);if(!el)return;
+  let cur=0;const step=()=>{cur+=Math.ceil(target/15);if(cur>=target){el.textContent=target;return;}el.textContent=cur;requestAnimationFrame(step);};
   setTimeout(step,300);
 }
-
-// ── TABS ──
 function switchTab(i){document.querySelectorAll('.tab').forEach((t,n)=>t.classList.toggle('active',n===i));document.querySelectorAll('.panel').forEach((p,n)=>p.classList.toggle('active',n===i));if(i===5)loadContrib();if(i===6)loadActivity();}
-
-// ── VIEW ──
 function setView(v,btn){document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentView=v;document.querySelectorAll('.grid').forEach(g=>g.classList.toggle('list',v==='list'));}
-
-// ── THEME ──
 function toggleTheme(){const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;document.getElementById('themeBtn').innerHTML=t==='dark'?'&#9728;':'&#9790;';localStorage.setItem('theme',t);}
 (function(){const t=localStorage.getItem('theme');if(t){document.documentElement.dataset.theme=t;if(t==='dark')document.getElementById('themeBtn').innerHTML='&#9728;';}})();
-
-// ── MOUSE GRADIENT ──
 document.addEventListener('mousemove',e=>{const x=Math.round(e.clientX/window.innerWidth*100);const y=Math.round(e.clientY/window.innerHeight*100);document.getElementById('mesh').style.setProperty('--mx',x+'%');document.getElementById('mesh').style.setProperty('--my',y+'%');});
-
-// ── CMD PALETTE (local search only) ──
 let cmdIdx=-1;
 function openCmd(){document.getElementById('cmdOverlay').classList.add('visible');document.getElementById('cmdInput').value='';document.getElementById('cmdInput').focus();cmdIdx=-1;showAllCmd();}
 function closeCmd(){document.getElementById('cmdOverlay').classList.remove('visible');}
@@ -247,19 +221,12 @@ function cmdSearch(){
   document.getElementById('cmdResults').innerHTML=scored.length?scored.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name}</h4><p>${a.desc.slice(0,70)}...</p></div></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found. Try different keywords.</div>';
 }
 function cmdKey(e){const items=document.querySelectorAll('.cmd-item');if(e.key==='Escape')closeCmd();if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=Math.min(cmdIdx+1,items.length-1);items.forEach((it,i)=>it.classList.toggle('sel',i===cmdIdx));}if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=Math.max(cmdIdx-1,0);items.forEach((it,i)=>it.classList.toggle('sel',i===cmdIdx));}if(e.key==='Enter'&&cmdIdx>=0&&items[cmdIdx]){const h=items[cmdIdx].getAttribute('href');if(h)window.location.href=h;}}
-
-// ── KEYBOARD ──
 document.addEventListener('keydown',e=>{if(e.metaKey&&e.key==='k'){e.preventDefault();openCmd();}if(!e.metaKey&&!e.ctrlKey&&!document.querySelector('.cmd-overlay.visible')){const n=+e.key;if(n>=1&&n<=7){e.preventDefault();switchTab(n-1);}}});
-
-// ── CONTRIBUTORS ──
 let cL=false;
 async function loadContrib(){if(cL)return;cL=true;const el=document.getElementById('contribContent');try{const r=await fetch('https://api.github.com/repos/ceg-csp/claude-artifacts/contributors');const d=await r.json();if(!Array.isArray(d)||!d.length){el.innerHTML='<div class="empty"><strong>No contributors yet</strong></div>';return;}const c=['var(--accent)','var(--purple)','var(--green)','var(--rose)','var(--amber)'];el.innerHTML='<div class="contrib-grid">'+d.map((u,i)=>`<div class="contrib-card"><img src="${u.avatar_url}" style="width:40px;height:40px;border-radius:50%;" alt="${u.login}"><div style="flex:1"><div style="font-size:13px;font-weight:600;">${u.login}</div><div style="font-size:10px;color:var(--t3);"><a href="${u.html_url}" target="_blank" style="color:var(--accent);text-decoration:none;">Profile</a></div></div><div class="contrib-stat"><div class="num" style="color:${c[i%5]}">${u.contributions}</div><div class="lbl">Commits</div></div></div>`).join('')+'</div>';}catch(e){el.innerHTML='<div class="empty"><strong>Could not load</strong><div class="sub">Try again shortly.</div></div>';}}
-
-// ── ACTIVITY ──
 let aL=false;
 async function loadActivity(){if(aL)return;aL=true;const el=document.getElementById('activityContent');try{const r=await fetch('https://api.github.com/repos/ceg-csp/claude-artifacts/commits?per_page=20');const d=await r.json();if(!Array.isArray(d)){el.innerHTML='<div class="empty"><strong>No activity</strong></div>';return;}el.innerHTML=d.map(c=>{const ago=timeAgo(new Date(c.commit.author.date));const msg=c.commit.message.split('\n')[0];const who=c.author?c.author.login:c.commit.author.name;const av=c.author?c.author.avatar_url:null;return`<div class="act-item">${av?`<img class="act-avatar" src="${av}">`:`<div class="act-avatar" style="background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent);">${who.slice(0,2).toUpperCase()}</div>`}<div style="flex:1;min-width:0;"><div class="act-msg">${msg}</div><div class="act-author">${who}</div></div><div class="act-time">${ago}</div></div>`;}).join('');}catch(e){el.innerHTML='<div class="empty"><strong>Could not load</strong></div>';}}
 function timeAgo(d){const s=Math.floor((Date.now()-d.getTime())/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';if(s<604800)return Math.floor(s/86400)+'d ago';return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
-
 init();
 </script>
 </body>

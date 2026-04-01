@@ -6,11 +6,13 @@ This skill automates publishing interactive artifacts to the CSP team's shared A
 
 After you build any interactive prototype or demo with Claude, this skill:
 
-1. Infers artifact details (name, section, description, tags) from conversation context
-2. Presents a single confirmation table for you to approve or edit
-3. Pushes the artifact to our shared repo
-4. Updates the library registry (artifacts.json) so the homepage picks it up automatically
+1. Asks if you want to publish it to the team library
+2. Infers the name, section, description, and tags from conversation context
+3. Shows you a confirmation table to review before publishing
+4. Pushes the artifact and registers it in artifacts.json
 5. Returns a permanent, shareable URL
+
+The homepage at https://ceg-csp.github.io/claude-artifacts/ renders dynamically from artifacts.json. Once registered, your artifact appears automatically in the correct section tab, in search results, and in the library stats.
 
 ## Prerequisites (before you start)
 
@@ -87,10 +89,10 @@ If you do not add the skill, the workflow still works. Just tell Claude "publish
 ## How to use it
 
 1. Build any interactive artifact with Claude the way you normally would
-2. When it is ready, say "deploy this to GitHub Pages" or Claude will ask you if the skill is active
-3. Claude infers the name, section, tags, and description from context and shows you a confirmation table
-4. Confirm or edit, and it pushes the artifact and registers it in the library
-5. You get a permanent URL — share it with anyone, no login needed
+2. When it is ready, say "publish this to the artifact library" (or Claude will ask you if the skill is active)
+3. Claude infers the name, section, and description, then shows you a confirmation table
+4. Confirm or request changes, and Claude pushes the artifact
+5. You get back a permanent URL. Share it with anyone — it works in any browser, no login needed
 
 ## Troubleshooting
 
