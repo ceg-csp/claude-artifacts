@@ -26,5 +26,19 @@
     "color2": "var(--green)",
     "colorBg": "var(--accent-bg)",
     "added": "2026-04-01"
+  },
+  {
+    "name": "Agentic AI x Guided CSM Journey",
+    "section": "Product Management",
+    "desc": "Interactive mapping of agentic AI workflows across the 5-stage CSM lifecycle (Onboard, Engage, Adopt, Monitor, Expand). Four AI modes taxonomy, before/after comparisons, time savings metrics, OOB vs custom build analysis.",
+    "tags": ["Agentic AI", "CSM Journey", "Workflows", "Time Savings"],
+    "keywords": ["agentic", "CSM", "journey", "onboard", "engage", "adopt", "monitor", "expand", "playbook", "CRIR", "four modes", "assistive", "generative", "predictive", "automation", "time savings"],
+    "url": "agentic-csm-journey/",
+    "live": true,
+    "agent": "Journey Architect",
+    "color1": "var(--purple)",
+    "color2": "var(--rose)",
+    "colorBg": "var(--purple-bg)",
+    "added": "2026-04-01"
   }
 ]

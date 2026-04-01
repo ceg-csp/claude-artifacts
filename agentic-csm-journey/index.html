@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI × Guided CSM Journey</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:#1e252c;font-family:'Gilroy','Helvetica Neue',Arial,sans-serif;color:#fff}
+.header{padding:24px 24px 16px;border-bottom:1px solid #3a4754}
+.header h1{font-size:1.5rem;font-weight:700;display:flex;align-items:center;gap:12px}
+.header h1::before{content:'';width:8px;height:8px;border-radius:50%;background:#63df4e}
+.header p{color:#6e8091;font-size:.875rem;margin-top:4px}
+.stage-tabs{display:flex;padding:16px 24px;gap:8px;border-bottom:1px solid #3a4754;overflow-x:auto}
+.stage-tab{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;border:1px solid #3a4754;background:transparent;cursor:pointer;color:#a3b3c2;font-size:.875rem;white-space:nowrap;transition:all .2s}
+.stage-tab.active{font-weight:600}
+.stage-tab .num{font-size:.625rem;font-weight:700;opacity:.6}
+.content{padding:24px}
+.trigger-box{background:rgba(91,192,222,.08);border:1px solid rgba(91,192,222,.25);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.badge{padding:2px 8px;border-radius:4px;font-size:.625rem;font-weight:600;text-transform:uppercase;white-space:nowrap}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.metric{background:#252d36;border-radius:8px;padding:12px 14px;text-align:center}
+.metric .val{font-size:1.25rem;font-weight:700}
+.metric .lbl{font-size:.625rem;color:#6e8091;text-transform:uppercase;margin-top:2px}
+.view-switch{display:flex;gap:4px;margin-bottom:16px;background:#252d36;border-radius:8px;padding:4px;width:fit-content}
+.view-btn{padding:6px 14px;border-radius:6px;border:none;cursor:pointer;background:transparent;color:#6e8091;font-size:.75rem;transition:all .2s}
+.view-btn.active{background:#323d49;color:#fff;font-weight:600}
+.modes-list{display:flex;flex-direction:column;gap:10px}
+.mode-card{background:#252d36;border-radius:10px;padding:14px 16px;border-left:3px solid}
+.mode-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.mode-header .name{font-weight:600;font-size:.875rem}
+.mode-header .desc{font-size:.7rem;color:#6e8091}
+.mode-item{display:flex;align-items:flex-start;gap:6px;font-size:.8rem;color:#a3b3c2;line-height:1.5;margin-bottom:4px}
+.mode-item .dot{flex-shrink:0;margin-top:6px;width:5px;height:5px;border-radius:50%}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.compare-grid{grid-template-columns:1fr}.metrics-grid{grid-template-columns:repeat(2,1fr)}}
+.col{border-radius:10px;padding:16px}
+.col-before{background:#252d36}
+.col-after{background:rgba(212,83,126,.06);border:1px solid rgba(212,83,126,.2)}
+.col-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-weight:600;font-size:.8rem}
+.col-hdr .dot{width:8px;height:8px;border-radius:50%}
+.step{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.step-num{min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:600;flex-shrink:0}
+.step-txt{font-size:.8rem;color:#fff;line-height:1.4}
+.step-meta{font-size:.65rem;color:#6e8091;margin-top:2px}
+.build-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.build-col{border-radius:10px;padding:16px}
+.build-item{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:.8rem;color:#a3b3c2}
+.build-item .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.evolution-bar{margin-top:20px;padding:14px 16px;background:#252d36;border-radius:10px;display:flex;align-items:center;gap:16px}
+.evo-label{display:flex;flex-direction:column;align-items:center;gap:4px}
+.evo-label .sub{font-size:.6rem;text-transform:uppercase}
+.evo-label .main{font-size:.75rem;font-weight:600}
+.evo-line{flex:1;height:2px;background:linear-gradient(to right,#6e8091,#D4537E);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Agentic AI × Guided CSM Journey</h1>
+<p>How AI agents transform each lifecycle stage — from manual switchboard to smart routing</p>
+</div>
+<div class="stage-tabs" id="stageTabs"></div>
+<div class="content" id="content"></div>
+
+<script>
+const C={pink:'#D4537E',green:'#5cb85c',amber:'#f0ad4e',blue:'#5aa8e8',teal:'#1D9E75',purple:'#7F77DD',wasabi:'#63df4e'};
+const MODES=[
+{key:'assistive',label:'Assistive AI',color:C.blue,desc:'AI answers your questions',icon:'\uD83D\uDCAC'},
+{key:'generative',label:'Generative AI',color:C.green,desc:'AI creates content for you',icon:'\u270D\uFE0F'},
+{key:'predictive',label:'Predictive AI',color:C.amber,desc:'AI alerts you proactively',icon:'\uD83D\uDD14'},
+{key:'agentic',label:'Agentic AI',color:C.pink,desc:'AI acts on your behalf',icon:'\uD83E\uDD16'}
+];
+const STAGES={
+onboard:{label:'Onboard',num:'01',color:C.blue,summary:'From ~160 min manual work per account to CSM showing up ready for the call',trigger:'New customer provisioned in Dynamics / contract signed',metrics:{tb:160,ta:15,toolsB:6,toolsA:1},
+modes:{assistive:['CSM asks Claude sidebar: "What products did Acme buy?"','Instant answers from Account 360','What\'s their CACV tier? \u2014 one question, one answer'],generative:['Auto-draft pre-kickoff email from template + account context','Auto-personalize kickoff deck with products, POCs','Generate interlock prep notes from CRM data'],predictive:['Flag accounts with high onboarding friction risk','Score based on product complexity, CACV tier, history','Surface Instance Observer provisioning issues'],agentic:['TRIGGER: New customer \u2192 AGENT auto-researches account','Auto-provisions Instance Observer + IDI access','Sends pre-kickoff email, schedules kickoff, personalizes deck','CSM reviews 2-page brief \u2192 walks into kickoff prepared','Post-kickoff: AI notes synced, follow-up email sent, tasks created']},
+before:[{s:'Research company',t:'PowerBI, Surf, Dynamics, Google',m:30},{s:'Interlock meeting with AT',t:'Teams, Zoom',m:20},{s:'Send pre-kickoff email manually',t:'Outlook, IDW',m:15},{s:'Provision Instance Observer',t:'IDI, Now Support',m:10},{s:'Personalize kickoff deck',t:'PPT, SharePoint',m:10},{s:'Schedule kickoff call',t:'Outlook',m:15},{s:'Run kickoff + post-meeting notes',t:'Zoom, IDI, Loop',m:60}],
+after:[{s:'AGENT: Account research (all sources, one pass)',a:true},{s:'AGENT: Interlock prep brief generated',a:true},{s:'AGENT: Instance Observer + IDI auto-provisioned',a:true},{s:'AGENT: Pre-kickoff email + deck + scheduling',a:true},{s:'CSM: Review brief (5 min) \u2192 Run kickoff call',a:false},{s:'AGENT: Post-kickoff sync (notes, email, tasks)',a:true}],
+oob:['Account 360 data model','Playbook framework','Flow Designer triggers','Email Integration'],custom:['Interlock prep brief template','Deck auto-generation','IO auto-provisioning']},
+engage:{label:'Engage',num:'02',color:C.teal,summary:'From manual QIR prep scramble to auto-generated briefings with focus on conversation quality',trigger:'QIR cadence date approaching (T-14 days) OR contact engagement % drops below threshold',metrics:{tb:260,ta:30,toolsB:5,toolsA:1},
+modes:{assistive:['"Summarize Acme\'s last 3 QIR outcomes"','"What did we discuss in the last cadence call?"','Instant recall from meeting notes and CIP data'],generative:['Auto-generate "While You\'ve Been Gone" briefing','Draft follow-up emails with extracted action items','Generate QIR agenda from CIP + adoption metrics'],predictive:['Surface accounts where contact engagement % is dropping','Flag accounts with no cadence meeting in 45+ days','Alert on CIP milestones at risk of slipping'],agentic:['TRIGGER: QIR cadence date T-14 \u2192 AGENT generates full briefing','Auto-pulls health signals, usage trends, CIP status','Drafts QIR agenda, schedules call with POCs','Post-QIR: extracts action items, creates tasks, sends summary','CSM focuses on the conversation, not the paperwork']},
+before:[{s:'Research account activity',t:'IDI, Surf, Support',m:45},{s:'Prepare QIR agenda',t:'CIP, Adoption data',m:30},{s:'Schedule QIR with POCs',t:'Outlook',m:15},{s:'Run QIR meeting',t:'Teams/Zoom',m:60},{s:'Post-QIR documentation',t:'IDI, Loop, Outlook',m:45},{s:'Track follow-ups manually',t:'Personal system',m:65}],
+after:[{s:'AGENT: "While You\'ve Been Gone" brief auto-generated',a:true},{s:'AGENT: QIR agenda pre-built with context',a:true},{s:'AGENT: Auto-schedule with POCs',a:true},{s:'CSM: Runs the QIR (60 min)',a:false},{s:'AGENT: Notes synced, summary sent, tasks created',a:true}],
+oob:['QIR tracking','Conversations module','Success Plan / CIP','Scheduled playbooks'],custom:['"While You\'ve Been Gone" summarization','Auto-agenda generation','Post-meeting task extraction']},
+adopt:{label:'Adopt',num:'03',color:C.green,summary:'From blind telemetry reactions to informed, context-rich adoption interventions',trigger:'Critical app usage drops >30% over 30 days OR capability map gap detected',metrics:{tb:290,ta:45,toolsB:4,toolsA:1},
+modes:{assistive:['"Which accelerators are relevant for Acme\'s ITSM?"','"What\'s their critical app adoption rate?"','Answers from capability maps and telemetry'],generative:['Auto-create Product Adoption Roadmap from gaps','Generate adoption improvement plans per product mix','Draft customer-facing enablement recommendations'],predictive:['Detect usage drops across critical applications','Surface capability map gaps (entitlement vs. zero adoption)','Flag stalled implementations before they become risks'],agentic:['TRIGGER: Usage drop >30% \u2192 AGENT assesses BU ACV + Health + Tier','Auto-calculates severity score','Selects and launches appropriate adoption playbook','Sends targeted enablement to customer POC','Auto-fires 30-day checkpoint to measure recovery']},
+before:[{s:'Notice usage signal in dashboard',t:'Telemetry',m:20},{s:'Research context',t:'Multiple systems',m:40},{s:'Decide next steps (no business context)',t:'Judgment call',m:30},{s:'Manually select / create playbook',t:'Manual',m:30},{s:'Reach out to customer',t:'Outlook, IDI',m:30},{s:'Execute intervention + track',t:'Various',m:140}],
+after:[{s:'AGENT: Signal + context fusion (ACV, Health, Tier)',a:true},{s:'AGENT: Severity assessment with impact scoring',a:true},{s:'AGENT: Playbook selection from unified library',a:true},{s:'AGENT: Launch playbook + send enablement',a:true},{s:'CSM: Reviews recommendation \u2192 runs discovery call',a:false},{s:'AGENT: 30-day auto-checkpoint',a:true}],
+oob:['Health scoring','Playbook framework','Accelerator recommendations','Instance Observer telemetry'],custom:['BU ACV weighting logic','Compound severity scoring','Unified playbook routing','30-day auto-checkpoint']},
+monitor:{label:'Monitor',num:'04',color:C.amber,summary:'From "waiting for fires" to receiving pre-triaged, pre-prioritized risk packages',trigger:'CRIR risk signal (compound: NPS + usage + support + renewal proximity)',metrics:{tb:180,ta:20,toolsB:5,toolsA:1},
+modes:{assistive:['"What\'s Acme\'s current health score?"','"Show me all open risk signals for my portfolio"','Instant portfolio-level visibility'],generative:['Auto-generate risk summaries per account','Draft escalation emails with full context','Create executive briefings for at-risk accounts'],predictive:['CRIR surfaces compound risk signals','NPS trend analysis + support case velocity spikes','Prioritization heat map by severity \u00D7 ACV'],agentic:['TRIGGER: CRIR risk signal \u2192 AGENT calculates compound score','Auto-routes to right CSM based on AT + tier + workload','Launches risk resolution playbook with pre-populated tasks','If no resolution in 14 days \u2192 auto-escalates to manager','CSM receives pre-triaged risk with recommended playbook']},
+before:[{s:'Wait for single-source risk signal',t:'Alert system',m:0},{s:'Manual triage across systems',t:'Multiple',m:60},{s:'Decide priority (gut feel)',t:'Judgment',m:15},{s:'Create action plan manually',t:'Manual',m:45},{s:'Execute and track',t:'Personal lists',m:30},{s:'Escalate manually if needed',t:'Teams, Outlook',m:30}],
+after:[{s:'AGENT: Compound risk detection (NPS + usage + support)',a:true},{s:'AGENT: Severity \u00D7 ACV prioritization',a:true},{s:'AGENT: Smart routing to right CSM',a:true},{s:'AGENT: Playbook auto-launch with context',a:true},{s:'CSM: Executes human judgment \u2014 conversations, repair',a:false},{s:'AGENT: 14-day auto-escalation if unresolved',a:true}],
+oob:['CRIR framework','Health scoring','NPS closed-loop workflow','Account Team routing'],custom:['Compound risk scoring','ACV-weighted prioritization','Workload-aware assignment','Auto-escalation with context']},
+expand:{label:'Expand',num:'05',color:C.purple,summary:'From last-minute renewal scrambles to data-backed expansion proposals at T-120',trigger:'Renewal T-120 days + adoption score >75% + whitespace detected',metrics:{tb:270,ta:30,toolsB:4,toolsA:1},
+modes:{assistive:['"What\'s Acme\'s renewal timeline?"','"Which products could they expand into?"','Instant renewal and whitespace analysis'],generative:['Auto-generate value realization reports','Draft renewal narratives and expansion proposals','Create use-case mapping with success stories'],predictive:['Surface accounts with high expansion propensity','Strong adoption + renewal + whitespace = opportunity','Flag renewals at risk >90 days out'],agentic:['TRIGGER: Renewal T-120 + adoption >75% + whitespace','AGENT generates value realization summary','Identifies top 3 expansion opportunities with ROI','Drafts proposal + notifies Account Team','CSM validates story \u2192 co-pilots customer conversation']},
+before:[{s:'Renewal prep starts at T-60',t:'Manual',m:90},{s:'Manual value realization analysis',t:'Multiple',m:60},{s:'Identify expansion opportunities',t:'Product catalog',m:30},{s:'Draft renewal/expansion pitch',t:'PPT',m:60},{s:'Coordinate with Account Team',t:'Teams, Outlook',m:30}],
+after:[{s:'AGENT: Early trigger at T-120 (not T-60)',a:true},{s:'AGENT: Value realization report auto-generated',a:true},{s:'AGENT: Whitespace analysis with top 3 products',a:true},{s:'AGENT: Expansion proposal drafted',a:true},{s:'AGENT: Account Team notified with pitch',a:true},{s:'CSM: Strategic advisor \u2014 validates and co-pilots',a:false}],
+oob:['Renewal tracking','Success Plan outcomes','Product catalog data','AT integration'],custom:['Whitespace detection engine','Auto-value realization reports','Expansion propensity scoring','Cross-account story matching']}
+};
+
+let active='onboard',view='overview';
+
+function badge(text,bg,color){return `<span class="badge" style="background:${bg};color:${color}">${text}</span>`}
+
+function render(){
+const tabs=document.getElementById('stageTabs');
+tabs.innerHTML=Object.entries(STAGES).map(([k,s])=>`<button class="stage-tab ${k===active?'active':''}" style="${k===active?`border-color:${s.color};background:${s.color}20;color:${s.color}`:''}" onclick="setStage('${k}')"><span class="num">${s.num}</span>${s.label}</button>`).join('');
+
+const s=STAGES[active];
+const pct=Math.round(((s.metrics.tb-s.metrics.ta)/s.metrics.tb)*100);
+let h=`<p style="color:#a3b3c2;font-size:.875rem;margin-bottom:12px">${s.summary}</p>`;
+h+=`<div class="trigger-box">${badge('AGENTIC TRIGGER',C.pink+'30',C.pink)}<span style="font-size:.8rem;color:#a3b3c2">${s.trigger}</span></div>`;
+h+=`<div class="metrics-grid">`;
+h+=`<div class="metric"><div class="val" style="color:#6e8091">${s.metrics.tb} min</div><div class="lbl">Time before</div></div>`;
+h+=`<div class="metric"><div class="val" style="color:${C.wasabi}">${s.metrics.ta} min</div><div class="lbl">Time after</div></div>`;
+h+=`<div class="metric"><div class="val" style="color:${C.green}">${pct}%</div><div class="lbl">Time saved</div></div>`;
+h+=`<div class="metric"><div class="val" style="color:${C.blue}">${s.metrics.toolsB} \u2192 ${s.metrics.toolsA}</div><div class="lbl">Tools reduced</div></div>`;
+h+=`</div>`;
+
+h+=`<div class="view-switch">`;
+['overview','workflow','build'].forEach(v=>{
+const labels={overview:'AI modes',workflow:'Before \u2192 after',build:'OOB vs custom'};
+h+=`<button class="view-btn ${view===v?'active':''}" onclick="setView('${v}')">${labels[v]}</button>`;
+});
+h+=`</div>`;
+
+if(view==='overview'){
+h+=`<div class="modes-list">`;
+MODES.forEach(m=>{
+h+=`<div class="mode-card" style="border-left-color:${m.color}"><div class="mode-header"><span style="font-size:.8rem">${m.icon}</span><span class="name" style="color:${m.color}">${m.label}</span><span class="desc">\u2014 ${m.desc}</span></div>`;
+s.modes[m.key].forEach(item=>{h+=`<div class="mode-item"><div class="dot" style="background:${m.color}"></div>${item}</div>`});
+h+=`</div>`;
+});
+h+=`</div>`;
+}
+
+if(view==='workflow'){
+h+=`<div class="compare-grid"><div class="col col-before"><div class="col-hdr"><div class="dot" style="background:#6e8091"></div>TODAY (MANUAL)</div>`;
+s.before.forEach((item,i)=>{h+=`<div class="step"><div class="step-num" style="background:#2c3640;color:#6e8091">${i+1}</div><div><div class="step-txt">${item.s}</div><div class="step-meta">${item.t} \u00B7 ${item.m} min</div></div></div>`});
+h+=`</div><div class="col col-after"><div class="col-hdr"><div class="dot" style="background:${C.pink}"></div>AGENTIC (FUTURE)</div>`;
+s.after.forEach((item,i)=>{
+const col=item.a?C.pink:C.wasabi;
+h+=`<div class="step"><div class="step-num" style="background:${col}30;color:${col}">${item.a?'A':'H'}</div><div><div class="step-txt">${item.s}</div>${badge(item.a?'AUTOMATED':'HUMAN-IN-LOOP',col+'20',col)}</div></div>`;
+});
+h+=`</div></div>`;
+}
+
+if(view==='build'){
+h+=`<div class="build-grid"><div class="build-col" style="background:#252d36;border-radius:10px"><div style="margin-bottom:12px">${badge('OOB CSM CAPABILITIES',C.green+'20',C.green)}</div>`;
+s.oob.forEach(item=>{h+=`<div class="build-item"><div class="dot" style="background:${C.green}"></div>${item}</div>`});
+h+=`</div><div class="build-col" style="background:${C.amber}10;border:1px solid ${C.amber}30;border-radius:10px"><div style="margin-bottom:12px">${badge('CUSTOM BUILD REQUIRED',C.amber+'20',C.amber)}</div>`;
+s.custom.forEach(item=>{h+=`<div class="build-item"><div class="dot" style="background:${C.amber}"></div>${item}</div>`});
+h+=`</div></div>`;
+}
+
+h+=`<div class="evolution-bar"><div class="evo-label"><span class="sub" style="color:#6e8091">Before</span><span class="main" style="color:#6e8091">Manual switchboard</span></div><div class="evo-line"></div><div class="evo-label"><span class="sub" style="color:${C.pink}">After</span><span class="main" style="color:${C.pink}">Smart routing system</span></div></div>`;
+
+document.getElementById('content').innerHTML=h;
+}
+
+window.setStage=function(k){active=k;render()};
+window.setView=function(v){view=v;render()};
+render();
+</script>
+</body>
+</html>
