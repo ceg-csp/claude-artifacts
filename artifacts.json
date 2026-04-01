@@ -12,5 +12,19 @@
     "color2": "var(--orange)",
     "colorBg": "var(--rose-bg)",
     "added": "2026-04-01"
+  },
+  {
+    "name": "CSQL Intelligence Hub",
+    "section": "Product Management",
+    "desc": "AI-powered Customer Success Qualified Lead workspace. Expansion signal detection, health-scored accounts, rich CSQL creation with QBR extraction, pipeline tracking, and CS revenue attribution.",
+    "tags": ["CSQL", "Expansion", "AI Copilot", "Revenue"],
+    "keywords": ["CSQL", "expansion", "signals", "health score", "pipeline", "revenue attribution", "QBR", "lead scoring", "handoff", "CSM", "cross-sell", "upsell"],
+    "url": "csql/",
+    "live": true,
+    "agent": "CSQL Copilot",
+    "color1": "var(--blue)",
+    "color2": "var(--green)",
+    "colorBg": "var(--blue-bg)",
+    "added": "2026-04-01"
   }
 ]
