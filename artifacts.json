@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Support Notification Agent",
+    "section": "Product Management",
+    "desc": "Real-time case pattern detection. P1 concentrations, stale cases, misrouted tickets, SLA-only responses, cross-agent escalation.",
+    "tags": ["Alerts", "Patterns", "Escalation"],
+    "keywords": ["alerts", "cases", "support", "CRIR", "P1", "escalation", "patterns", "agent 13", "misrouted", "stale", "SLA"],
+    "url": "Agentic%20CSM/",
+    "live": true,
+    "agent": "Agent 13",
+    "color1": "var(--rose)",
+    "color2": "var(--orange)",
+    "colorBg": "var(--rose-bg)",
+    "added": "2026-04-01"
+  }
+]
