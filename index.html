@@ -1,33 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CSP Artifact Library</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap');
-:root{
-  --bg:#f4f6fa;--surface:#fff;--card-h:#f8f9fc;
-  --bdr:#dfe4ed;--bdr-h:#c5ccda;
-  --accent:#2563eb;--accent2:#3b82f6;--accent-bg:rgba(37,99,235,.05);
-  --green:#059669;--green-bg:rgba(5,150,105,.06);
-  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.05);
-  --amber:#d97706;--amber-bg:rgba(217,119,6,.06);
-  --rose:#e11d48;--rose-bg:rgba(225,29,72,.05);
-  --orange:#ea580c;--orange-bg:rgba(234,88,12,.05);
-  --t1:#0f172a;--t2:#475569;--t3:#94a3b8;
-  --font:'DM Sans',-apple-system,sans-serif;--mono:'Space Mono',monospace;
-  --sh:0 1px 3px rgba(0,0,0,.04);--sh-md:0 4px 16px rgba(0,0,0,.06);--sh-lg:0 8px 30px rgba(0,0,0,.08);
-}
-*{margin:0;padding:0;box-sizing:border-box}
+:root{--font:'DM Sans',-apple-system,sans-serif;--mono:'Space Mono',monospace}
+[data-theme="light"]{--bg:#f4f6fa;--surface:#fff;--card-h:#f7f8fc;--bdr:#dfe4ed;--bdr-h:#c5ccda;--accent:#2563eb;--accent2:#3b82f6;--accent-bg:rgba(37,99,235,.05);--green:#059669;--green-bg:rgba(5,150,105,.06);--purple:#7c3aed;--purple-bg:rgba(124,58,237,.05);--amber:#d97706;--amber-bg:rgba(217,119,6,.06);--rose:#e11d48;--rose-bg:rgba(225,29,72,.05);--orange:#ea580c;--t1:#0f172a;--t2:#475569;--t3:#94a3b8;--sh:0 1px 3px rgba(0,0,0,.04);--sh-md:0 4px 16px rgba(0,0,0,.06);--sh-lg:0 8px 30px rgba(0,0,0,.08);--overlay:rgba(15,23,42,.4);--dot:rgba(148,163,184,.2);--mesh1:rgba(37,99,235,.04);--mesh2:rgba(124,58,237,.03);--mesh3:rgba(5,150,105,.02)}
+[data-theme="dark"]{--bg:#0e1525;--surface:#162037;--card-h:#1c2a42;--bdr:#243352;--bdr-h:#2f4270;--accent:#6cb4f0;--accent2:#91cbff;--accent-bg:rgba(108,180,240,.07);--green:#5eead4;--green-bg:rgba(94,234,212,.06);--purple:#b197fc;--purple-bg:rgba(177,151,252,.06);--amber:#fcd34d;--amber-bg:rgba(252,211,77,.06);--rose:#fda4af;--rose-bg:rgba(253,164,175,.06);--orange:#fdba74;--t1:#e8edf5;--t2:#8fa3be;--t3:#506580;--sh:0 1px 3px rgba(0,0,0,.1);--sh-md:0 4px 16px rgba(0,0,0,.15);--sh-lg:0 8px 30px rgba(0,0,0,.2);--overlay:rgba(6,9,13,.6);--dot:rgba(108,180,240,.06);--mesh1:rgba(108,180,240,.04);--mesh2:rgba(177,151,252,.03);--mesh3:rgba(94,234,212,.02)}
+*{margin:0;padding:0;box-sizing:border-box;transition:background-color .3s,border-color .3s,color .3s,box-shadow .3s}
 body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
 ::selection{background:var(--accent);color:#fff}
-.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 50% at 10% 0%,rgba(37,99,235,.04),transparent),
-  radial-gradient(ellipse 60% 40% at 90% 90%,rgba(124,58,237,.03),transparent),
-  radial-gradient(ellipse 50% 50% at 50% 30%,rgba(5,150,105,.02),transparent)}
-.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:radial-gradient(circle,rgba(148,163,184,.2) .7px,transparent .7px);background-size:22px 22px}
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;transition:background .5s;background:radial-gradient(ellipse 80% 50% at var(--mx,10%) var(--my,0%),var(--mesh1),transparent),radial-gradient(ellipse 60% 40% at 90% 90%,var(--mesh2),transparent),radial-gradient(ellipse 50% 50% at 50% 30%,var(--mesh3),transparent)}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,var(--dot) .7px,transparent .7px);background-size:22px 22px}
 .shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;max-width:1320px;margin:0 auto;padding:0 36px}
 
 /* ── TOPBAR ── */
@@ -40,50 +26,50 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 .live-pill{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--green);background:var(--green-bg);border:1px solid rgba(5,150,105,.1);padding:4px 12px;border-radius:16px}
 .live-pill .dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.icon-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--bdr);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .15s}
+.icon-btn:hover{border-color:var(--bdr-h);box-shadow:var(--sh-md)}
 .btn-setup{font-size:10.5px;font-weight:600;color:#fff;background:var(--accent);padding:6px 16px;border-radius:7px;text-decoration:none;transition:all .15s;box-shadow:0 2px 6px rgba(37,99,235,.18)}
-.btn-setup:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-setup:hover{transform:translateY(-1px)}
+.kbd-hint{font-size:9px;font-weight:600;color:var(--t3);background:var(--bg);border:1px solid var(--bdr);padding:2px 6px;border-radius:4px;margin-left:4px;font-family:var(--mono)}
 
-/* ── HERO + SEARCH ── */
-.hero{padding:28px 0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.hero-left{max-width:480px}
+/* ── HERO ── */
+.hero{padding:28px 0 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.hero-left{max-width:460px}
 .hero h1{font-size:clamp(24px,3.5vw,34px);font-weight:700;line-height:1.15;letter-spacing:-.8px;margin-bottom:6px}
 .hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{font-size:13px;color:var(--t2);line-height:1.6}
-.search-box{width:380px;position:relative}
-.search-input{width:100%;background:var(--surface);border:1.5px solid var(--bdr);border-radius:12px;padding:12px 16px 12px 40px;font-size:13px;font-family:var(--font);color:var(--t1);outline:none;transition:all .2s;box-shadow:var(--sh)}
-.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.search-input::placeholder{color:var(--t3)}
-.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--t3);pointer-events:none}
-.ai-badge{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:9px;font-weight:700;color:var(--purple);background:var(--purple-bg);padding:3px 8px;border-radius:6px;letter-spacing:.5px}
-.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--bdr);border-radius:12px;box-shadow:var(--sh-lg);z-index:50;display:none;overflow:hidden}
-.search-results.visible{display:block}
-.sr-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .1s;text-decoration:none;color:inherit;border-bottom:1px solid var(--bdr)}
-.sr-item:last-child{border-bottom:none}
-.sr-item:hover{background:var(--accent-bg)}
-.sr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sr-info h4{font-size:13px;font-weight:600;margin-bottom:1px}
-.sr-info p{font-size:11px;color:var(--t2)}
-.sr-thinking{padding:16px;text-align:center;font-size:12px;color:var(--t3)}
-.sr-thinking .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--bdr);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle}
-@keyframes spin{to{transform:rotate(360deg)}}
+.hero-stats{display:flex;gap:16px}
+.hs{text-align:center;background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:12px 20px;box-shadow:var(--sh)}
+.hs-val{font-family:var(--mono);font-size:24px;font-weight:700;letter-spacing:-1px}
+.hs-label{font-size:8.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
 
-/* ── TABS ── */
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--bdr);overflow-x:auto;padding-top:4px}
-.tab{font-size:12px;font-weight:500;color:var(--t3);padding:9px 16px;cursor:pointer;border-bottom:2px solid transparent;transition:all .12s;white-space:nowrap}
+/* ── TOOLBAR ── */
+.toolbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 0;border-bottom:1px solid var(--bdr)}
+.tabs{display:flex;gap:2px;overflow-x:auto;flex:1}
+.tab{font-size:11.5px;font-weight:500;color:var(--t3);padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;transition:all .12s;white-space:nowrap}
 .tab:hover{color:var(--t2)}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
-.tab .ct{font-size:8.5px;font-weight:700;padding:2px 5px;border-radius:6px;margin-left:4px;vertical-align:middle}
+.tab .ct{font-size:8px;font-weight:700;padding:2px 5px;border-radius:6px;margin-left:3px;vertical-align:middle}
 .tab .ct.has{background:var(--accent-bg);color:var(--accent)}
 .tab .ct.zero{background:rgba(148,163,184,.08);color:var(--t3)}
+.view-toggle{display:flex;gap:2px;padding:4px;margin-bottom:-2px}
+.vt-btn{width:28px;height:28px;border-radius:6px;border:1px solid transparent;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;color:var(--t3);transition:all .1s}
+.vt-btn.active{background:var(--accent-bg);color:var(--accent);border-color:rgba(37,99,235,.1)}
 
 /* ── CONTENT ── */
-.content{flex:1;padding:20px 0 32px;overflow-y:auto}
+.content{flex:1;padding:18px 0 32px}
 .panel{display:none}
-.panel.active{display:block;animation:fadeIn .2s ease-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.panel.active{display:block;animation:fadeIn .15s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── CARDS ── */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.grid.list{grid-template-columns:1fr}
+.grid.list .card{display:flex;align-items:center;gap:16px;padding:16px 20px}
+.grid.list .card .desc{display:none}
+.grid.list .card .tags{display:none}
+.grid.list .card h3{margin-bottom:0}
+.grid.list .card-top{margin-bottom:0;min-width:140px}
 .card{background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:20px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:all .2s}
 .card:hover{border-color:var(--bdr-h);box-shadow:var(--sh-lg);transform:translateY(-2px)}
 .card .bar{position:absolute;top:0;left:0;right:0;height:3px}
@@ -92,32 +78,54 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 .st{font-size:9px;font-weight:600;display:flex;align-items:center;gap:4px}
 .st.live{color:var(--green)}.st.live .d{width:4px;height:4px;background:var(--green);border-radius:50%}
 .st.soon{color:var(--t3)}
-.card h3{font-size:14.5px;font-weight:600;margin-bottom:3px;letter-spacing:-.2px}
-.card .desc{font-size:11.5px;color:var(--t2);line-height:1.5;margin-bottom:12px}
+.card h3{font-size:14px;font-weight:600;margin-bottom:3px;letter-spacing:-.2px}
+.card .desc{font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:10px}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{font-size:9px;font-weight:500;padding:3px 8px;border-radius:5px}
-.card.ph{opacity:.4;cursor:default}
-.card.ph:hover{transform:none;box-shadow:none;border-color:var(--bdr)}
+.card.ph{opacity:.4;cursor:default}.card.ph:hover{transform:none;box-shadow:none;border-color:var(--bdr)}
 
-/* ── CONTRIBUTORS ── */
+/* ── CONTRIB ── */
 .contrib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.contrib-card{background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:20px;display:flex;align-items:center;gap:14px;transition:all .15s}
+.contrib-card{background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:18px;display:flex;align-items:center;gap:12px;transition:all .15s}
 .contrib-card:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
-.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
-.contrib-info{flex:1}
-.contrib-info h4{font-size:13.5px;font-weight:600;margin-bottom:2px}
-.contrib-info p{font-size:11px;color:var(--t2)}
-.contrib-stat{text-align:right}
 .contrib-stat .num{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent)}
 .contrib-stat .lbl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px}
-.contrib-loading{text-align:center;padding:40px;color:var(--t3);font-size:13px}
+
+/* ── ACTIVITY ── */
+.act-item{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--bdr)}
+.act-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover}
+.act-msg{font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.act-author{font-size:10.5px;color:var(--t3);margin-top:1px}
+.act-time{font-size:10px;color:var(--t3);white-space:nowrap;margin-left:auto}
 
 /* ── EMPTY ── */
 .empty{background:var(--surface);border:1.5px dashed var(--bdr);border-radius:12px;padding:44px 28px;text-align:center;box-shadow:var(--sh)}
 .empty strong{color:var(--t1);display:block;margin-bottom:5px;font-size:14px;font-weight:600}
 .empty .sub{font-size:12px;color:var(--t2);line-height:1.6;max-width:400px;margin:0 auto}
-.empty .hint{margin-top:14px;font-size:10.5px;color:var(--t3)}
-.empty .hint a{color:var(--accent);text-decoration:none;font-weight:500}
+.empty .hint{margin-top:14px;font-size:10.5px;color:var(--t3)}.empty .hint a{color:var(--accent);text-decoration:none;font-weight:500}
+
+/* ── CMD PALETTE ── */
+.cmd-overlay{position:fixed;inset:0;z-index:999;background:var(--overlay);display:none;align-items:flex-start;justify-content:center;padding-top:20vh;backdrop-filter:blur(4px)}
+.cmd-overlay.visible{display:flex}
+.cmd-box{width:560px;max-width:90vw;background:var(--surface);border:1px solid var(--bdr);border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,.2);overflow:hidden;animation:cmdIn .2s ease-out}
+@keyframes cmdIn{from{opacity:0;transform:scale(.97) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.cmd-input-wrap{padding:16px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
+.cmd-input-wrap .search-icon{font-size:16px;color:var(--t3)}
+.cmd-input{flex:1;border:none;background:none;font-size:15px;font-family:var(--font);color:var(--t1);outline:none}
+.cmd-input::placeholder{color:var(--t3)}
+.cmd-esc{font-size:9px;font-weight:600;color:var(--t3);background:var(--bg);border:1px solid var(--bdr);padding:2px 6px;border-radius:4px;font-family:var(--mono)}
+.cmd-results{max-height:320px;overflow-y:auto}
+.cmd-item{display:flex;align-items:center;gap:12px;padding:12px 20px;cursor:pointer;transition:all .08s;text-decoration:none;color:inherit}
+.cmd-item:hover,.cmd-item.selected{background:var(--accent-bg)}
+.cmd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cmd-info h4{font-size:13px;font-weight:600;margin-bottom:1px}
+.cmd-info p{font-size:11px;color:var(--t2)}
+.cmd-footer{padding:10px 20px;border-top:1px solid var(--bdr);display:flex;gap:16px;font-size:10px;color:var(--t3)}
+.cmd-footer span{display:flex;align-items:center;gap:4px}
+.cmd-footer .k{font-family:var(--mono);background:var(--bg);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;font-size:9px}
+.cmd-thinking{padding:20px;text-align:center;font-size:12px;color:var(--t3)}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--bdr);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── FOOTER ── */
 footer{padding:16px 0;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--t3)}
@@ -126,13 +134,15 @@ footer a:hover{color:var(--accent)}
 </style>
 </head>
 <body>
-<div class="mesh"></div><div class="dot-grid"></div>
+<div class="mesh" id="mesh"></div><div class="dot-grid"></div>
 <div class="shell">
 
   <div class="topbar">
     <div class="brand"><div class="logo">CSP</div><div><div class="brand-text">Artifact Library</div><div class="brand-sub">Customer Success Platform</div></div></div>
     <div class="top-right">
       <div class="live-pill"><span class="dot"></span> Active</div>
+      <div class="icon-btn" onclick="openCmd()" title="Search (Cmd+K)">&#9906;</div>
+      <div class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">&#9790;</div>
       <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" class="btn-setup">Get Set Up</a>
     </div>
   </div>
@@ -142,233 +152,115 @@ footer a:hover{color:var(--accent)}
       <h1>CSP <span class="grad">Artifact Library</span></h1>
       <p>Permanent home for every prototype the team builds. One link, always live, nothing gets lost.</p>
     </div>
-    <div class="search-box">
-      <span class="search-icon">&#9906;</span>
-      <input class="search-input" id="searchInput" type="text" placeholder="Describe what you are looking for..." oninput="handleSearch()" onkeydown="if(event.key==='Enter')runAISearch()">
-      <span class="ai-badge">AI SEARCH</span>
-      <div class="search-results" id="searchResults"></div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val" style="color:var(--accent);" data-target="5">0</div><div class="hs-label">Sections</div></div>
+      <div class="hs"><div class="hs-val" style="color:var(--green);" data-target="1">0</div><div class="hs-label">Live</div></div>
+      <div class="hs"><div class="hs-val" style="color:var(--purple);">&#8734;</div><div class="hs-label">Permanent</div></div>
     </div>
   </div>
 
-  <div class="tabs" id="mainTabs">
-    <div class="tab active" onclick="switchTab(0)">Product Management <span class="ct has">1</span></div>
-    <div class="tab" onclick="switchTab(1)">Analytics <span class="ct zero">0</span></div>
-    <div class="tab" onclick="switchTab(2)">GTM Tooling <span class="ct zero">0</span></div>
-    <div class="tab" onclick="switchTab(3)">Program Management <span class="ct zero">0</span></div>
-    <div class="tab" onclick="switchTab(4)">Misc <span class="ct zero">0</span></div>
-    <div class="tab" onclick="switchTab(5)" style="margin-left:auto;color:var(--purple);">Contributors</div>
-    <div class="tab" onclick="switchTab(6)">Recent Activity</div>
+  <div class="toolbar">
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab(0)">Product Mgmt <span class="ct has">1</span></div>
+      <div class="tab" onclick="switchTab(1)">Analytics <span class="ct zero">0</span></div>
+      <div class="tab" onclick="switchTab(2)">GTM <span class="ct zero">0</span></div>
+      <div class="tab" onclick="switchTab(3)">Program Mgmt <span class="ct zero">0</span></div>
+      <div class="tab" onclick="switchTab(4)">Misc <span class="ct zero">0</span></div>
+      <div class="tab" onclick="switchTab(5)" style="color:var(--purple);">Contributors</div>
+      <div class="tab" onclick="switchTab(6)">Activity</div>
+    </div>
+    <div class="view-toggle">
+      <div class="vt-btn active" onclick="setView('grid',this)" title="Grid view">&#9638;</div>
+      <div class="vt-btn" onclick="setView('list',this)" title="List view">&#9776;</div>
+    </div>
   </div>
 
   <div class="content">
-    <!-- PRODUCT MANAGEMENT -->
     <div class="panel active" id="p0">
-      <div class="grid">
-        <a href="Agentic%20CSM/" class="card">
-          <div class="bar" style="background:linear-gradient(90deg,var(--rose),var(--orange));"></div>
-          <div class="card-top"><span class="badge" style="background:var(--rose-bg);color:var(--rose);">Agent 13 / CRIR</span><span class="st live"><span class="d"></span> Live</span></div>
-          <h3>Support Notification Agent</h3>
-          <div class="desc">Real-time case pattern detection. Monitors P1 concentrations, stale cases, misrouted tickets, SLA-only responses, and cross-agent escalation workflows.</div>
-          <div class="tags"><span class="tag" style="background:var(--rose-bg);color:var(--rose);">Real-time alerts</span><span class="tag" style="background:var(--rose-bg);color:var(--rose);">Pattern detection</span><span class="tag" style="background:var(--rose-bg);color:var(--rose);">Escalation</span></div>
-        </a>
-        <div class="card ph"><div class="bar" style="background:linear-gradient(90deg,var(--accent),var(--purple));"></div><div class="card-top"><span class="badge" style="background:var(--accent-bg);color:var(--accent);">Agent 3</span><span class="st soon">Coming Soon</span></div><h3>Prioritization Heat Map</h3><div class="desc">4-quadrant portfolio triage. Classifies accounts by risk and value signals so CSMs focus on highest-impact accounts first.</div><div class="tags"><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Portfolio scoring</span><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Risk matrix</span></div></div>
-        <div class="card ph"><div class="bar" style="background:linear-gradient(90deg,var(--amber),var(--orange));"></div><div class="card-top"><span class="badge" style="background:var(--amber-bg);color:var(--amber);">Agent 1</span><span class="st soon">Coming Soon</span></div><h3>Meeting Co-Pilot</h3><div class="desc">Transforms customer meetings into structured intelligence. Auto-generates summaries and follow-up agendas.</div><div class="tags"><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Transcripts</span><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Action items</span></div></div>
+      <div class="grid" id="mainGrid">
+        <a href="Agentic%20CSM/" class="card"><div class="bar" style="background:linear-gradient(90deg,var(--rose),var(--orange));"></div><div class="card-top"><span class="badge" style="background:var(--rose-bg);color:var(--rose);">Agent 13</span><span class="st live"><span class="d"></span> Live</span></div><h3>Support Notification Agent</h3><div class="desc">Real-time case pattern detection. P1 concentrations, stale cases, misrouted tickets, SLA-only responses, cross-agent escalation.</div><div class="tags"><span class="tag" style="background:var(--rose-bg);color:var(--rose);">Alerts</span><span class="tag" style="background:var(--rose-bg);color:var(--rose);">Patterns</span><span class="tag" style="background:var(--rose-bg);color:var(--rose);">Escalation</span></div></a>
+        <div class="card ph"><div class="bar" style="background:linear-gradient(90deg,var(--accent),var(--purple));"></div><div class="card-top"><span class="badge" style="background:var(--accent-bg);color:var(--accent);">Agent 3</span><span class="st soon">Coming Soon</span></div><h3>Prioritization Heat Map</h3><div class="desc">4-quadrant portfolio triage by risk and value signals.</div><div class="tags"><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Scoring</span><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Risk</span></div></div>
+        <div class="card ph"><div class="bar" style="background:linear-gradient(90deg,var(--amber),var(--orange));"></div><div class="card-top"><span class="badge" style="background:var(--amber-bg);color:var(--amber);">Agent 1</span><span class="st soon">Coming Soon</span></div><h3>Meeting Co-Pilot</h3><div class="desc">Meeting transcript analysis with auto summaries and agendas.</div><div class="tags"><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Transcripts</span><span class="tag" style="background:rgba(148,163,184,.06);color:var(--t3);">Actions</span></div></div>
       </div>
     </div>
-
-    <!-- ANALYTICS -->
-    <div class="panel" id="p1"><div class="empty"><strong>No artifacts yet</strong><div class="sub">Account 360 dashboards, CSQL scorecards, portfolio health views, adoption analytics.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div></div></div>
-    <!-- GTM -->
-    <div class="panel" id="p2"><div class="empty"><strong>No artifacts yet</strong><div class="sub">CEG play planners, competitive analysis tools, sales enablement demos.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div></div></div>
-    <!-- PROGRAM -->
-    <div class="panel" id="p3"><div class="empty"><strong>No artifacts yet</strong><div class="sub">Onboarding playbooks, journey trackers, program dashboards, capacity planners.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div></div></div>
-    <!-- MISC -->
-    <div class="panel" id="p4"><div class="empty"><strong>No artifacts yet</strong><div class="sub">Experiments, hackathon projects, internal tools, concept proofs.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div></div></div>
-
-    <!-- CONTRIBUTORS -->
-    <div class="panel" id="p5">
-      <div id="contribContent" class="contrib-loading"><span class="spinner" style="display:inline-block;width:14px;height:14px;border:2px solid var(--bdr);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span> Loading contributors from GitHub...</div>
-    </div>
-
-    <!-- RECENT ACTIVITY -->
-    <div class="panel" id="p6">
-      <div id="activityContent" class="contrib-loading"><span class="spinner" style="display:inline-block;width:14px;height:14px;border:2px solid var(--bdr);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span> Loading recent activity...</div>
-    </div>
+    <div class="panel" id="p1"><div class="empty"><strong>No artifacts yet</strong><div class="sub">Account 360, CSQL scorecards, portfolio views, adoption analytics.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a></div></div></div>
+    <div class="panel" id="p2"><div class="empty"><strong>No artifacts yet</strong><div class="sub">CEG play planners, competitive tools, enablement demos.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a></div></div></div>
+    <div class="panel" id="p3"><div class="empty"><strong>No artifacts yet</strong><div class="sub">Onboarding playbooks, journey trackers, program dashboards.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a></div></div></div>
+    <div class="panel" id="p4"><div class="empty"><strong>No artifacts yet</strong><div class="sub">Experiments, hackathon projects, internal tools.</div><div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a></div></div></div>
+    <div class="panel" id="p5"><div id="contribContent" class="empty"><strong>Loading contributors...</strong><div class="sub"><span class="spinner"></span></div></div></div>
+    <div class="panel" id="p6"><div id="activityContent" class="empty"><strong>Loading activity...</strong><div class="sub"><span class="spinner"></span></div></div></div>
   </div>
 
-  <footer><span>CSP Artifact Library</span><div><a href="https://github.com/ceg-csp/claude-artifacts" target="_blank">GitHub</a><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup Guide</a></div></footer>
+  <footer><span>CSP Artifact Library &middot; <span class="kbd-hint">&#8984;K</span> to search</span><div><a href="https://github.com/ceg-csp/claude-artifacts" target="_blank">GitHub</a><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup</a></div></footer>
+</div>
+
+<!-- CMD PALETTE -->
+<div class="cmd-overlay" id="cmdOverlay" onclick="if(event.target===this)closeCmd()">
+  <div class="cmd-box">
+    <div class="cmd-input-wrap">
+      <span class="search-icon">&#9906;</span>
+      <input class="cmd-input" id="cmdInput" type="text" placeholder="Search artifacts, agents, capabilities..." oninput="cmdSearch()" onkeydown="cmdKey(event)">
+      <span class="cmd-esc">ESC</span>
+    </div>
+    <div class="cmd-results" id="cmdResults">
+      <div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">Type to search across all artifacts using AI</div>
+    </div>
+    <div class="cmd-footer">
+      <span><span class="k">&#8593;&#8595;</span> Navigate</span>
+      <span><span class="k">&#9166;</span> Open</span>
+      <span><span class="k">ESC</span> Close</span>
+    </div>
+  </div>
 </div>
 
 <script>
-// ── ARTIFACTS REGISTRY ──
-const artifacts = [
-  { name: 'Support Notification Agent', section: 'Product Management', desc: 'Real-time case pattern detection with P1 concentration monitoring, stale case alerts, misrouted ticket detection, SLA-only response tracking, and cross-agent escalation workflows', tags: ['alerts','cases','support','CRIR','P1','escalation','pattern detection'], url: 'Agentic%20CSM/', live: true, agent: 'Agent 13', color: '#e11d48' },
-  { name: 'Prioritization Heat Map', section: 'Product Management', desc: 'Portfolio triage with risk-value quadrant classification for CSM account prioritization', tags: ['portfolio','risk','scoring','heat map','prioritization'], url: null, live: false, agent: 'Agent 3', color: '#2563eb' },
-  { name: 'Meeting Co-Pilot', section: 'Product Management', desc: 'Meeting transcript analysis with auto-generated summaries, action items, and follow-up agendas', tags: ['meetings','transcript','agenda','action items','notes'], url: null, live: false, agent: 'Agent 1', color: '#d97706' },
+const artifacts=[
+  {name:'Support Notification Agent',section:'Product Management',desc:'Real-time case pattern detection with P1 monitoring, stale case alerts, misrouted tickets, SLA tracking, escalation workflows',tags:['alerts','cases','support','CRIR','P1','escalation','patterns','agent 13'],url:'Agentic%20CSM/',live:true,agent:'Agent 13',color:'var(--rose)'},
+  {name:'Prioritization Heat Map',section:'Product Management',desc:'Portfolio triage with risk-value quadrant classification for CSM account prioritization',tags:['portfolio','risk','scoring','heat map','prioritization','agent 3'],url:null,live:false,agent:'Agent 3',color:'var(--accent)'},
+  {name:'Meeting Co-Pilot',section:'Product Management',desc:'Meeting transcript analysis with auto-generated summaries, action items, and follow-up agendas',tags:['meetings','transcript','agenda','action items','notes','agent 1'],url:null,live:false,agent:'Agent 1',color:'var(--amber)'}
 ];
+let cmdIdx=-1;
 
-// ── TAB SWITCHING ──
-function switchTab(i) {
-  document.querySelectorAll('.tab').forEach((t,n) => t.classList.toggle('active', n===i));
-  document.querySelectorAll('.panel').forEach((p,n) => p.classList.toggle('active', n===i));
-  if (i===5) loadContributors();
-  if (i===6) loadActivity();
-}
+// ── TABS ──
+function switchTab(i){document.querySelectorAll('.tab').forEach((t,n)=>t.classList.toggle('active',n===i));document.querySelectorAll('.panel').forEach((p,n)=>p.classList.toggle('active',n===i));if(i===5)loadContrib();if(i===6)loadActivity();}
 
-// ── AI SEARCH ──
-let searchTimeout;
-function handleSearch() {
-  const q = document.getElementById('searchInput').value.trim();
-  const r = document.getElementById('searchResults');
-  clearTimeout(searchTimeout);
-  if (q.length < 2) { r.classList.remove('visible'); return; }
-  // Local fuzzy match first
-  const matches = artifacts.filter(a => {
-    const hay = (a.name + ' ' + a.desc + ' ' + a.tags.join(' ') + ' ' + a.agent).toLowerCase();
-    return q.toLowerCase().split(' ').some(w => hay.includes(w));
-  });
-  if (matches.length > 0) {
-    showSearchResults(matches);
-  } else {
-    searchTimeout = setTimeout(() => runAISearch(), 800);
-  }
-}
+// ── VIEW TOGGLE ──
+function setView(v,btn){document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('mainGrid');g.classList.toggle('list',v==='list');}
 
-function runAISearch() {
-  const q = document.getElementById('searchInput').value.trim();
-  if (!q) return;
-  const r = document.getElementById('searchResults');
-  r.innerHTML = '<div class="sr-thinking"><span class="spinner"></span> AI is searching the library...</div>';
-  r.classList.add('visible');
-  // AI-powered semantic search via Anthropic API
-  fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 500,
-      messages: [{ role: 'user', content: `You are a search engine for an artifact library. Here are the available artifacts:\n${JSON.stringify(artifacts.map(a=>({name:a.name,desc:a.desc,tags:a.tags,agent:a.agent,live:a.live})))}\n\nUser query: "${q}"\n\nReturn a JSON array of matching artifact names ranked by relevance, with a one-line reason for each match. Format: [{"name":"...","reason":"..."}]. If nothing matches, return []. Only return valid JSON, no markdown.` }]
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    try {
-      const text = data.content.map(c => c.text || '').join('');
-      const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-      const matched = parsed.map(p => {
-        const a = artifacts.find(x => x.name === p.name);
-        return a ? { ...a, reason: p.reason } : null;
-      }).filter(Boolean);
-      if (matched.length > 0) showSearchResults(matched);
-      else r.innerHTML = '<div class="sr-thinking">No matching artifacts found. Try different keywords.</div>';
-    } catch(e) {
-      // Fallback to local search
-      r.innerHTML = '<div class="sr-thinking">Could not parse AI results. Showing local matches.</div>';
-      setTimeout(() => r.classList.remove('visible'), 2000);
-    }
-  })
-  .catch(() => {
-    r.innerHTML = '<div class="sr-thinking">AI search unavailable. Showing local results.</div>';
-    const matches = artifacts.filter(a => {
-      const hay = (a.name+' '+a.desc+' '+a.tags.join(' ')).toLowerCase();
-      return q.toLowerCase().split(' ').some(w => hay.includes(w));
-    });
-    if (matches.length) showSearchResults(matches);
-    else setTimeout(() => r.classList.remove('visible'), 2000);
-  });
-}
+// ── THEME ──
+function toggleTheme(){const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;document.getElementById('themeBtn').innerHTML=t==='dark'?'&#9728;':'&#9790;';localStorage.setItem('theme',t);}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.dataset.theme=t;if(t==='dark')document.getElementById('themeBtn').innerHTML='&#9728;';}})();
 
-function showSearchResults(matches) {
-  const r = document.getElementById('searchResults');
-  r.innerHTML = matches.map(a => `
-    <${a.live && a.url ? `a href="${a.url}"` : 'div'} class="sr-item">
-      <div class="sr-dot" style="background:${a.color};opacity:${a.live?.6:.2}"></div>
-      <div class="sr-info">
-        <h4>${a.name} <span style="font-size:9px;font-weight:500;color:var(--t3);margin-left:4px;">${a.agent}</span></h4>
-        <p>${a.reason || a.desc.slice(0,80) + '...'}</p>
-      </div>
-      <span class="st ${a.live?'live':'soon'}" style="margin-left:auto;font-size:9px;">${a.live?'Live':'Planned'}</span>
-    </${a.live && a.url ? 'a' : 'div'}>
-  `).join('');
-  r.classList.add('visible');
-}
+// ── MOUSE GRADIENT ──
+document.addEventListener('mousemove',e=>{const x=Math.round(e.clientX/window.innerWidth*100);const y=Math.round(e.clientY/window.innerHeight*100);document.getElementById('mesh').style.setProperty('--mx',x+'%');document.getElementById('mesh').style.setProperty('--my',y+'%');});
 
-// Close search on outside click
-document.addEventListener('click', e => {
-  if (!e.target.closest('.search-box')) document.getElementById('searchResults').classList.remove('visible');
-});
+// ── COUNTER ANIM ──
+document.querySelectorAll('.hs-val[data-target]').forEach(el=>{const target=+el.dataset.target;let cur=0;const step=()=>{cur+=Math.ceil(target/20);if(cur>=target){el.textContent=target;return;}el.textContent=cur;requestAnimationFrame(step);};setTimeout(step,400);});
 
-// ── CONTRIBUTORS (GitHub API) ──
-let contribLoaded = false;
-async function loadContributors() {
-  if (contribLoaded) return;
-  contribLoaded = true;
-  const el = document.getElementById('contribContent');
-  try {
-    const res = await fetch('https://api.github.com/repos/ceg-csp/claude-artifacts/contributors');
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) {
-      el.innerHTML = '<div class="empty"><strong>No contributors yet</strong><div class="sub">Once the team starts publishing artifacts, contributors will appear here.</div></div>';
-      return;
-    }
-    const colors = ['#2563eb','#7c3aed','#059669','#e11d48','#d97706','#ea580c','#0d9488'];
-    el.innerHTML = '<div class="contrib-grid">' + data.map((c,i) => `
-      <div class="contrib-card">
-        <img src="${c.avatar_url}" style="width:42px;height:42px;border-radius:50%;object-fit:cover;" alt="${c.login}">
-        <div class="contrib-info">
-          <h4>${c.login}</h4>
-          <p><a href="${c.html_url}" target="_blank" style="color:var(--accent);text-decoration:none;font-size:11px;">View profile</a></p>
-        </div>
-        <div class="contrib-stat">
-          <div class="num" style="color:${colors[i%colors.length]}">${c.contributions}</div>
-          <div class="lbl">Commits</div>
-        </div>
-      </div>
-    `).join('') + '</div>';
-  } catch(e) {
-    el.innerHTML = '<div class="empty"><strong>Could not load contributors</strong><div class="sub">GitHub API may be rate-limited. Try again in a few minutes.</div></div>';
-  }
-}
+// ── CMD PALETTE ──
+function openCmd(){document.getElementById('cmdOverlay').classList.add('visible');document.getElementById('cmdInput').value='';document.getElementById('cmdInput').focus();cmdIdx=-1;showDefaultCmd();}
+function closeCmd(){document.getElementById('cmdOverlay').classList.remove('visible');}
+function showDefaultCmd(){document.getElementById('cmdResults').innerHTML=artifacts.map((a,i)=>`<${a.url?`a href="${a.url}"`:'div'} class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color};opacity:${a.live?.7:.25}"></div><div class="cmd-info"><h4>${a.name} <span style="font-size:9px;color:var(--t3);font-weight:400;">${a.agent}</span></h4><p>${a.desc.slice(0,60)}...</p></div><span class="st ${a.live?'live':'soon'}" style="margin-left:auto;font-size:9px;">${a.live?'Live':'Planned'}</span></${a.url?'a':'div'}>`).join('');}
+function cmdSearch(){const q=document.getElementById('cmdInput').value.trim().toLowerCase();cmdIdx=-1;if(!q){showDefaultCmd();return;}
+const matches=artifacts.filter(a=>(a.name+' '+a.desc+' '+a.tags.join(' ')+' '+a.agent).toLowerCase().includes(q));
+if(matches.length){document.getElementById('cmdResults').innerHTML=matches.map((a,i)=>`<${a.url?`a href="${a.url}"`:'div'} class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color};opacity:${a.live?.7:.25}"></div><div class="cmd-info"><h4>${a.name}</h4><p>${a.desc.slice(0,70)}...</p></div></${a.url?'a':'div'}>`).join('');}
+else{document.getElementById('cmdResults').innerHTML='<div class="cmd-thinking"><span class="spinner"></span> Searching with AI...</div>';
+fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:`Artifacts: ${JSON.stringify(artifacts.map(a=>({name:a.name,desc:a.desc,tags:a.tags})))}\n\nQuery: "${q}"\n\nReturn JSON array of matching names with reason: [{"name":"...","reason":"..."}]. No markdown, only JSON.`}]})}).then(r=>r.json()).then(d=>{try{const t=d.content.map(c=>c.text||'').join('');const p=JSON.parse(t.replace(/```json|```/g,'').trim());const m=p.map(x=>{const a=artifacts.find(v=>v.name===x.name);return a?{...a,reason:x.reason}:null;}).filter(Boolean);document.getElementById('cmdResults').innerHTML=m.length?m.map((a,i)=>`<${a.url?`a href="${a.url}"`:'div'} class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color};opacity:${a.live?.7:.25}"></div><div class="cmd-info"><h4>${a.name}</h4><p>${a.reason}</p></div></${a.url?'a':'div'}>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found</div>';}catch(e){document.getElementById('cmdResults').innerHTML='<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found</div>';}}).catch(()=>{document.getElementById('cmdResults').innerHTML='<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">AI search unavailable</div>';});}}
+function cmdKey(e){const items=document.querySelectorAll('.cmd-item');if(e.key==='Escape')closeCmd();if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=Math.min(cmdIdx+1,items.length-1);items.forEach((it,i)=>it.classList.toggle('selected',i===cmdIdx));}
+if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=Math.max(cmdIdx-1,0);items.forEach((it,i)=>it.classList.toggle('selected',i===cmdIdx));}
+if(e.key==='Enter'&&cmdIdx>=0&&items[cmdIdx]){const href=items[cmdIdx].getAttribute('href');if(href)window.location.href=href;}}
 
-// ── RECENT ACTIVITY (GitHub API) ──
-let activityLoaded = false;
-async function loadActivity() {
-  if (activityLoaded) return;
-  activityLoaded = true;
-  const el = document.getElementById('activityContent');
-  try {
-    const res = await fetch('https://api.github.com/repos/ceg-csp/claude-artifacts/commits?per_page=15');
-    const data = await res.json();
-    if (!Array.isArray(data)) { el.innerHTML = '<div class="empty"><strong>No activity yet</strong></div>'; return; }
-    el.innerHTML = data.map(c => {
-      const d = new Date(c.commit.author.date);
-      const ago = timeAgo(d);
-      const msg = c.commit.message.split('\n')[0];
-      const author = c.author ? c.author.login : c.commit.author.name;
-      const avatar = c.author ? c.author.avatar_url : null;
-      return `
-      <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--bdr);">
-        ${avatar ? `<img src="${avatar}" style="width:30px;height:30px;border-radius:50%;">` : `<div style="width:30px;height:30px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);">${author.slice(0,2).toUpperCase()}</div>`}
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${msg}</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:1px;">${author}</div>
-        </div>
-        <div style="font-size:10.5px;color:var(--t3);white-space:nowrap;">${ago}</div>
-      </div>`;
-    }).join('');
-  } catch(e) {
-    el.innerHTML = '<div class="empty"><strong>Could not load activity</strong><div class="sub">Try again in a few minutes.</div></div>';
-  }
-}
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown',e=>{if(e.metaKey&&e.key==='k'){e.preventDefault();openCmd();}if(!e.metaKey&&!e.ctrlKey&&!document.querySelector('.cmd-overlay.visible')){const n=+e.key;if(n>=1&&n<=7){e.preventDefault();switchTab(n-1);}}});
 
-function timeAgo(date) {
-  const s = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (s < 60) return 'just now';
-  if (s < 3600) return Math.floor(s/60) + 'm ago';
-  if (s < 86400) return Math.floor(s/3600) + 'h ago';
-  if (s < 604800) return Math.floor(s/86400) + 'd ago';
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
+// ── CONTRIBUTORS ──
+let cLoaded=false;
+async function loadContrib(){if(cLoaded)return;cLoaded=true;const el=document.getElementById('contribContent');try{const r=await fetch('https://api.github.com/repos/ceg-csp/claude-artifacts/contributors');const d=await r.json();if(!Array.isArray(d)||!d.length){el.innerHTML='<div class="empty"><strong>No contributors yet</strong></div>';return;}const colors=['var(--accent)','var(--purple)','var(--green)','var(--rose)','var(--amber)'];el.innerHTML='<div class="contrib-grid">'+d.map((c,i)=>`<div class="contrib-card"><img src="${c.avatar_url}" style="width:40px;height:40px;border-radius:50%;" alt="${c.login}"><div style="flex:1"><div style="font-size:13px;font-weight:600;">${c.login}</div><div style="font-size:10px;color:var(--t3);"><a href="${c.html_url}" target="_blank" style="color:var(--accent);text-decoration:none;">Profile</a></div></div><div class="contrib-stat"><div class="num" style="color:${colors[i%5]}">${c.contributions}</div><div class="lbl">Commits</div></div></div>`).join('')+'</div>';}catch(e){el.innerHTML='<div class="empty"><strong>Could not load</strong><div class="sub">Try again shortly.</div></div>';}}
+
+// ── ACTIVITY ──
+let aLoaded=false;
+async function loadActivity(){if(aLoaded)return;aLoaded=true;const el=document.getElementById('activityContent');try{const r=await fetch('https://api.github.com/repos/ceg-csp/claude-artifacts/commits?per_page=15');const d=await r.json();if(!Array.isArray(d)){el.innerHTML='<div class="empty"><strong>No activity</strong></div>';return;}el.innerHTML=d.map(c=>{const ago=timeAgo(new Date(c.commit.author.date));const msg=c.commit.message.split('\n')[0];const who=c.author?c.author.login:c.commit.author.name;const av=c.author?c.author.avatar_url:null;return`<div class="act-item">${av?`<img class="act-avatar" src="${av}">`:`<div class="act-avatar" style="background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent);">${who.slice(0,2).toUpperCase()}</div>`}<div style="flex:1;min-width:0;"><div class="act-msg">${msg}</div><div class="act-author">${who}</div></div><div class="act-time">${ago}</div></div>`;}).join('');}catch(e){el.innerHTML='<div class="empty"><strong>Could not load</strong></div>';}}
+function timeAgo(d){const s=Math.floor((Date.now()-d.getTime())/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';if(s<604800)return Math.floor(s/86400)+'d ago';return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
 </script>
 </body>
 </html>
