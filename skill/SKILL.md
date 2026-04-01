@@ -11,97 +11,115 @@ This skill automates publishing interactive artifacts to the CSP team's shared l
 
 After ANY interactive HTML artifact is created (prototypes, demos, dashboards, mockups), ask:
 
-> "Would you like to publish this to the team's Artifact Library?"
+> "Would you like me to deploy this to GitHub Pages?"
 
-If yes, proceed with the workflow below.
+If yes, proceed with the workflow below. Execute ALL steps — never stop after pushing the HTML.
 
 ## Workflow
 
-### Step 1: Collect Info
+### Step 1: Infer Registry Entry (DO NOT ask 6 separate questions)
 
-Ask the user for all of the following:
+Read the current `artifacts.json` to understand existing sections and naming patterns:
 
-1. **Artifact name** — short, descriptive (e.g., "Support Notification Agent")
-2. **One-line description** — under 120 characters
-3. **Section** — which tab:
-   - Product Management
-   - Analytics
-   - GTM Tooling
-   - Program Management
-   - Misc
-4. **Agent number** (if applicable) — e.g., "Agent 13". Use "Tool" or "Demo" if not agent-related.
-5. **Tags** — 2-4 short keywords (e.g., "Real-time alerts", "Portfolio scoring")
-6. **Accent colors** — pick from palette:
-   - Rose/Orange: `var(--rose)` / `var(--orange)` + `var(--rose-bg)`
-   - Accent/Purple: `var(--accent)` / `var(--purple)` + `var(--accent-bg)`
-   - Amber/Orange: `var(--amber)` / `var(--orange)` + `var(--amber-bg)`
-   - Green/Teal: `var(--green)` / `var(--teal)` + `var(--green-bg)`
-   - Purple: `var(--purple)` / `var(--accent)` + `var(--purple-bg)`
+```
+github:get_file_contents -> owner: ceg-csp, repo: claude-artifacts, path: artifacts.json
+```
+
+Save the returned `sha` for later.
+
+Using conversation context, infer ALL fields and present a single confirmation table:
+
+> **Deploying to Artifact Library**
+>
+> | Field | Value |
+> |---|---|
+> | **Name** | [inferred from artifact title] |
+> | **Section** | [best match from existing sections, or suggest new] |
+> | **Description** | [one-line, under 120 chars] |
+> | **Tags** | [2-4 short keywords] |
+> | **Agent** | [agent name if applicable, otherwise "Tool" or "Demo"] |
+>
+> Confirm to deploy, or tell me what to change.
+
+**Section inference rules:**
+- CSP prototypes, product features, demos, PRDs → Product Management
+- Data dashboards, Snowflake queries, analytics tools → Analytics
+- Sales tooling, AE/CSM enablement, account briefs → GTM Tooling
+- Ops workflows, process tools, governance → Program Management
+- Anything else → Misc
+
+**Color auto-assignment by section:**
+- Product Management: `var(--blue)` / `var(--green)` / `var(--blue-bg)`
+- Analytics: `var(--accent)` / `var(--purple)` / `var(--accent-bg)`
+- GTM Tooling: `var(--amber)` / `var(--orange)` / `var(--amber-bg)`
+- Program Management: `var(--green)` / `var(--teal)` / `var(--green-bg)`
+- Misc: `var(--rose)` / `var(--orange)` / `var(--rose-bg)`
+
+Wait for user confirmation before proceeding. If user requests changes, update and re-confirm.
 
 ### Step 2: Push the Artifact HTML
 
 - **Owner:** `ceg-csp` (MUST be lowercase)
 - **Repo:** `claude-artifacts`
 - **Branch:** `main`
-- **Path:** `[Artifact Name]/index.html`
-- **Commit message:** `Add [Artifact Name] - [YYYY-MM-DD]`
+- **Path:** `[artifact-name]/index.html` (lowercase, hyphens for spaces)
+- **Commit message:** `Update [artifact-name] - [YYYY-MM-DD]`
 
 If updating an existing artifact, fetch sha first:
 ```
-github:get_file_contents -> owner: ceg-csp, repo: claude-artifacts, path: [Artifact Name]/index.html
+github:get_file_contents -> owner: ceg-csp, repo: claude-artifacts, path: [artifact-name]/index.html
 ```
 Then include `sha` in the update call.
 
-### Step 3: Update artifacts.json (CRITICAL)
+### Step 3: Update artifacts.json (CRITICAL — NEVER SKIP)
 
-This is the ONLY file that needs updating for the homepage. No HTML editing required.
+This step is MANDATORY. The homepage reads artifacts.json on load. If you skip this, the artifact exists but is invisible in the library.
 
-#### 3a: Fetch current artifacts.json
-```
-github:get_file_contents -> owner: ceg-csp, repo: claude-artifacts, path: artifacts.json
-```
-Save the returned `sha`.
+Parse the JSON array from Step 1 and append the new entry:
 
-#### 3b: Parse the JSON and add the new artifact
-
-Add a new entry to the array:
 ```json
 {
   "name": "[Artifact Name]",
   "section": "[Section Name]",
-  "desc": "[Description]",
+  "desc": "[Description under 120 chars]",
   "tags": ["Tag 1", "Tag 2", "Tag 3"],
-  "keywords": ["keyword1", "keyword2", "keyword3"],
-  "url": "[Folder Name URL-encoded]/",
+  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"],
+  "url": "[folder-name]/",
   "live": true,
   "agent": "[Agent Badge]",
-  "color1": "var(--rose)",
-  "color2": "var(--orange)",
-  "colorBg": "var(--rose-bg)",
+  "color1": "[from section color map]",
+  "color2": "[from section color map]",
+  "colorBg": "[from section color map]",
   "added": "[YYYY-MM-DD]"
 }
 ```
 
-- `keywords` should include 8-12 search terms that someone might use to find this artifact (broader than tags)
-- `url` must be URL-encoded (spaces become %20)
+**Field notes:**
+- `keywords`: 8-12 search terms broader than tags — think about what someone would type to find this
+- `url`: folder name, URL-encoded if spaces (prefer lowercase hyphens to avoid encoding)
 - If updating an existing artifact, find the entry by name and update its fields
 
-#### 3c: Push updated artifacts.json
+Push updated artifacts.json using the sha saved from Step 1:
 ```
-github:create_or_update_file -> owner: ceg-csp, repo: claude-artifacts, path: artifacts.json, sha: [sha from 3a]
+github:create_or_update_file -> owner: ceg-csp, repo: claude-artifacts, path: artifacts.json, sha: [saved sha]
 ```
-Commit message: `Register [Artifact Name] in library - [YYYY-MM-DD]`
+Commit message: `Update artifacts.json - add [Artifact Name]`
 
-That is it. The homepage reads artifacts.json on load and dynamically renders all cards, tab counts, stats, and search index. No HTML editing needed.
+### Step 4: Return Structured Confirmation
 
-### Step 4: Confirm to User
+Always return this exact format after successful deployment:
 
-Return:
-1. **Artifact URL:** `https://ceg-csp.github.io/claude-artifacts/[Folder Name URL-encoded]/`
-2. **Library URL:** `https://ceg-csp.github.io/claude-artifacts/`
-3. **Confirmation:** "Published to [Section Name]. The artifact will appear on the homepage automatically."
-
-Remind user to hard refresh (Cmd+Shift+R) if they see the old version.
+> **Deployment Complete**
+>
+> | | |
+> |---|---|
+> | **Artifact** | [Name] |
+> | **Repo Path** | `ceg-csp/claude-artifacts/[folder]/index.html` |
+> | **Shareable Link** | https://ceg-csp.github.io/claude-artifacts/[folder]/ |
+> | **Artifact Library** | https://ceg-csp.github.io/claude-artifacts/ |
+> | **Commit 1** | `[sha]` — [artifact commit message] |
+> | **Commit 2** | `[sha]` — [registry commit message] |
+> | **Status** | Live |
 
 ## Important Notes
 
@@ -109,5 +127,6 @@ Remind user to hard refresh (Cmd+Shift+R) if they see the old version.
 - Always fetch sha before updating any existing file
 - The homepage dynamically reads artifacts.json — you NEVER need to edit index.html
 - Keep keywords broad — include terms users might naturally search for
-- URL-encode spaces as %20 in the url field
+- Prefer lowercase-hyphen folder names (e.g., `csql/` not `CSQL Intelligence Hub/`)
 - If GitHub MCP is not available (e.g., in claude.ai web), provide terminal commands instead
+- Hard refresh (Cmd+Shift+R) may be needed if user sees cached version
