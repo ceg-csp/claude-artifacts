@@ -14,11 +14,11 @@ The homepage dynamically renders from `artifacts.json`. Each artifact lives in i
 
 ```
 claude-artifacts/
-  index.html          <- Homepage (reads from artifacts.json, never needs manual editing)
-  artifacts.json      <- Registry of all artifacts (the skill updates this automatically)
-  agentic-csm/        <- Agent 13: Support Notification Agent
-  csql/               <- CSQL Intelligence Hub
-  skill/              <- Deploy automation skill and setup guide
+  index.html            <- Homepage (reads from artifacts.json, never needs manual editing)
+  artifacts.json        <- Registry of all artifacts (the skill updates this automatically)
+  agentic-csm/          <- Agent 13: Support Notification Agent
+  csql/                 <- CSQL Intelligence Hub
+  claude-skill/         <- Deploy automation skill and setup guide
 ```
 
 ## Publishing an artifact
@@ -33,7 +33,7 @@ The homepage picks up new artifacts automatically. No HTML editing required.
 
 You need a GitHub account, collaborator access to this repo, Claude Desktop, and Node.js. The full setup guide (about 5 minutes) is here:
 
-**[Setup Guide](https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md)**
+**[Setup Guide](https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/README.md)**
 
 ## Naming convention
 
@@ -52,5 +52,5 @@ All artifact folders use lowercase with hyphens. Examples: `agentic-csm/`, `csql
 ## Links
 
 - **Live site:** https://ceg-csp.github.io/claude-artifacts/
-- **Setup guide:** https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md
-- **Deploy skill:** https://github.com/ceg-csp/claude-artifacts/blob/main/skill/SKILL.md
+- **Setup guide:** https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/README.md
+- **Deploy skill:** https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/SKILL.md
