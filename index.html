@@ -7,104 +7,110 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap');
 :root{
-  --bg:#0e1525;--bg2:#121a2e;--surface:#162037;--card:#1a2641;--card-h:#1f2d4d;
-  --bdr:#243352;--bdr-h:#2f4270;
-  --accent:#6cb4f0;--accent2:#91cbff;--accent-g:rgba(108,180,240,.06);
-  --green:#5eead4;--teal:#2dd4bf;--purple:#b197fc;--amber:#fcd34d;--rose:#fda4af;--orange:#fdba74;
-  --t1:#e8edf5;--t2:#8fa3be;--t3:#506580;
+  --bg:#f6f8fb;--bg2:#ffffff;--surface:#fff;--card:#fff;--card-h:#f9fafb;
+  --bdr:#e2e8f0;--bdr-h:#cbd5e1;
+  --accent:#2563eb;--accent2:#3b82f6;--accent-bg:rgba(37,99,235,.04);
+  --green:#059669;--green-bg:rgba(5,150,105,.06);
+  --teal:#0d9488;--purple:#7c3aed;--purple-bg:rgba(124,58,237,.05);
+  --amber:#d97706;--amber-bg:rgba(217,119,6,.05);
+  --rose:#e11d48;--rose-bg:rgba(225,29,72,.04);
+  --orange:#ea580c;--orange-bg:rgba(234,88,12,.05);
+  --t1:#0f172a;--t2:#475569;--t3:#94a3b8;
   --font:'DM Sans',-apple-system,sans-serif;--mono:'Space Mono',monospace;
-  --glass:rgba(22,32,55,.65);--glass-bdr:rgba(36,51,82,.6);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow:0 4px 16px rgba(0,0,0,.06);--shadow-lg:0 8px 30px rgba(0,0,0,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
-::selection{background:var(--accent);color:var(--bg)}
+::selection{background:var(--accent);color:#fff}
 
 /* ── BG ── */
 .mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%,rgba(108,180,240,.06),transparent),
-    radial-gradient(ellipse 60% 50% at 80% 80%,rgba(177,151,252,.04),transparent),
-    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(94,234,212,.03),transparent)}
-.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+    radial-gradient(ellipse 80% 50% at 10% 0%,rgba(37,99,235,.05),transparent),
+    radial-gradient(ellipse 60% 40% at 90% 100%,rgba(124,58,237,.04),transparent),
+    radial-gradient(ellipse 50% 50% at 50% 30%,rgba(5,150,105,.03),transparent)}
+.dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(148,163,184,.25) .8px,transparent .8px);background-size:24px 24px}
 
-.shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;max-width:1400px;margin:0 auto;padding:0 32px}
+.shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;max-width:1320px;margin:0 auto;padding:0 36px}
 
 /* ── TOP BAR ── */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--bdr)}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:var(--bg);letter-spacing:-.5px}
-.brand-text{font-weight:600;font-size:15px;letter-spacing:-.3px}
-.brand-sub{font-size:10.5px;color:var(--t3);font-weight:500;margin-top:1px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--bdr)}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11.5px;color:#fff;letter-spacing:-.3px;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.brand-text{font-weight:700;font-size:15px;letter-spacing:-.3px;color:var(--t1)}
+.brand-sub{font-size:10px;color:var(--t3);font-weight:500;margin-top:1px;letter-spacing:.3px}
 .top-right{display:flex;align-items:center;gap:10px}
-.live-pill{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--green);background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.12);padding:5px 14px;border-radius:20px}
+.live-pill{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--green);background:var(--green-bg);border:1px solid rgba(5,150,105,.12);padding:5px 14px;border-radius:20px}
 .live-pill .dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.setup-btn{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-g);border:1px solid rgba(108,180,240,.15);padding:6px 16px;border-radius:8px;text-decoration:none;transition:all .15s}
-.setup-btn:hover{background:rgba(108,180,240,.1);border-color:rgba(108,180,240,.3)}
+.setup-btn{font-size:11px;font-weight:600;color:#fff;background:var(--accent);border:none;padding:7px 18px;border-radius:8px;text-decoration:none;transition:all .15s;box-shadow:0 2px 8px rgba(37,99,235,.2)}
+.setup-btn:hover{background:var(--accent2);box-shadow:0 4px 12px rgba(37,99,235,.3);transform:translateY(-1px)}
 
-/* ── HERO COMPACT ── */
-.hero{padding:36px 0 28px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.hero-left{max-width:600px}
-.hero h1{font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.15;letter-spacing:-1px;margin-bottom:8px}
-.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:14px;color:var(--t2);line-height:1.6;max-width:480px}
-.hero-stats{display:flex;gap:32px}
-.hs{text-align:center}
-.hs-val{font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-1px}
-.hs-label{font-size:9.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
+/* ── HERO ── */
+.hero{padding:40px 0 28px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.hero-left{max-width:560px}
+.hero h1{font-size:clamp(28px,4vw,38px);font-weight:700;line-height:1.15;letter-spacing:-1px;margin-bottom:8px;color:var(--t1)}
+.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:14px;color:var(--t2);line-height:1.65}
+.hero-stats{display:flex;gap:28px}
+.hs{text-align:center;background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:14px 22px;box-shadow:var(--shadow-sm)}
+.hs-val{font-family:var(--mono);font-size:24px;font-weight:700;letter-spacing:-1px}
+.hs-label{font-size:9px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
 
-/* ── SECTION TABS ── */
-.tabs{display:flex;gap:4px;padding:20px 0 0;border-bottom:1px solid var(--bdr);overflow-x:auto}
-.tab{font-size:12px;font-weight:500;color:var(--t3);padding:10px 20px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;position:relative}
+/* ── TABS ── */
+.tabs{display:flex;gap:2px;padding:22px 0 0;border-bottom:1px solid var(--bdr);overflow-x:auto}
+.tab{font-size:12.5px;font-weight:500;color:var(--t3);padding:10px 20px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
 .tab:hover{color:var(--t2)}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.tab .count{font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;margin-left:6px;background:rgba(108,180,240,.08);color:var(--accent);vertical-align:middle}
-.tab .count.zero{background:rgba(80,101,128,.15);color:var(--t3)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tab .ct{font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;margin-left:5px;vertical-align:middle}
+.tab .ct.has{background:var(--accent-bg);color:var(--accent)}
+.tab .ct.zero{background:rgba(148,163,184,.1);color:var(--t3)}
 
-/* ── CONTENT AREA ── */
+/* ── CONTENT ── */
 .content{flex:1;padding:24px 0 40px}
-.tab-panel{display:none}
-.tab-panel.active{display:block;animation:fadeIn .25s ease-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.panel{display:none}
+.panel.active{display:block;animation:fadeIn .2s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── CARDS GRID ── */
+/* ── CARDS ── */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
-.card{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-bdr);border-radius:14px;padding:22px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:all .25s}
-.card:hover{border-color:var(--bdr-h);background:var(--card-h);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
-.card .bar{position:absolute;top:0;left:0;right:0;height:2px}
+.card{background:var(--surface);border:1px solid var(--bdr);border-radius:14px;padding:22px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:all .2s}
+.card:hover{border-color:var(--bdr-h);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card .bar{position:absolute;top:0;left:0;right:0;height:3px}
 .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.badge{font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:14px;text-transform:uppercase;letter-spacing:.5px}
-.status{font-size:9.5px;font-weight:600;display:flex;align-items:center;gap:5px}
-.status.live{color:var(--green)}
-.status.live .sd{width:5px;height:5px;background:var(--green);border-radius:50%}
-.status.soon{color:var(--t3)}
-.card h3{font-size:15.5px;font-weight:600;margin-bottom:4px;letter-spacing:-.2px}
-.card .desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:12px}
+.badge{font-size:9.5px;font-weight:700;padding:4px 10px;border-radius:14px;text-transform:uppercase;letter-spacing:.5px}
+.st{font-size:9.5px;font-weight:600;display:flex;align-items:center;gap:5px}
+.st.live{color:var(--green)}
+.st.live .d{width:5px;height:5px;background:var(--green);border-radius:50%}
+.st.soon{color:var(--t3)}
+.card h3{font-size:15.5px;font-weight:600;margin-bottom:4px;letter-spacing:-.2px;color:var(--t1)}
+.card .desc{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:14px}
 .tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{font-size:9.5px;font-weight:500;padding:3px 9px;border-radius:5px;border:1px solid var(--bdr)}
-.card.ph{opacity:.35;cursor:default}
-.card.ph:hover{transform:none;border-color:var(--glass-bdr);background:var(--glass);box-shadow:none}
+.tag{font-size:9.5px;font-weight:500;padding:3px 10px;border-radius:6px}
+.card.ph{opacity:.45;cursor:default}
+.card.ph:hover{transform:none;box-shadow:none;border-color:var(--bdr)}
 
-/* ── EMPTY STATE ── */
-.empty{background:var(--glass);backdrop-filter:blur(8px);border:1px dashed var(--bdr);border-radius:14px;padding:48px 32px;text-align:center;color:var(--t3);font-size:13px;line-height:1.6}
-.empty strong{color:var(--t2);display:block;margin-bottom:4px;font-size:15px;font-weight:600}
-.empty .hint{margin-top:12px;font-size:11.5px;color:var(--t3)}
+/* ── EMPTY ── */
+.empty{background:var(--surface);border:1.5px dashed var(--bdr);border-radius:14px;padding:52px 32px;text-align:center;box-shadow:var(--shadow-sm)}
+.empty strong{color:var(--t1);display:block;margin-bottom:6px;font-size:15px;font-weight:600}
+.empty .sub{font-size:13px;color:var(--t2);line-height:1.6;max-width:440px;margin:0 auto}
+.empty .hint{margin-top:16px;font-size:11px;color:var(--t3)}
+.empty .hint a{color:var(--accent);text-decoration:none;font-weight:500}
 
 /* ── FOOTER ── */
-footer{padding:20px 0;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--t3)}
-footer a{color:var(--t2);text-decoration:none;margin-left:16px}
+footer{padding:18px 0;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--t3)}
+footer a{color:var(--t2);text-decoration:none;margin-left:16px;font-weight:500}
 footer a:hover{color:var(--accent)}
 </style>
 </head>
 <body>
 
 <div class="mesh"></div>
-<div class="grain"></div>
+<div class="dot-grid"></div>
 
 <div class="shell">
 
-  <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand">
       <div class="logo">CSP</div>
@@ -116,7 +122,6 @@ footer a:hover{color:var(--accent)}
     </div>
   </div>
 
-  <!-- HERO COMPACT -->
   <div class="hero">
     <div class="hero-left">
       <h1>CSP <span class="grad">Artifact Library</span></h1>
@@ -129,105 +134,97 @@ footer a:hover{color:var(--accent)}
     </div>
   </div>
 
-  <!-- SECTION TABS -->
   <div class="tabs">
-    <div class="tab active" onclick="switchTab(0)">Product Management <span class="count">1</span></div>
-    <div class="tab" onclick="switchTab(1)">Analytics <span class="count zero">0</span></div>
-    <div class="tab" onclick="switchTab(2)">GTM Tooling <span class="count zero">0</span></div>
-    <div class="tab" onclick="switchTab(3)">Program Management <span class="count zero">0</span></div>
-    <div class="tab" onclick="switchTab(4)">Misc <span class="count zero">0</span></div>
+    <div class="tab active" onclick="switchTab(0)">Product Management <span class="ct has">1</span></div>
+    <div class="tab" onclick="switchTab(1)">Analytics <span class="ct zero">0</span></div>
+    <div class="tab" onclick="switchTab(2)">GTM Tooling <span class="ct zero">0</span></div>
+    <div class="tab" onclick="switchTab(3)">Program Management <span class="ct zero">0</span></div>
+    <div class="tab" onclick="switchTab(4)">Misc <span class="ct zero">0</span></div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
-    <!-- PRODUCT MANAGEMENT -->
-    <div class="tab-panel active" id="panel-0">
+    <div class="panel active" id="p0">
       <div class="grid">
         <a href="Agentic%20CSM/" class="card">
-          <div class="bar" style="background:linear-gradient(90deg,var(--rose),var(--amber));"></div>
+          <div class="bar" style="background:linear-gradient(90deg,var(--rose),var(--orange));"></div>
           <div class="card-top">
-            <span class="badge" style="background:rgba(253,164,175,.08);color:var(--rose);">Agent 13 / CRIR</span>
-            <span class="status live"><span class="sd"></span> Live</span>
+            <span class="badge" style="background:var(--rose-bg);color:var(--rose);">Agent 13 / CRIR</span>
+            <span class="st live"><span class="d"></span> Live</span>
           </div>
           <h3>Support Notification Agent</h3>
           <div class="desc">Real-time case pattern detection. Monitors P1 concentrations, stale cases, misrouted tickets, SLA-only responses, and cross-agent escalation workflows.</div>
           <div class="tags">
-            <span class="tag" style="color:var(--rose);border-color:rgba(253,164,175,.2);">Real-time alerts</span>
-            <span class="tag" style="color:var(--rose);border-color:rgba(253,164,175,.2);">Pattern detection</span>
-            <span class="tag" style="color:var(--rose);border-color:rgba(253,164,175,.2);">Escalation</span>
+            <span class="tag" style="background:var(--rose-bg);color:var(--rose);">Real-time alerts</span>
+            <span class="tag" style="background:var(--rose-bg);color:var(--rose);">Pattern detection</span>
+            <span class="tag" style="background:var(--rose-bg);color:var(--rose);">Escalation</span>
           </div>
         </a>
 
         <div class="card ph">
           <div class="bar" style="background:linear-gradient(90deg,var(--accent),var(--purple));"></div>
           <div class="card-top">
-            <span class="badge" style="background:rgba(108,180,240,.08);color:var(--accent);">Agent 3</span>
-            <span class="status soon">Coming Soon</span>
+            <span class="badge" style="background:var(--accent-bg);color:var(--accent);">Agent 3</span>
+            <span class="st soon">Coming Soon</span>
           </div>
           <h3>Prioritization Heat Map</h3>
           <div class="desc">4-quadrant portfolio triage. Classifies accounts by risk and value signals so CSMs focus on highest-impact accounts first.</div>
           <div class="tags">
-            <span class="tag" style="color:var(--t3);">Portfolio scoring</span>
-            <span class="tag" style="color:var(--t3);">Risk matrix</span>
+            <span class="tag" style="background:rgba(148,163,184,.08);color:var(--t3);">Portfolio scoring</span>
+            <span class="tag" style="background:rgba(148,163,184,.08);color:var(--t3);">Risk matrix</span>
           </div>
         </div>
 
         <div class="card ph">
           <div class="bar" style="background:linear-gradient(90deg,var(--amber),var(--orange));"></div>
           <div class="card-top">
-            <span class="badge" style="background:rgba(252,211,77,.08);color:var(--amber);">Agent 1</span>
-            <span class="status soon">Coming Soon</span>
+            <span class="badge" style="background:var(--amber-bg);color:var(--amber);">Agent 1</span>
+            <span class="st soon">Coming Soon</span>
           </div>
           <h3>Meeting Co-Pilot</h3>
           <div class="desc">Transforms customer meetings into structured intelligence. Auto-generates summaries, next-step assignments, and follow-up agendas.</div>
           <div class="tags">
-            <span class="tag" style="color:var(--t3);">Transcript analysis</span>
-            <span class="tag" style="color:var(--t3);">Action items</span>
+            <span class="tag" style="background:rgba(148,163,184,.08);color:var(--t3);">Transcript analysis</span>
+            <span class="tag" style="background:rgba(148,163,184,.08);color:var(--t3);">Action items</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ANALYTICS -->
-    <div class="tab-panel" id="panel-1">
+    <div class="panel" id="p1">
       <div class="empty">
         <strong>No artifacts yet</strong>
-        Account 360 dashboards, CSQL scorecards, portfolio health views, adoption analytics — build something with Claude and publish it here.
-        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+        <div class="sub">Account 360 dashboards, CSQL scorecards, portfolio health views, adoption analytics — build something with Claude and publish it here.</div>
+        <div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div>
       </div>
     </div>
 
-    <!-- GTM TOOLING -->
-    <div class="tab-panel" id="panel-2">
+    <div class="panel" id="p2">
       <div class="empty">
         <strong>No artifacts yet</strong>
-        CEG play planners, competitive analysis tools, sales enablement demos, talk track generators — anything the GTM team builds.
-        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+        <div class="sub">CEG play planners, competitive analysis tools, sales enablement demos, talk track generators — anything the GTM team builds.</div>
+        <div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div>
       </div>
     </div>
 
-    <!-- PROGRAM MANAGEMENT -->
-    <div class="tab-panel" id="panel-3">
+    <div class="panel" id="p3">
       <div class="empty">
         <strong>No artifacts yet</strong>
-        Onboarding playbooks, journey trackers, program dashboards, capacity planners, process simulators — all welcome here.
-        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+        <div class="sub">Onboarding playbooks, journey trackers, program dashboards, capacity planners, process simulators — all welcome here.</div>
+        <div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div>
       </div>
     </div>
 
-    <!-- MISC -->
-    <div class="tab-panel" id="panel-4">
+    <div class="panel" id="p4">
       <div class="empty">
         <strong>No artifacts yet</strong>
-        Experiments, hackathon projects, internal tools, concept proofs — if it does not fit elsewhere, it lives here.
-        <div class="hint">Setup guide: <a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/ceg-csp/claude-artifacts/skill</a></div>
+        <div class="sub">Experiments, hackathon projects, internal tools, concept proofs — if it does not fit elsewhere, it lives here.</div>
+        <div class="hint"><a href="https://github.com/ceg-csp/claude-artifacts/blob/main/skill/README.md" target="_blank">Setup guide</a> to get started</div>
       </div>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <span>CSP Artifact Library</span>
     <div>
@@ -239,9 +236,9 @@ footer a:hover{color:var(--accent)}
 </div>
 
 <script>
-function switchTab(idx) {
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i === idx));
-  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i === idx));
+function switchTab(i){
+  document.querySelectorAll('.tab').forEach((t,n)=>t.classList.toggle('active',n===i));
+  document.querySelectorAll('.panel').forEach((p,n)=>p.classList.toggle('active',n===i));
 }
 </script>
 </body>
