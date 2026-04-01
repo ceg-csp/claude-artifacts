@@ -70,6 +70,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 .card .desc{font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:10px}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{font-size:9px;font-weight:500;padding:3px 8px;border-radius:5px}
+.copy-btn{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:7px;border:1px solid var(--bdr);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--t3);opacity:0;transition:all .15s;z-index:2}
+.card:hover .copy-btn{opacity:1}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.copy-btn.copied{border-color:var(--green);color:var(--green);background:var(--green-bg);opacity:1}
+.copy-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--green);color:var(--green);font-size:12px;font-weight:600;padding:8px 20px;border-radius:10px;box-shadow:var(--sh-lg);z-index:1000;animation:toastUp .3s ease-out}
+@keyframes toastUp{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .contrib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
 .contrib-card{background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:18px;display:flex;align-items:center;gap:12px;transition:all .15s}
 .contrib-card:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
@@ -97,9 +103,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 .cmd-item{display:flex;align-items:center;gap:12px;padding:12px 20px;cursor:pointer;transition:all .08s;text-decoration:none;color:inherit}
 .cmd-item:hover,.cmd-item.sel{background:var(--accent-bg)}
 .cmd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cmd-info{flex:1;min-width:0}
 .cmd-info h4{font-size:13px;font-weight:600;margin-bottom:1px}
 .cmd-info p{font-size:11px;color:var(--t2)}
 .cmd-sec{font-size:8.5px;font-weight:600;color:var(--t3);opacity:.7;margin-right:4px}
+.cmd-copy{width:26px;height:26px;border-radius:6px;border:1px solid var(--bdr);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:var(--t3);flex-shrink:0;transition:all .1s}
+.cmd-copy:hover{border-color:var(--accent);color:var(--accent)}
+.cmd-copy.copied{border-color:var(--green);color:var(--green)}
 .cmd-footer{padding:10px 20px;border-top:1px solid var(--bdr);display:flex;gap:16px;font-size:10px;color:var(--t3)}
 .cmd-footer span{display:flex;align-items:center;gap:4px}
 .cmd-footer .k{font-family:var(--mono);background:var(--bg);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;font-size:9px}
@@ -108,7 +118,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 footer{padding:16px 0;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--t3)}
 footer a{color:var(--t2);text-decoration:none;margin-left:14px;font-weight:500}
 footer a:hover{color:var(--accent)}
-@media(max-width:768px){.shell{padding:0 16px}.hero{flex-direction:column;align-items:flex-start;padding:20px 0 14px}.hero-stats{gap:10px}.hs{padding:10px 14px}.hs-val{font-size:18px}.tabs{gap:0}.tab{padding:8px 10px;font-size:10.5px}.grid{grid-template-columns:1fr}.topbar{flex-wrap:wrap;gap:8px}.top-right{flex-wrap:wrap}.view-toggle{display:none}}
+@media(max-width:768px){.shell{padding:0 16px}.hero{flex-direction:column;align-items:flex-start;padding:20px 0 14px}.hero-stats{gap:10px}.hs{padding:10px 14px}.hs-val{font-size:18px}.tabs{gap:0}.tab{padding:8px 10px;font-size:10.5px}.grid{grid-template-columns:1fr}.topbar{flex-wrap:wrap;gap:8px}.top-right{flex-wrap:wrap}.view-toggle{display:none}.copy-btn{opacity:1}}
 </style>
 </head>
 <body>
@@ -152,6 +162,7 @@ footer a:hover{color:var(--accent)}
   </div>
 </div>
 <script>
+const BASE_URL='https://ceg-csp.github.io/claude-artifacts/';
 const SECTIONS=['Product Management','Analytics','GTM Tooling','Program Management','Misc'];
 const SECTION_HINTS=['Agent prototypes, workspace demos, CSP features.','Account 360, CSQL scorecards, portfolio views, adoption analytics.','CEG play planners, competitive tools, enablement demos.','Onboarding playbooks, journey trackers, program dashboards.','Experiments, hackathon projects, internal tools.'];
 const SETUP_URL='https://github.com/ceg-csp/claude-artifacts/blob/main/claude-skill/README.md';
@@ -161,6 +172,26 @@ async function init(){
   try{const r=await fetch('artifacts.json?t='+Date.now());artifacts=await r.json();}catch(e){artifacts=[];}
   renderTabs();renderPanels();updateStats();
 }
+
+// ── COPY LINK ──
+function copyLink(url,event){
+  event.preventDefault();
+  event.stopPropagation();
+  const full=BASE_URL+url;
+  navigator.clipboard.writeText(full).then(()=>{
+    const btn=event.currentTarget;
+    btn.classList.add('copied');
+    btn.innerHTML='&#10003;';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='&#9112;';},1500);
+    // show toast
+    const t=document.createElement('div');
+    t.className='copy-toast';
+    t.textContent='Link copied to clipboard';
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),2000);
+  });
+}
+
 function renderTabs(){
   const counts=SECTIONS.map(s=>artifacts.filter(a=>a.section===s&&a.live).length);
   let html=SECTIONS.map((s,i)=>{
@@ -182,7 +213,7 @@ function renderPanels(){
     }else{
       html+=`<div class="grid" id="grid-${i}">`;
       liveItems.forEach(a=>{
-        html+=`<a href="${a.url}" class="card"><div class="bar" style="background:linear-gradient(90deg,${a.color1},${a.color2});"></div><div class="card-top"><span class="badge" style="background:${a.colorBg};color:${a.color1};">${a.agent}</span><span class="st live"><span class="d"></span> Live</span></div><h3>${a.name}</h3><div class="desc">${a.desc}</div><div class="tags">${a.tags.map(t=>`<span class="tag" style="background:${a.colorBg};color:${a.color1};">${t}</span>`).join('')}</div></a>`;
+        html+=`<a href="${a.url}" class="card"><div class="bar" style="background:linear-gradient(90deg,${a.color1},${a.color2});"></div><div class="copy-btn" onclick="copyLink('${a.url}',event)" title="Copy shareable link">&#9112;</div><div class="card-top"><span class="badge" style="background:${a.colorBg};color:${a.color1};">${a.agent}</span><span class="st live"><span class="d"></span> Live</span></div><h3>${a.name}</h3><div class="desc">${a.desc}</div><div class="tags">${a.tags.map(t=>`<span class="tag" style="background:${a.colorBg};color:${a.color1};">${t}</span>`).join('')}</div></a>`;
       });
       html+=`</div>`;
     }
@@ -210,7 +241,26 @@ document.addEventListener('mousemove',e=>{const x=Math.round(e.clientX/window.in
 let cmdIdx=-1;
 function openCmd(){document.getElementById('cmdOverlay').classList.add('visible');document.getElementById('cmdInput').value='';document.getElementById('cmdInput').focus();cmdIdx=-1;showAllCmd();}
 function closeCmd(){document.getElementById('cmdOverlay').classList.remove('visible');}
-function showAllCmd(){const live=artifacts.filter(a=>a.live);document.getElementById('cmdResults').innerHTML=live.length?live.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name} <span style="font-size:9px;color:var(--t3);font-weight:400;">${a.agent}</span></h4><p><span class="cmd-sec">${a.section}</span>${a.desc.slice(0,55)}...</p></div><span class="st live" style="margin-left:auto;font-size:9px;">Live</span></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No live artifacts yet</div>';}
+function cmdCopyLink(url,event){
+  event.preventDefault();
+  event.stopPropagation();
+  const full=BASE_URL+url;
+  navigator.clipboard.writeText(full).then(()=>{
+    const btn=event.currentTarget;
+    btn.classList.add('copied');
+    btn.innerHTML='&#10003;';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='&#9112;';},1500);
+    const t=document.createElement('div');
+    t.className='copy-toast';
+    t.textContent='Link copied to clipboard';
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),2000);
+  });
+}
+function renderCmdItem(a,i){
+  return `<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name} <span style="font-size:9px;color:var(--t3);font-weight:400;">${a.agent}</span></h4><p><span class="cmd-sec">${a.section}</span>${a.desc.slice(0,55)}...</p></div><div class="cmd-copy" onclick="cmdCopyLink('${a.url}',event)" title="Copy link">&#9112;</div></a>`;
+}
+function showAllCmd(){const live=artifacts.filter(a=>a.live);document.getElementById('cmdResults').innerHTML=live.length?live.map((a,i)=>renderCmdItem(a,i)).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No live artifacts yet</div>';}
 function cmdSearch(){
   const q=document.getElementById('cmdInput').value.trim().toLowerCase();cmdIdx=-1;
   if(!q){showAllCmd();return;}
@@ -220,7 +270,7 @@ function cmdSearch(){
     const score=words.reduce((s,w)=>s+(hay.includes(w)?1:0),0);
     return{...a,score};
   }).filter(a=>a.score>0).sort((a,b)=>b.score-a.score);
-  document.getElementById('cmdResults').innerHTML=scored.length?scored.map((a,i)=>`<a href="${a.url}" class="cmd-item" data-idx="${i}"><div class="cmd-dot" style="background:${a.color1};opacity:.7"></div><div class="cmd-info"><h4>${a.name}</h4><p><span class="cmd-sec">${a.section}</span>${a.desc.slice(0,55)}...</p></div></a>`).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found. Try different keywords.</div>';
+  document.getElementById('cmdResults').innerHTML=scored.length?scored.map((a,i)=>renderCmdItem(a,i)).join(''):'<div style="padding:20px;text-align:center;font-size:12px;color:var(--t3);">No matches found. Try different keywords.</div>';
 }
 function cmdKey(e){const items=document.querySelectorAll('.cmd-item');if(e.key==='Escape')closeCmd();if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=Math.min(cmdIdx+1,items.length-1);items.forEach((it,i)=>it.classList.toggle('sel',i===cmdIdx));}if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=Math.max(cmdIdx-1,0);items.forEach((it,i)=>it.classList.toggle('sel',i===cmdIdx));}if(e.key==='Enter'&&cmdIdx>=0&&items[cmdIdx]){const h=items[cmdIdx].getAttribute('href');if(h)window.location.href=h;}}
 document.addEventListener('keydown',e=>{if(e.metaKey&&e.key==='k'){e.preventDefault();openCmd();}if(!e.metaKey&&!e.ctrlKey&&!document.querySelector('.cmd-overlay.visible')){const n=+e.key;if(n>=1&&n<=7){e.preventDefault();switchTab(n-1);}}});
