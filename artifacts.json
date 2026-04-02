@@ -40,5 +40,19 @@
     "color2": "var(--rose)",
     "colorBg": "var(--purple-bg)",
     "added": "2026-04-01"
+  },
+  {
+    "name": "CSA Exam Prep",
+    "section": "Learning & Enablement",
+    "desc": "60-question ServiceNow CSA practice bank. Domain-filtered, scored, with full right/wrong explanations per question. Mapped to official Zurich blueprint weightings.",
+    "tags": ["CSA", "Certification", "Exam Prep", "Training"],
+    "keywords": ["CSA", "certification", "exam", "practice", "questions", "study", "admin", "system administrator", "training", "quiz"],
+    "url": "csa-exam-prep/",
+    "live": true,
+    "agent": "Exam Coach",
+    "color1": "var(--green)",
+    "color2": "var(--accent)",
+    "colorBg": "var(--green-bg)",
+    "added": "2026-04-03"
   }
 ]

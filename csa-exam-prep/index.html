@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ServiceNow CSA Exam Prep</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --infinite-blue: #032D42;
+  --blue-dark: #021F2F;
+  --blue-mid: #0A3D54;
+  --blue-surface: #0F4D68;
+  --wasabi-green: #63DF4E;
+  --wasabi-hover: #85ED77;
+  --white: #FFFFFF;
+  --gray-100: #F5F7FA;
+  --gray-300: #CBD5E1;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --err: #F87171;
+  --warn: #FBBF24;
+  --success-bg: rgba(99,223,78,0.1);
+  --err-bg: rgba(248,113,113,0.1);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+  --radius: 1rem;
+  --radius-sm: 0.5rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--infinite-blue);
+  color: var(--white);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.container { max-width: 72rem; margin: 0 auto; padding: 0 2rem; }
+
+header {
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.pill {
+  background: var(--wasabi-green);
+  color: var(--infinite-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+}
+
+.glass {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  padding: 1.75rem;
+  transition: all 0.2s;
+}
+
+.hero { padding: 2.5rem 0 2rem; }
+.eyebrow { font-size: 0.75rem; font-weight: 700; color: var(--wasabi-green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+h1 { font-weight: 700; font-size: 2.5rem; line-height: 1.1; margin-bottom: 1rem; }
+h1 span { color: var(--wasabi-green); }
+.hero p { font-size: 1rem; color: var(--gray-400); font-weight: 300; max-width: 42rem; }
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  text-align: center;
+}
+.stat-val { font-size: 1.75rem; font-weight: 700; color: var(--white); line-height: 1; }
+.stat-val.green { color: var(--wasabi-green); }
+.stat-val.red { color: var(--err); }
+.stat-lbl { font-size: 0.6875rem; font-weight: 500; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 0.25rem; }
+
+.filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.filter-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--gray-300);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--wasabi-green); color: var(--wasabi-green); }
+.filter-btn.active { background: var(--wasabi-green); border-color: var(--wasabi-green); color: var(--infinite-blue); font-weight: 700; }
+
+.q-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+  transition: all 0.2s;
+}
+.q-card:hover { box-shadow: var(--shadow-md); }
+.q-meta { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.q-num { font-size: 0.6875rem; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; }
+.domain-tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+.domain-nav { border-color: #63DF4E; color: #63DF4E; background: rgba(99,223,78,0.08); }
+.domain-inst { border-color: #60A5FA; color: #60A5FA; background: rgba(96,165,250,0.08); }
+.domain-self { border-color: #A78BFA; color: #A78BFA; background: rgba(167,139,250,0.08); }
+.domain-db { border-color: #F59E0B; color: #F59E0B; background: rgba(245,158,11,0.08); }
+.domain-flow { border-color: #F472B6; color: #F472B6; background: rgba(244,114,182,0.08); }
+.domain-security { border-color: #34D399; color: #34D399; background: rgba(52,211,153,0.08); }
+.domain-reporting { border-color: #FB923C; color: #FB923C; background: rgba(251,146,60,0.08); }
+.domain-catalog { border-color: #E879F9; color: #E879F9; background: rgba(232,121,249,0.08); }
+.domain-itsm { border-color: #38BDF8; color: #38BDF8; background: rgba(56,189,248,0.08); }
+.domain-import { border-color: #A3E635; color: #A3E635; background: rgba(163,230,53,0.08); }
+
+.multi-tag { font-size: 0.6875rem; color: var(--warn); border: 1px solid var(--warn); padding: 0.2rem 0.6rem; border-radius: 9999px; background: rgba(251,191,36,0.08); font-weight: 600; }
+
+.q-text { font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 1.25rem; line-height: 1.55; }
+
+.options { display: flex; flex-direction: column; gap: 0.6rem; }
+.option-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  text-align: left;
+  color: var(--gray-300);
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: all 0.18s;
+  line-height: 1.45;
+  width: 100%;
+}
+.option-btn:hover:not(:disabled) { border-color: rgba(255,255,255,0.3); color: var(--white); background: rgba(255,255,255,0.07); }
+.option-btn .opt-key {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.3rem;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+.option-btn.correct { border-color: var(--wasabi-green); background: var(--success-bg); color: var(--white); }
+.option-btn.correct .opt-key { background: var(--wasabi-green); color: var(--infinite-blue); }
+.option-btn.incorrect { border-color: var(--err); background: var(--err-bg); color: var(--white); }
+.option-btn.incorrect .opt-key { background: var(--err); color: var(--white); }
+.option-btn.missed { border-color: var(--wasabi-green); border-style: dashed; }
+.option-btn:disabled { cursor: default; }
+
+.option-btn .check-box {
+  min-width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 0.25rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.option-btn.selected .check-box { border-color: var(--wasabi-green); background: var(--wasabi-green); }
+
+.submit-btn {
+  margin-top: 1rem;
+  background: var(--wasabi-green);
+  color: var(--infinite-blue);
+  border: none;
+  border-radius: 9999px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.submit-btn:hover { background: var(--wasabi-hover); transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+.explanation {
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.6;
+  display: none;
+}
+.explanation.show { display: block; }
+.explanation.pass { background: rgba(99,223,78,0.07); border-left: 3px solid var(--wasabi-green); }
+.explanation.fail { background: rgba(248,113,113,0.07); border-left: 3px solid var(--err); }
+.explanation strong { font-weight: 600; color: var(--white); }
+.exp-correct-lbl { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.4rem; }
+.exp-correct-lbl.pass { color: var(--wasabi-green); }
+.exp-correct-lbl.fail { color: var(--err); }
+
+.progress-wrap { margin-bottom: 2rem; }
+.progress-header { display: flex; justify-content: space-between; font-size: 0.8125rem; color: var(--gray-400); margin-bottom: 0.5rem; }
+.progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--wasabi-green); border-radius: 9999px; transition: width 0.4s; }
+
+.controls { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; justify-content: space-between; }
+.ctrl-left { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--wasabi-green);
+  color: var(--wasabi-green);
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: rgba(99,223,78,0.1); }
+.btn-solid {
+  background: var(--wasabi-green);
+  border: 2px solid var(--wasabi-green);
+  color: var(--infinite-blue);
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-solid:hover { background: var(--wasabi-hover); }
+
+.search-input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 9999px;
+  padding: 0.45rem 1rem;
+  color: var(--white);
+  font-size: 0.875rem;
+  width: 220px;
+  outline: none;
+  transition: border 0.2s;
+}
+.search-input:focus { border-color: var(--wasabi-green); }
+.search-input::placeholder { color: var(--gray-500); }
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(2,15,22,0.85);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: #0A3D54;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.modal h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.modal .score-big { font-size: 4rem; font-weight: 700; line-height: 1; margin: 1.25rem 0; }
+.modal .score-big.pass { color: var(--wasabi-green); }
+.modal .score-big.fail { color: var(--err); }
+.modal p { color: var(--gray-400); font-weight: 300; margin-bottom: 1.5rem; }
+.modal-btns { display: flex; gap: 0.75rem; justify-content: center; }
+
+footer { padding: 2rem 0; text-align: center; font-size: 0.75rem; color: var(--gray-500); font-weight: 300; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.06); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <svg xmlns="http://www.w3.org/2000/svg" width="132" height="20" viewBox="0 0 132 20"><path d="M32.022,6.391a5.626,5.626,0,0,0-3.61,1.3V6.523H25.119V19.35h3.425v-8.2a4.073,4.073,0,0,1,3.109-1.588,3.494,3.494,0,0,1,1.374.206V6.479a5.851,5.851,0,0,0-1.005-.088" fill="#ffffff" fill-rule="evenodd"/><path d="M2.16,15.436a5.369,5.369,0,0,0,3.5,1.269c.922,0,1.633-.45,1.633-1.084,0-1.931-6.191-1.243-6.191-5.369,0-2.459,2.371-3.993,4.9-3.993a7.9,7.9,0,0,1,4.32,1.3L8.72,10.04a4.3,4.3,0,0,0-2.45-.872c-.948,0-1.739.37-1.739,1.031,0,1.666,6.192,1.005,6.192,5.448,0,2.46-2.4,3.967-5.085,3.967A8.815,8.815,0,0,1,.5,17.9Z" fill="#ffffff" fill-rule="evenodd"/><path d="M23.657,12.817c0-3.57-2.5-6.558-6.034-6.558-3.794,0-6.218,3.12-6.218,6.691A6.4,6.4,0,0,0,18.1,19.614a6.919,6.919,0,0,0,5.243-2.3l-1.95-1.957a4.515,4.515,0,0,1-3.214,1.481A3.36,3.36,0,0,1,14.725,13.8h8.853A5.735,5.735,0,0,0,23.657,12.817Zm-8.774-1.533a2.775,2.775,0,0,1,2.74-2.248,2.552,2.552,0,0,1,2.53,2.248Z" fill="#ffffff" fill-rule="evenodd"/><polygon points="41.19 14.351 44.694 6.523 48.252 6.523 42.376 19.35 40.005 19.35 34.129 6.523 37.686 6.523 41.19 14.351" fill="#ffffff" fill-rule="evenodd"/><path d="M51.128.5A2.2,2.2,0,1,1,48.888,2.7,2.2,2.2,0,0,1,51.128.5" fill="#ffffff" fill-rule="evenodd"/><rect x="49.415" y="6.523" width="3.425" height="12.827" fill="#ffffff"/><path d="M67,16.731a6.766,6.766,0,0,1-5.8,2.883,6.68,6.68,0,1,1,.026-13.355,6.808,6.808,0,0,1,5.375,2.565l-2.424,2.142a3.7,3.7,0,0,0-2.951-1.534A3.433,3.433,0,0,0,57.78,12.95a3.383,3.383,0,0,0,3.531,3.49,3.741,3.741,0,0,0,3.056-1.692Z" fill="#ffffff" fill-rule="evenodd"/><path d="M79.442,17.313a6.918,6.918,0,0,1-5.243,2.3,6.4,6.4,0,0,1-6.692-6.664c0-3.571,2.424-6.691,6.218-6.691,3.53,0,6.033,2.988,6.033,6.558a5.635,5.635,0,0,1-.079.979H70.826a3.36,3.36,0,0,0,3.452,3.041,4.52,4.52,0,0,0,3.215-1.481Zm-3.188-6.029a2.551,2.551,0,0,0-2.529-2.248,2.774,2.774,0,0,0-2.74,2.248Z" fill="#ffffff" fill-rule="evenodd"/><path d="M81.12,19.35V6.523h3.293V7.554a5.625,5.625,0,0,1,3.609-1.295,5.747,5.747,0,0,1,4.427,2.063,6.482,6.482,0,0,1,1.317,4.5V19.35H90.341v-6.8a3.11,3.11,0,0,0-.764-2.407,2.69,2.69,0,0,0-1.923-.714,4.076,4.076,0,0,0-3.109,1.587V19.35Z" fill="#ffffff" fill-rule="evenodd"/><path d="M102.586,6.259A7.5,7.5,0,0,0,97.419,19.21a1.481,1.481,0,0,0,1.926.1,5.355,5.355,0,0,1,6.394,0,1.485,1.485,0,0,0,1.937-.113,7.5,7.5,0,0,0-5.09-12.94M102.542,17.5a3.637,3.637,0,0,1-3.734-3.733,3.734,3.734,0,1,1,7.468,0,3.637,3.637,0,0,1-3.734,3.733" fill="#62d84e" fill-rule="evenodd"/><polygon points="116.788 19.35 114.237 19.35 109.15 6.523 112.57 6.523 115.359 13.853 118.094 6.523 120.952 6.523 123.662 13.853 126.475 6.523 129.896 6.523 124.809 19.35 122.258 19.35 119.523 12.046 116.788 19.35" fill="#ffffff" fill-rule="evenodd"/><path d="M129.935,17.9h-.289v.543H129.4V16.957h.6a.476.476,0,0,1,.478.478.469.469,0,0,1-.295.432l.338.579h-.268Zm-.289-.219H130a.249.249,0,0,0,0-.5h-.351Z" fill="#ffffff"/><path d="M129.9,16.348a1.379,1.379,0,1,1-1.378,1.379,1.381,1.381,0,0,1,1.378-1.379m0-.218a1.6,1.6,0,1,0,1.6,1.6,1.6,1.6,0,0,0-1.6-1.6Z" fill="#ffffff"/></svg>
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span class="pill">CSA PREP</span>
+      <span style="font-size:0.8125rem;color:var(--gray-400);">60 Questions</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Certified System Administrator</div>
+    <h1><span>CSA Exam</span><br>Practice Bank</h1>
+    <p>60 questions mapped to all official exam domains. Select an answer, read the explanation, and track your score.</p>
+  </section>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-card"><div class="stat-val" id="statTotal">60</div><div class="stat-lbl">Total Questions</div></div>
+    <div class="stat-card"><div class="stat-val" id="statAnswered">0</div><div class="stat-lbl">Answered</div></div>
+    <div class="stat-card"><div class="stat-val green" id="statCorrect">0</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat-card"><div class="stat-val red" id="statWrong">0</div><div class="stat-lbl">Incorrect</div></div>
+    <div class="stat-card"><div class="stat-val" id="statScore">0%</div><div class="stat-lbl">Score</div></div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-header"><span id="progressLabel">Progress: 0 / 60</span><span id="progressPct">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-left">
+      <button class="btn-solid" onclick="showScore()">See Score</button>
+      <button class="btn-outline" onclick="resetAll()">Reset</button>
+    </div>
+    <input class="search-input" type="text" placeholder="Search questions..." oninput="filterSearch(this.value)" />
+  </div>
+
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" onclick="filterDomain('all', this)">All Domains</button>
+    <button class="filter-btn" onclick="filterDomain('Platform Navigation', this)">Platform Navigation</button>
+    <button class="filter-btn" onclick="filterDomain('Instance Configuration', this)">Instance Config</button>
+    <button class="filter-btn" onclick="filterDomain('Self-Service', this)">Self-Service</button>
+    <button class="filter-btn" onclick="filterDomain('Database', this)">Database</button>
+    <button class="filter-btn" onclick="filterDomain('Flow & Automation', this)">Flow & Automation</button>
+    <button class="filter-btn" onclick="filterDomain('Security & Access', this)">Security & Access</button>
+    <button class="filter-btn" onclick="filterDomain('Reporting', this)">Reporting</button>
+    <button class="filter-btn" onclick="filterDomain('Service Catalog', this)">Service Catalog</button>
+    <button class="filter-btn" onclick="filterDomain('ITSM', this)">ITSM</button>
+    <button class="filter-btn" onclick="filterDomain('Data Import', this)">Data Import</button>
+  </div>
+
+  <div id="questionContainer"></div>
+
+  <footer>&copy; 2026 ServiceNow, Inc. All rights reserved. For exam preparation purposes only.</footer>
+</div>
+
+<div class="modal-overlay" id="scoreModal">
+  <div class="modal">
+    <h2>Your Score</h2>
+    <div class="score-big" id="modalScore">0%</div>
+    <p id="modalMsg"></p>
+    <div id="modalStats" style="margin-bottom:1.5rem;font-size:0.9rem;color:var(--gray-300);"></div>
+    <div class="modal-btns">
+      <button class="btn-solid" onclick="closeModal()">Continue</button>
+      <button class="btn-outline" onclick="resetAll(); closeModal()">Restart</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {id:1,domain:"Platform Navigation",domainClass:"domain-nav",q:"What is the recommended way to navigate to a specific application or module in the Next Experience UI?",type:"single",options:["A. Type in the URL bar directly","B. Use the All menu or Unified Navigation bar","C. Open a new browser tab","D. Use the Classic UI toggle"],correct:["B"],explanation:"The Unified Navigation bar (All menu) in Next Experience is the primary navigation mechanism. It allows users to search for and pin applications and modules. Typing directly in the URL bar works but is not recommended for navigation. The Classic UI toggle switches UI modes, not helps navigate."},
+  {id:2,domain:"Platform Navigation",domainClass:"domain-nav",q:"Which element allows users to personalize their home page in ServiceNow by adding widgets and reports?",type:"single",options:["A. Service Portal","B. Homepage (Legacy) or Now Experience Dashboard","C. Studio","D. CMS"],correct:["B"],explanation:"Users can add reports and widgets to Homepages (legacy) or Dashboards in the Now Experience. Service Portal is for end-user self-service. Studio is for application development. CMS is a content management tool."},
+  {id:3,domain:"Platform Navigation",domainClass:"domain-nav",q:"What does the 'Impersonate User' functionality allow an administrator to do?",type:"single",options:["A. Permanently change a user's password","B. See the platform as another user without knowing their credentials","C. Delete a user's session","D. Assign roles to another user"],correct:["B"],explanation:"Impersonate User lets admins experience the platform exactly as another user would, useful for troubleshooting access issues. It does not change passwords, delete sessions, or assign roles. You navigate to it via the user menu at the top right."},
+  {id:4,domain:"Platform Navigation",domainClass:"domain-nav",q:"In ServiceNow, where would you find a list of all recently viewed records?",type:"single",options:["A. The History tab in the left nav","B. The Favorites menu","C. The History star icon in the navigation bar","D. System Diagnostics"],correct:["C"],explanation:"The History (clock/star) icon in the navigation bar shows recently visited records and pages. Favorites are manually pinned items. System Diagnostics is for admin troubleshooting, not record history."},
+  {id:5,domain:"Platform Navigation",domainClass:"domain-nav",q:"Which of the following best describes a 'perspective' in ServiceNow navigation?",type:"single",options:["A. A saved list filter","B. A view that controls which applications and modules are visible based on roles","C. A reporting dashboard","D. A form layout"],correct:["B"],explanation:"Perspectives (in legacy UI) control which application menus appear in the left navigator based on a user's active role or selected context. A saved filter is a condition set on a list. A dashboard is a reporting tool. A form layout controls field arrangement."},
+  {id:6,domain:"Instance Configuration",domainClass:"domain-inst",q:"Which system property controls the default theme for all users in a ServiceNow instance?",type:"single",options:["A. glide.ui.theme","B. css.base.color","C. glide.default.theme","D. glide.ui.polaris.theme"],correct:["D"],explanation:"glide.ui.polaris.theme controls the global theme in the Next Experience (Polaris) UI. glide.ui.theme applies to the Classic UI. css.base.color is not a standard property. Themes can also be set per user, but the system-level property sets the default."},
+  {id:7,domain:"Instance Configuration",domainClass:"domain-inst",q:"What is the purpose of a 'Plugin' in ServiceNow?",type:"single",options:["A. A custom script that modifies table behavior","B. A packaged application that adds functionality to a base instance","C. A reporting configuration file","D. An integration endpoint"],correct:["B"],explanation:"Plugins are pre-built packages that activate additional features or applications within ServiceNow (e.g., ITSM, HR). Custom scripts are Business Rules or Script Includes. Reporting config and integration endpoints are separate concepts."},
+  {id:8,domain:"Instance Configuration",domainClass:"domain-inst",q:"Where in ServiceNow would an admin configure company-wide branding such as logo and banner color?",type:"single",options:["A. System Properties > Basic Configuration","B. System Properties > UI16","C. User Administration > Preferences","D. Studio > Theme Editor"],correct:["A"],explanation:"System Properties > Basic Configuration (or System Properties > Basic Configuration UI16) is where you set the banner logo, company name, and colors visible across the instance. Studio is for application development, not global instance branding."},
+  {id:9,domain:"Instance Configuration",domainClass:"domain-inst",q:"Which of the following is a valid way to activate a plugin in ServiceNow? (Choose TWO)",type:"multi",options:["A. System Definition > Plugins, then click Activate","B. Import the plugin via XML update set","C. System Definition > Plugins and search for it","D. Enable it from the user profile page"],correct:["A","C"],explanation:"Plugins are activated via System Definition > Plugins. You search for the plugin and then activate it from that same interface. Update sets carry customizations, not plugin activations. Plugins cannot be enabled from a user profile."},
+  {id:10,domain:"Instance Configuration",domainClass:"domain-inst",q:"What is an Update Set used for in ServiceNow?",type:"single",options:["A. To update user passwords in bulk","B. To capture and migrate configuration changes between instances","C. To run batch database updates","D. To schedule system maintenance tasks"],correct:["B"],explanation:"Update Sets are containers that capture customization changes (like Business Rules, UI Policies, Forms) so they can be exported from one instance (e.g., Dev) and imported into another (e.g., Prod). They are not used for user passwords, raw database updates, or maintenance scheduling."},
+  {id:11,domain:"Instance Configuration",domainClass:"domain-inst",q:"Which ServiceNow feature allows you to schedule scripts or jobs to run at defined intervals?",type:"single",options:["A. Workflow","B. Flow Designer","C. Scheduled Jobs (sys_trigger)","D. Transform Map"],correct:["C"],explanation:"Scheduled Jobs (found under System Definition > Scheduled Jobs) allow admins to run GlideSystem scripts on a schedule. Workflows and Flow Designer handle process automation triggered by events or conditions, not time schedules directly. Transform Maps process import data."},
+  {id:12,domain:"Instance Configuration",domainClass:"domain-inst",q:"What is the function of the 'System Clone' feature in ServiceNow?",type:"single",options:["A. Duplicate individual records across tables","B. Copy an entire instance's data and configuration to another instance","C. Create a backup of update sets","D. Clone a specific application to a new scope"],correct:["B"],explanation:"System Clone copies an entire instance (data, configurations, attachments) to a target instance — typically used to refresh lower environments like Dev from Production. It is not for individual records, update set backups, or scoped application duplication."},
+  {id:13,domain:"Self-Service",domainClass:"domain-self",q:"What is the primary purpose of the ServiceNow Service Portal?",type:"single",options:["A. Internal admin configuration interface","B. A consumer-grade, widget-based self-service interface for end users","C. A development environment for scripts","D. A reporting tool for managers"],correct:["B"],explanation:"Service Portal provides end users with a modern, widget-based UI to access services, submit requests, and search the knowledge base — without needing access to the native ServiceNow UI. It is distinct from the admin-facing platform and from development tools."},
+  {id:14,domain:"Self-Service",domainClass:"domain-self",q:"In the Service Portal, what is a 'Widget'?",type:"single",options:["A. A navigation shortcut","B. A reusable UI component built with HTML, CSS, and AngularJS","C. A knowledge article template","D. A type of approval workflow"],correct:["B"],explanation:"Widgets are the building blocks of Service Portal pages. Each widget is a self-contained component with its own HTML, CSS, client script, and server script. They are reusable, configurable, and can be placed on any portal page."},
+  {id:15,domain:"Self-Service",domainClass:"domain-self",q:"Which role is required to create and edit Knowledge Base articles in ServiceNow?",type:"single",options:["A. itil","B. knowledge_admin or kb_contributor","C. admin only","D. approver_user"],correct:["B"],explanation:"knowledge_admin manages knowledge bases and categories; kb_contributor can create and submit articles for review. The itil role grants access to ITSM modules but not article authoring. Admins can do everything but the specific knowledge roles are designed for this purpose."},
+  {id:16,domain:"Self-Service",domainClass:"domain-self",q:"What does 'Knowledge Versioning' allow in ServiceNow?",type:"single",options:["A. Restricting knowledge articles to specific user roles","B. Maintaining a history of changes to a knowledge article over time","C. Translating articles to multiple languages","D. Setting article expiry dates"],correct:["B"],explanation:"Knowledge Versioning tracks changes to articles over time, allowing admins to see what changed between versions and revert if needed. Role restriction is handled via user criteria. Localization handles multi-language. Expiry is a separate configuration field."},
+  {id:17,domain:"Self-Service",domainClass:"domain-self",q:"What is the difference between a 'Knowledge Base' and a 'Knowledge Category' in ServiceNow?",type:"single",options:["A. They are identical — different labels for the same record","B. A Knowledge Base is the top-level container; Categories organize articles within it","C. Categories are public-facing; Knowledge Bases are internal-only","D. A Knowledge Base is a single article; a Category is a collection"],correct:["B"],explanation:"A Knowledge Base is the top-level parent (e.g., IT Knowledge Base). Categories are sub-folders within that base that organize articles by topic. Both can have access controls via user criteria. A Knowledge article is the actual content record."},
+  {id:18,domain:"Database",domainClass:"domain-db",q:"In ServiceNow, what does 'table inheritance' mean?",type:"single",options:["A. A table that imports data from an external source","B. A child table that extends a parent table, inheriting its fields and data","C. A table that has multiple views","D. A system-generated audit table"],correct:["B"],explanation:"Table inheritance in ServiceNow means a child table (e.g., Incident) extends a parent table (e.g., Task), inheriting all parent fields and storing records in both tables via a shared sys_id. Think of it like class inheritance in OOP — the child gets everything the parent has, plus its own unique fields."},
+  {id:19,domain:"Database",domainClass:"domain-db",q:"What is a 'Reference field' in ServiceNow?",type:"single",options:["A. A field that stores a URL","B. A field that points to a record in another table","C. A field with a predefined list of values","D. A calculated field based on a script"],correct:["B"],explanation:"A Reference field stores a pointer (sys_id) to a record in another table. For example, the Caller field on an Incident references the User table. A Choice field has predefined options. A URL field stores a link. Calculated fields use scripts but are a different type."},
+  {id:20,domain:"Database",domainClass:"domain-db",q:"What is the 'sys_id' field in ServiceNow?",type:"single",options:["A. A sequential integer primary key","B. A globally unique identifier (GUID) assigned to every record","C. A user-defined unique identifier","D. The record number visible to users"],correct:["B"],explanation:"sys_id is a 32-character GUID automatically assigned to every record in ServiceNow. It is the true primary key used internally. The 'number' field (like INC0001234) is the human-readable display value but sys_id is what all system references use."},
+  {id:21,domain:"Database",domainClass:"domain-db",q:"Which of the following correctly describes a 'Dictionary Override'?",type:"single",options:["A. A way to override a Business Rule on a specific table","B. A mechanism to customize field attributes in a child table without affecting the parent","C. A method to hide fields from all users","D. A way to import dictionary definitions from another instance"],correct:["B"],explanation:"Dictionary Overrides allow you to change field properties (like max length, default value, mandatory) on a child table without modifying the parent table's definition. This is critical for table inheritance — you can make a field mandatory on Incident without affecting the parent Task table."},
+  {id:22,domain:"Database",domainClass:"domain-db",q:"What is the purpose of the 'coalesce' field setting in a Transform Map?",type:"single",options:["A. It merges two columns into one","B. It designates the field as a matching key to find and update existing records rather than creating duplicates","C. It makes a field read-only after import","D. It formats date fields automatically"],correct:["B"],explanation:"Coalescing a field in a Transform Map tells ServiceNow to use that field as the match key. If a record with the same value exists, it updates the existing record instead of creating a duplicate. Without a coalesce field, every import creates a new record. Think of it as a deduplication key."},
+  {id:23,domain:"Database",domainClass:"domain-db",q:"In ServiceNow, what is a 'Dot-walk' used for?",type:"single",options:["A. Navigating to sub-pages in the UI","B. Accessing fields on a referenced record within a condition, filter, or script","C. Creating child records from a form","D. Building a report drill-down hierarchy"],correct:["B"],explanation:"Dot-walking lets you traverse reference fields to access data on related records. For example, incident.caller_id.department.name accesses the department name of the caller on an incident — without writing a custom script. It is widely used in filters, conditions, and reports."},
+  {id:24,domain:"Database",domainClass:"domain-db",q:"What does ACL stand for and what is its function in ServiceNow?",type:"single",options:["A. Automated Control Logic — runs scripts on record save","B. Access Control List — defines which roles can read, write, create, or delete records or fields","C. Application Configuration Layer — manages plugin settings","D. Audit Change Log — tracks all changes to a table"],correct:["B"],explanation:"ACLs (Access Control Lists) are the primary security mechanism in ServiceNow. They evaluate whether a user can perform an operation (read, write, create, delete) on a table or field based on roles, conditions, and scripts. Without the right ACL, a user cannot access data regardless of what their UI shows."},
+  {id:25,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is the key difference between a 'Business Rule' and a 'Flow Designer' flow?",type:"single",options:["A. Business Rules run on the client side; Flow Designer runs server-side","B. Business Rules are server-side scripts triggered by database operations; Flow Designer is a no-code/low-code tool for process automation","C. Flow Designer can only trigger on new records; Business Rules work on all operations","D. They are identical in capability — just different interfaces"],correct:["B"],explanation:"Business Rules are server-side scripts written in JavaScript that fire on database operations (insert, update, delete, query). Flow Designer is a visual, no-code/low-code tool for building end-to-end process automations using triggers, actions, and decision logic — no scripting required for common use cases."},
+  {id:26,domain:"Flow & Automation",domainClass:"domain-flow",q:"In Flow Designer, what is a 'Subflow'?",type:"single",options:["A. A flow that runs in the background without logging","B. A reusable flow that can be called from within another flow","C. A flow triggered only by schedules","D. A read-only template flow"],correct:["B"],explanation:"A Subflow is a reusable, modular set of actions that can be invoked from multiple flows. Think of it like a function in programming — you define logic once and call it wherever needed. This avoids duplication and makes flows easier to maintain."},
+  {id:27,domain:"Flow & Automation",domainClass:"domain-flow",q:"When should you use a 'Before Business Rule' versus an 'After Business Rule'?",type:"single",options:["A. Before rules run for queries only; After rules run for inserts and updates","B. Before rules run before the record is committed to the database, allowing field changes; After rules run after the commit and cannot modify the record","C. They are interchangeable — only naming convention differs","D. Before rules require the admin role; After rules do not"],correct:["B"],explanation:"Before Business Rules execute prior to the database write — any changes you make to current object fields will be saved. After Business Rules execute after the write, so they can trigger notifications, create related records, or run integrations, but cannot change the saved record's fields directly."},
+  {id:28,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is the purpose of a 'Client Script' in ServiceNow?",type:"single",options:["A. To run JavaScript on the server when a record is saved","B. To run JavaScript in the browser to control form behavior in real time","C. To schedule batch operations","D. To validate incoming REST API calls"],correct:["B"],explanation:"Client Scripts run in the user's browser and enable real-time form interactivity — showing/hiding fields, populating values, validating input before submission. They have four types: onLoad, onChange, onSubmit, and onCellEdit. Business Rules, not Client Scripts, run on the server."},
+  {id:29,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is a 'UI Policy' used for in ServiceNow?",type:"single",options:["A. Setting field visibility, read-only state, and mandatory status dynamically on a form without scripting","B. Configuring the navigation menu for different roles","C. Controlling which tables a user can access","D. Applying email notification rules"],correct:["A"],explanation:"UI Policies apply dynamic behavior to form fields (make mandatory, read-only, or visible/hidden) based on conditions — without writing JavaScript. They are the no-code alternative to Client Scripts for simple field control logic. Navigation is controlled by roles/modules. Table access is controlled by ACLs."},
+  {id:30,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is a 'Script Include' in ServiceNow?",type:"single",options:["A. A JavaScript library stored server-side, callable from Business Rules, Flow Designer actions, or other scripts","B. A file imported from an external library","C. A client-side reusable function","D. An HTML template for UI components"],correct:["A"],explanation:"Script Includes are reusable server-side JavaScript libraries. They are only loaded when explicitly called, making them more efficient than putting all logic in individual Business Rules. They support OOP-style class definitions and are callable from Business Rules, Scheduled Jobs, REST APIs, and Flow Designer."},
+  {id:31,domain:"Flow & Automation",domainClass:"domain-flow",q:"Which trigger types are available in Flow Designer? (Choose THREE)",type:"multi",options:["A. Record-based trigger","B. Schedule-based trigger","C. Inbound email trigger","D. Application-based trigger (e.g., Service Catalog, SLA)"],correct:["A","B","D"],explanation:"Flow Designer supports Record triggers (on create/update), Schedule triggers (time-based), and Application triggers (like Service Catalog item request or SLA breach). Inbound email processing uses Email Actions or Inbound Email Actions, not Flow Designer triggers directly."},
+  {id:32,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is a 'Data Pill' in Flow Designer?",type:"single",options:["A. A system health metric dashboard","B. A dynamic reference to data from a previous step in a flow, used to pass values between actions","C. A field validation rule","D. A UI component in Service Portal"],correct:["B"],explanation:"Data Pills represent dynamic values at runtime — like the record that triggered the flow, or the output of a prior action. You drag them into action input fields to pass data between steps. They are the Flow Designer equivalent of variables in traditional scripting."},
+  {id:33,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is the 'Condition Builder' in ServiceNow used for?",type:"single",options:["A. Building SQL queries for external databases","B. Creating filter conditions on lists, Business Rules, and notifications without writing scripts","C. Defining validation rules for form submissions","D. Generating REST API parameters"],correct:["B"],explanation:"The Condition Builder is ServiceNow's visual query-builder UI that generates filter conditions using field, operator, and value combinations. It is used in list filters, Business Rules, Flow Designer conditions, notifications, and more. No scripting knowledge is required for standard conditions."},
+  {id:34,domain:"Flow & Automation",domainClass:"domain-flow",q:"How does an 'Inbound Email Action' work in ServiceNow?",type:"single",options:["A. It sends automated emails when a record is updated","B. It processes incoming emails to create or update records based on matching rules","C. It blocks spam emails from entering the instance","D. It converts email attachments to knowledge articles"],correct:["B"],explanation:"Inbound Email Actions define how ServiceNow handles emails received in a monitored mailbox. Rules can create incidents, update records, post comments, or trigger workflows based on email subject, sender, or body content. Outbound email notifications are a separate feature (Notifications)."},
+  {id:35,domain:"Flow & Automation",domainClass:"domain-flow",q:"What is the role of 'SLA Definitions' in ServiceNow?",type:"single",options:["A. Define availability targets for the ServiceNow instance itself","B. Set time-based commitments on records (e.g., resolve incidents within 4 hours) and track breach status","C. Control the number of concurrent users","D. Set data retention policies"],correct:["B"],explanation:"SLA Definitions attach time targets to records (Incidents, Cases, etc.) based on conditions like priority. They track elapsed time, pause on specified conditions, and flag breaches. They drive operational accountability — if a P1 incident isn't resolved in 4 hours, the SLA is breached and notifications fire."},
+  {id:36,domain:"Security & Access",domainClass:"domain-security",q:"What is the 'admin' role in ServiceNow, and why should it be used carefully?",type:"single",options:["A. It provides read-only access to all tables","B. It grants full platform access including system configuration, overrides all ACLs, and can modify anything — use with extreme care","C. It is equivalent to the itil role with extra reporting access","D. It only affects the admin's own records"],correct:["B"],explanation:"The admin role bypasses all ACLs and has unrestricted access to tables, scripts, and configuration. Granting it broadly creates major security risks — changes made by an admin user affect the entire platform. Best practice is to use more specific roles and reserve admin for platform-wide changes."},
+  {id:37,domain:"Security & Access",domainClass:"domain-security",q:"What is role 'inheritance' in ServiceNow?",type:"single",options:["A. A parent role automatically gets all permissions of a child role","B. A child role inherits all permissions of its parent roles — assigning a child role grants parent permissions too","C. Roles inherit from the user's group membership only","D. Roles are not inherited in ServiceNow"],correct:["B"],explanation:"In ServiceNow, role inheritance flows downward — a child role inherits the parent's permissions. When you assign a role to a user, they also get all roles that parent role contains. For example, the itil role contains approver_user, so assigning itil grants approval capabilities too."},
+  {id:38,domain:"Security & Access",domainClass:"domain-security",q:"What is a 'Group' in ServiceNow and how does it relate to roles?",type:"single",options:["A. A group is just a label for organizing users — roles must be assigned individually","B. Groups can be assigned roles, and all members of the group inherit those roles","C. Groups only control which modules appear in the nav bar","D. Groups are only used for approval workflows"],correct:["B"],explanation:"Groups serve two purposes: organizing users and granting roles in bulk. When a role is assigned to a group, every member gets that role without individual assignment. Groups are also used for assignment queues (e.g., routing incidents to the Network team). This is the preferred way to manage permissions at scale."},
+  {id:39,domain:"Security & Access",domainClass:"domain-security",q:"What does 'Elevated Privilege' (Security Admin) mean in ServiceNow?",type:"single",options:["A. A permanent second administrator account","B. A session-level privilege that must be explicitly activated to modify ACLs and security settings","C. A role that auto-applies when the admin role is assigned","D. A way to grant temporary admin access to non-admin users"],correct:["B"],explanation:"Security Admin (Elevated Privilege) is a session-based capability. Even if you have the security_admin role, you must explicitly activate it in your session before modifying ACLs or security configurations. This prevents accidental security changes during normal work. It resets when your session ends."},
+  {id:40,domain:"Security & Access",domainClass:"domain-security",q:"What is a 'User Criteria' in the context of ServiceNow Knowledge and Service Catalog?",type:"single",options:["A. A mandatory profile completeness requirement for users","B. A rule that restricts who can view or access certain content based on roles, groups, companies, or locations","C. A filter that applies to all list views for a user","D. A record-level audit condition"],correct:["B"],explanation:"User Criteria are reusable access control rules for Knowledge Bases, Knowledge Articles, Catalog Items, and Service Portal content. They evaluate attributes like role, group, company, location, or department to determine visibility. They are more flexible than role-only restrictions and can be combined."},
+  {id:41,domain:"Security & Access",domainClass:"domain-security",q:"Which of the following is true about ACL evaluation order in ServiceNow?",type:"single",options:["A. ACLs are evaluated alphabetically by name","B. The most specific ACL wins — table.field > table.* > *","C. All ACLs are evaluated and any passing ACL grants access","D. ACLs are evaluated in creation date order"],correct:["B"],explanation:"ServiceNow evaluates ACLs from most specific to least specific: a field-level ACL (table.field_name) overrides a table-level wildcard (table.*), which overrides a global wildcard (*.*). The first matching ACL that the user satisfies grants access. If no ACL matches, access is denied by default (unless the admin role is active)."},
+  {id:42,domain:"Security & Access",domainClass:"domain-security",q:"What is 'Data Segregation' in ServiceNow, and when is it used?",type:"single",options:["A. Splitting large tables into smaller ones for performance","B. A feature that uses the Company field to isolate data so users only see records belonging to their own company — used in multi-tenant or outsourced environments","C. Restricting access based on geographic region","D. Encrypting sensitive field data at rest"],correct:["B"],explanation:"Data Segregation uses the Company field on records and users to ensure people only see records from their own company. It is typically used in managed service provider (MSP) scenarios where the same instance serves multiple customer organizations. It is distinct from ACLs and encryption."},
+  {id:43,domain:"Reporting",domainClass:"domain-reporting",q:"Which report type would be BEST suited to show the trend of incidents created over the past 12 months?",type:"single",options:["A. Pie chart","B. Bar chart","C. Line (trend) chart","D. List report"],correct:["C"],explanation:"Line/trend charts are designed to display data over time, making them ideal for showing volume trends. Pie charts show proportional breakdown. Bar charts compare categories. List reports show raw records without visualization."},
+  {id:44,domain:"Reporting",domainClass:"domain-reporting",q:"What is the difference between a 'Report' and a 'Dashboard' in ServiceNow?",type:"single",options:["A. Reports and Dashboards are the same thing","B. A Report is a single data visualization; a Dashboard is a collection of multiple reports and widgets on one page","C. Dashboards are only available with a premium license","D. Reports are public; Dashboards are always private"],correct:["B"],explanation:"A Report is a single chart, list, or visualization built from one data source. A Dashboard is a canvas that can display multiple reports, KPI indicators, and widgets simultaneously, giving a consolidated operational view. Both can have sharing settings (private, group, public)."},
+  {id:45,domain:"Reporting",domainClass:"domain-reporting",q:"What is a 'Report Source' in ServiceNow?",type:"single",options:["A. The user who created the report","B. A named, reusable data set (table or database view) that reports are built against","C. The export format of the report","D. The scheduled time when the report runs"],correct:["B"],explanation:"A Report Source defines the data source for a report — either a table or a database view. Using named Report Sources ensures consistent data sets across multiple reports and makes maintenance easier. If the source changes, all reports using it update automatically."},
+  {id:46,domain:"Reporting",domainClass:"domain-reporting",q:"How can a ServiceNow report be shared with users who do not have access to the ServiceNow instance?",type:"single",options:["A. Export as PDF or Excel and share externally","B. Make the report public via a public URL","C. Reports can only be viewed inside the instance","D. Use the Report Sharing API"],correct:["A"],explanation:"Reports can be exported to PDF, Excel, CSV, or PNG formats and shared outside the instance. Reports can also be emailed on a schedule. A 'public URL' option exists for some dashboards but is not a standard option for all report types. The primary out-of-the-box external sharing method is export."},
+  {id:47,domain:"Reporting",domainClass:"domain-reporting",q:"What is a 'Performance Analytics (PA) Indicator' in ServiceNow?",type:"single",options:["A. A static count of records displayed on a dashboard","B. A time-series metric that scores data over time to track KPI trends across historical snapshots","C. A real-time alert on system performance","D. A report that calculates SLA compliance"],correct:["B"],explanation:"PA Indicators capture point-in-time snapshots of data on a schedule, enabling true historical trend analysis. Unlike standard reports which query live data, PA builds a historical data warehouse. This is the key distinction — PA answers 'how has this metric changed over time?' whereas standard reports answer 'what is the state right now?'"},
+  {id:48,domain:"Service Catalog",domainClass:"domain-catalog",q:"What is a 'Catalog Item' in ServiceNow?",type:"single",options:["A. A record in the CMDB representing a service","B. A requestable item in the Service Catalog that captures user input and triggers fulfillment","C. A type of Knowledge article","D. A configuration template for new instances"],correct:["B"],explanation:"A Catalog Item is what end users request from the Service Catalog (e.g., 'Request a Laptop'). It contains variables to capture user input and is tied to a fulfillment process (Flow, Workflow, or manual task). It is distinct from CMDB items and Knowledge articles."},
+  {id:49,domain:"Service Catalog",domainClass:"domain-catalog",q:"What is the purpose of 'Record Producer' in the Service Catalog?",type:"single",options:["A. It generates reports automatically","B. It creates records in any table via a Service Catalog-style form — not limited to catalog requests","C. It publishes Knowledge articles from templates","D. It produces SLA reports on demand"],correct:["B"],explanation:"A Record Producer is a special type of Catalog Item that creates a record in any specified table when submitted. For example, it can create an Incident, Change, or custom table record through a user-friendly form, without giving the user direct table access. It bridges self-service UX with backend record creation."},
+  {id:50,domain:"Service Catalog",domainClass:"domain-catalog",q:"What is the function of 'Order Guides' in ServiceNow Service Catalog?",type:"single",options:["A. Guides for training new administrators on catalog setup","B. A multi-step catalog item that bundles multiple items or content items and conditionally suggests additional items based on responses","C. A checklist for fulfillment teams","D. A routing rule for catalog requests"],correct:["B"],explanation:"Order Guides allow users to go through a multi-step questionnaire and have catalog items automatically added to their cart based on their answers. They are ideal for complex requests like new hire provisioning, where different responses result in different sets of items being ordered."},
+  {id:51,domain:"Service Catalog",domainClass:"domain-catalog",q:"What is a 'Variable Set' in the Service Catalog?",type:"single",options:["A. A predefined set of user roles for catalog access","B. A reusable group of variables that can be attached to multiple catalog items to avoid duplication","C. A system-generated set of fields added to every catalog item","D. A report filter set for catalog data"],correct:["B"],explanation:"Variable Sets are reusable containers of form variables. Instead of recreating the same fields (e.g., Justification, Cost Center) on every catalog item, you create a Variable Set once and attach it to many items. Changes to the set automatically apply everywhere it is used — reducing maintenance overhead."},
+  {id:52,domain:"Service Catalog",domainClass:"domain-catalog",q:"How does the 'Approval' process work in a Service Catalog request flow?",type:"single",options:["A. All requests auto-approve after 24 hours if not actioned","B. Approvals can be configured via Approval Rules, Flow Designer, or Workflow to route requests to specific users or groups for sign-off before fulfillment begins","C. Catalog items do not support approvals — only Change Requests do","D. Approval is always routed to the requester's manager by default"],correct:["B"],explanation:"Service Catalog approvals are configurable. You can use Catalog Approval Rules, Flow Designer Approval actions, or legacy Workflows to route to specific users, groups, or managers based on conditions. There is no universal default — each item's flow determines the approval path."},
+  {id:53,domain:"ITSM",domainClass:"domain-itsm",q:"What is the difference between an 'Incident' and a 'Problem' in ITSM terminology within ServiceNow?",type:"single",options:["A. They are the same — just different naming conventions","B. An Incident is an unplanned service disruption; a Problem is the underlying root cause being investigated","C. Problems are created by end users; Incidents are created by IT staff","D. Incidents require approval; Problems do not"],correct:["B"],explanation:"ITIL defines Incident Management as restoring service quickly (reactive), while Problem Management investigates root cause to prevent recurrence (proactive). A single Problem can be linked to multiple Incidents. In ServiceNow, they are separate tables — Incident (incident) and Problem (problem)."},
+  {id:54,domain:"ITSM",domainClass:"domain-itsm",q:"What is the 'Assignment Group' field on an Incident used for?",type:"single",options:["A. Restricting who can view the incident","B. Routing the incident to a team responsible for resolution","C. Tracking approval history","D. Defining the SLA target"],correct:["B"],explanation:"The Assignment Group field routes an Incident to the appropriate team queue (e.g., Network Team, Desktop Support). Once in the group, individual assignment to a specific agent can be made via the Assigned To field. Access restrictions are controlled by ACLs, not the assignment group."},
+  {id:55,domain:"ITSM",domainClass:"domain-itsm",q:"What is a 'Change Request' in ServiceNow ITSM and what are its three standard types?",type:"single",options:["A. A user request for a new service; types are Standard, Emergency, Normal","B. A controlled modification to IT infrastructure; types are Normal, Standard (pre-approved), and Emergency","C. An update to a knowledge article; types are Minor, Major, Critical","D. A task created from an Incident; types are Corrective, Preventive, Adaptive"],correct:["B"],explanation:"Change Requests manage controlled modifications to reduce risk. Normal changes go through full CAB approval. Standard changes are pre-approved, low-risk, repeatable changes. Emergency changes bypass standard approval for urgent situations and are reviewed retrospectively. ServiceNow's Change Management module handles all three."},
+  {id:56,domain:"Data Import",domainClass:"domain-import",q:"What is the sequence of steps to import data into ServiceNow using an Import Set?",type:"single",options:["A. Load data → Run Transform Map → Review target table","B. Create Transform Map → Load data → Run Transform","C. Load data into Staging Table → Map fields via Transform Map → Transform into target table","D. Create target table → Import XML → Auto-map fields"],correct:["C"],explanation:"The correct sequence is: (1) Data is loaded into an Import Set (staging table) — raw, unmodified. (2) A Transform Map defines the mapping from staging fields to target table fields. (3) The transform runs, moving data to the target table with any transformation logic applied. This staged approach allows validation before committing data."},
+  {id:57,domain:"Data Import",domainClass:"domain-import",q:"What is a 'Transform Map' in ServiceNow?",type:"single",options:["A. A visual map of how data flows between applications","B. A configuration that defines how fields from an Import Set map to fields in a target ServiceNow table, including transformation rules","C. A network diagram of instance integrations","D. A geographic map widget for Service Portal"],correct:["B"],explanation:"Transform Maps define: which import set source maps to which target table, how each source field maps to a target field (with optional transformation scripts), and which field to coalesce on. They are the bridge between raw imported data and properly structured ServiceNow records."},
+  {id:58,domain:"Data Import",domainClass:"domain-import",q:"What happens to data in an Import Set table after a successful transform?",type:"single",options:["A. It is immediately deleted to save space","B. It remains in the import set table and can be referenced, re-run, or cleaned up manually or via scheduled cleanup","C. It is archived to a separate database","D. It is automatically moved to the History table"],correct:["B"],explanation:"Import Set data remains in the staging table after a transform. Admins can review transform results (success, error, skipped), re-run transforms, or clean up old import sets manually or via a scheduled cleanup job. This retention allows troubleshooting of failed imports."},
+  {id:59,domain:"Data Import",domainClass:"domain-import",q:"Which field setting in a Transform Map script allows you to stop processing a record?",type:"single",options:["A. Set answer = 'skip'","B. Use ignore = true in a Transform Script to prevent the record from being inserted/updated","C. Set the coalesce field to null","D. Return false from the onBefore script"],correct:["B"],explanation:"In a Transform Map's Transform Script, setting ignore = true tells the system to skip that record entirely — it will not be inserted or updated in the target table. This is used when a record fails a custom validation or should not be imported based on business logic."},
+  {id:60,domain:"Instance Configuration",domainClass:"domain-inst",q:"What is the correct order of Update Set states during a migration from Dev to Production?",type:"single",options:["A. In Progress → Complete → Retrieved → Preview → Commit","B. Draft → Saved → Exported → Approved → Committed","C. In Progress → Complete → Export XML → Import → Preview → Commit","D. Created → Locked → Shipped → Deployed"],correct:["C"],explanation:"The correct flow is: (1) Record changes in Dev with Update Set 'In Progress'. (2) Mark it 'Complete'. (3) Export the XML file. (4) Import the XML into the target instance (Prod). (5) Run Preview to check for conflicts. (6) Commit to apply the changes. Skipping Preview is risky as it can overwrite existing customizations."}
+];
+
+let answered={},selectedMulti={},currentDomain='all',searchTerm='';
+
+function renderQuestions(){const container=document.getElementById('questionContainer');container.innerHTML='';let visible=0;QUESTIONS.forEach(q=>{const domainMatch=currentDomain==='all'||q.domain===currentDomain;const searchMatch=!searchTerm||q.q.toLowerCase().includes(searchTerm)||q.options.some(o=>o.toLowerCase().includes(searchTerm));if(!domainMatch||!searchMatch)return;visible++;const div=document.createElement('div');div.className='q-card';div.id=`q-${q.id}`;const isAnswered=!!answered[q.id];const isCorrect=answered[q.id]?.correct;const multiSel=selectedMulti[q.id]||[];let optionsHTML='';q.options.forEach((opt)=>{const key=opt.charAt(0);const isCorrectOpt=q.correct.includes(key);const wasChosen=isAnswered&&answered[q.id].chosen&&answered[q.id].chosen.includes(key);const isSelected=!isAnswered&&q.type==='multi'&&multiSel.includes(key);let cls='option-btn';if(isAnswered){if(isCorrectOpt&&wasChosen)cls+=' correct';else if(!isCorrectOpt&&wasChosen)cls+=' incorrect';else if(isCorrectOpt&&!wasChosen)cls+=' missed';}else if(isSelected){cls+=' selected';}const keyIcon=q.type==='multi'?`<div class="check-box">${isSelected||(isAnswered&&wasChosen)?'✓':''}</div>`:`<div class="opt-key">${key}</div>`;const clickAction=isAnswered?'':(q.type==='multi'?`onclick="toggleMulti(${q.id},'${key}',this)"`:`onclick="answerSingle(${q.id},'${key}')"`);optionsHTML+=`<button class="${cls}" ${isAnswered?'disabled':''} ${clickAction}>${keyIcon}<span>${opt.substring(3)}</span></button>`;});const expClass=isAnswered?(isCorrect?'pass':'fail'):'';const expLabel=isAnswered?(isCorrect?'CORRECT':'INCORRECT'):'';const expShow=isAnswered?'show':'';const submitBtn=q.type==='multi'&&!isAnswered?`<button class="submit-btn" id="submit-${q.id}" onclick="submitMulti(${q.id})" ${multiSel.length===0?'disabled':''}>Submit Answer</button>`:'';div.innerHTML=`<div class="q-meta"><span class="q-num">Q${q.id}</span><span class="domain-tag ${q.domainClass}">${q.domain}</span>${q.type==='multi'?'<span class="multi-tag">MULTI-SELECT</span>':''}</div><div class="q-text">${q.q}</div><div class="options" id="opts-${q.id}">${optionsHTML}</div>${submitBtn}<div class="explanation ${expClass} ${expShow}" id="exp-${q.id}"><div class="exp-correct-lbl ${expClass}">${expLabel}</div>${q.explanation}</div>`;container.appendChild(div);});if(visible===0){container.innerHTML='<div class="glass" style="text-align:center;color:var(--gray-400);padding:3rem">No questions match your filter.</div>';}updateStats();}
+
+function answerSingle(qId,key){const q=QUESTIONS.find(x=>x.id===qId);answered[qId]={correct:q.correct.includes(key),chosen:[key]};renderQuestions();updateStats();}
+
+function toggleMulti(qId,key){if(!selectedMulti[qId])selectedMulti[qId]=[];const idx=selectedMulti[qId].indexOf(key);if(idx>-1)selectedMulti[qId].splice(idx,1);else selectedMulti[qId].push(key);const sb=document.getElementById(`submit-${qId}`);if(sb)sb.disabled=selectedMulti[qId].length===0;renderQuestions();}
+
+function submitMulti(qId){const q=QUESTIONS.find(x=>x.id===qId);const chosen=selectedMulti[qId]||[];answered[qId]={correct:JSON.stringify([...q.correct].sort())===JSON.stringify([...chosen].sort()),chosen};renderQuestions();updateStats();}
+
+function updateStats(){const total=QUESTIONS.length;const ans=Object.keys(answered).length;const correct=Object.values(answered).filter(a=>a.correct).length;const wrong=ans-correct;const score=ans>0?Math.round((correct/ans)*100):0;document.getElementById('statAnswered').textContent=ans;document.getElementById('statCorrect').textContent=correct;document.getElementById('statWrong').textContent=wrong;document.getElementById('statScore').textContent=score+'%';document.getElementById('progressLabel').textContent=`Progress: ${ans} / ${total}`;document.getElementById('progressPct').textContent=Math.round((ans/total)*100)+'%';document.getElementById('progressFill').style.width=(ans/total*100)+'%';}
+
+function showScore(){const ans=Object.keys(answered).length;const correct=Object.values(answered).filter(a=>a.correct).length;const score=ans>0?Math.round((correct/ans)*100):0;const pass=score>=70;document.getElementById('modalScore').textContent=score+'%';document.getElementById('modalScore').className='score-big '+(pass?'pass':'fail');document.getElementById('modalMsg').textContent=pass?'You are on track. CSA passing threshold is typically 70%.':'Keep studying. Review the explanations for incorrect answers.';document.getElementById('modalStats').innerHTML=`${correct} correct out of ${ans} answered (${QUESTIONS.length} total questions)`;document.getElementById('scoreModal').classList.add('show');}
+
+function closeModal(){document.getElementById('scoreModal').classList.remove('show');}
+function resetAll(){answered={};selectedMulti={};renderQuestions();updateStats();}
+function filterDomain(domain,btn){currentDomain=domain;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderQuestions();}
+function filterSearch(val){searchTerm=val.toLowerCase().trim();renderQuestions();}
+
+renderQuestions();
+</script>
+</body>
+</html>
