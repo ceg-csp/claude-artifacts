@@ -1,0 +1,72 @@
+{
+  "_comment": "Sample data file for CIP Runner. Use this as the template when building the data dict from Snowflake + ValueMelody. All fields are required unless marked optional.",
+
+  "account_name":             "Adani Enterprises Ltd",
+  "account_short":            "Adani",
+  "csm_name":                 "Nimril Dsilva",
+  "customer_since":           "14 Jun 2018",
+  "time_with_impact":         "7+ years",
+  "instance":                 "adani",
+  "release":                  "Yokohama",
+  "health_score":             "80",
+  "accelerators_raised":      "3",
+  "on_demand_training":       "0",
+  "observer_seats":           "0",
+  "impact_app_usage":         "25%",
+  "critical_apps_undeployed": "18.75%",
+
+  "initiative_1":             "ITSM Platform Uplift & Optimization",
+  "initiative_2":             "SAM Enterprise Expansion",
+  "initiative_3":             "IRM Compliance Rollout (TBC)",
+  "training_credits":         "N/A",
+  "training_expiry":          "N/A",
+
+  "past_accelerators": [
+    "TuneUp Your CMDB",
+    "Jumpstart Your NowAssist for ITSM",
+    "SAM Foundation",
+    "ITOM Discovery+",
+    "IRM Policy & Compliance",
+    "TuneUp Your ITSM"
+  ],
+
+  "adoption_gaps": [
+    "App Engine Studio",
+    "CSM Enterprise",
+    "IRM Risk Management",
+    "RPA / Automation Hub"
+  ],
+
+  "licensing_rows": [
+    {"code": "PROD17800", "name": "Business Stakeholder User v4",                  "type": "User",  "units": "7,770"},
+    {"code": "PROD17256", "name": "IT Service Management Professional - Fulfiller", "type": "User",  "units": "2,147"},
+    {"code": "PROD14996", "name": "ITOM Operator Enterprise v2",                   "type": "Each",  "units": "4,220"},
+    {"code": "PROD15034", "name": "Software Asset Management Enterprise",           "type": "Each",  "units": "17,500"},
+    {"code": "PROD23807", "name": "IRM - IRM Lite Operator v2",                    "type": "User",  "units": "120"},
+    {"code": "PROD23792", "name": "IRM Professional v2 - IRM Operator",            "type": "User",  "units": "30"},
+    {"code": "PROD19351", "name": "App Engine Enterprise - Fulfiller User",         "type": "User",  "units": "4"},
+    {"code": "PROD24404", "name": "Impact Guided v3 - Package",                    "type": "Each",  "units": "1"},
+    {"code": "PROD22417", "name": "Integration Hub Starter v4 - Transactions",     "type": "Each",  "units": "1"},
+    {"code": "PROD15338", "name": "AI Search Starter - Documents",                 "type": "Each",  "units": "1"}
+  ],
+
+  "completed_accelerators": [
+    "Your CMDB",
+    "Now Assist for ITSM",
+    "SAM Foundation",
+    "ITOM Discovery",
+    "IRM Policy",
+    "TuneUp Your ITSM"
+  ],
+
+  "recommended_accelerators": [
+    "App Engine",
+    "CSM Enterprise",
+    "IRM Risk",
+    "RPA",
+    "Automation",
+    "Process Mining",
+    "AI Control Tower",
+    "Employee Center"
+  ]
+}
