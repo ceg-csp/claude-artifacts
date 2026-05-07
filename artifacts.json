@@ -1,1 +1,86 @@
-WwogIHsKICAgICJuYW1lIjogIlN1cHBvcnQgTm90aWZpY2F0aW9uIEFnZW50IiwKICAgICJzZWN0aW9uIjogIlByb2R1Y3QgTWFuYWdlbWVudCIsCiAgICAiZGVzYyI6ICJSZWFsLXRpbWUgY2FzZSBwYXR0ZXJuIGRldGVjdGlvbi4gUDEgY29uY2VudHJhdGlvbnMsIHN0YWxlIGNhc2VzLCBtaXNyb3V0ZWQgdGlja2V0cywgU0xBLW9ubHkgcmVzcG9uc2VzLCBjcm9zcy1hZ2VudCBlc2NhbGF0aW9uLiIsCiAgICAidGFncyI6IFsiQWxlcnRzIiwgIlBhdHRlcm5zIiwgIkVzY2FsYXRpb24iXSwKICAgICJrZXl3b3JkcyI6IFsiYWxlcnRzIiwgImNhc2VzIiwgInN1cHBvcnQiLCAiQ1JJUiIsICJQMSIsICJlc2NhbGF0aW9uIiwgInBhdHRlcm5zIiwgImFnZW50IDEzIiwgIm1pc3JvdXRlZCIsICJzdGFsZSIsICJTTEEiXSwKICAgICJ1cmwiOiAiYWdlbnRpYy1jc20vIiwKICAgICJsaXZlIjogdHJ1ZSwKICAgICJhZ2VudCI6ICJBZ2VudCAxMyIsCiAgICAiY29sb3IxIjogInZhcigtLXJvc2UpIiwKICAgICJjb2xvcjIiOiAidmFyKC0tb3JhbmdlKSIsCiAgICAiY29sb3JCZyI6ICJ2YXIoLS1yb3NlLWJnKSIsCiAgICAiYWRkZWQiOiAiMjAyNi0wNC0wMSIKICB9LAogIHsKICAgICJuYW1lIjogIkNTUUwgSW50ZWxsaWdlbmNlIEh1YiIsCiAgICAic2VjdGlvbiI6ICJQcm9kdWN0IE1hbmFnZW1lbnQiLAogICAgImRlc2MiOiAiQUktcG93ZXJlZCBDdXN0b21lciBTdWNjZXNzIFF1YWxpZmllZCBMZWFkIHdvcmtzcGFjZS4gRXhwYW5zaW9uIHNpZ25hbCBkZXRlY3Rpb24sIGhlYWx0aC1zY29yZWQgYWNjb3VudHMsIHJpY2ggQ1NRTCBjcmVhdGlvbiB3aXRoIFFCUiBleHRyYWN0aW9uLCBwaXBlbGluZSB0cmFja2luZywgYW5kIENTIHJldmVudWUgYXR0cmlidXRpb24uIiwKICAgICJ0YWdzIjogWyJDU1FMIiwgIkV4cGFuc2lvbiIsICJBSSBDb3BpbG90IiwgIlJldmVudWUiXSwKICAgICJrZXl3b3JkcyI6IFsiQ1NRTCIsICJleHBhbnNpb24iLCAic2lnbmFscyIsICJoZWFsdGggc2NvcmUiLCAicGlwZWxpbmUiLCAicmV2ZW51ZSBhdHRyaWJ1dGlvbiIsICJRQlIiLCAibGVhZCBzY29yaW5nIiwgImhhbmRvZmYiLCAiQ1NNIiwgImNyb3NzLXNlbGwiLCAidXBzZWxsIl0sCiAgICAidXJsIjogImNzcWwvIiwKICAgICJsaXZlIjogdHJ1ZSwKICAgICJhZ2VudCI6ICJDU1FMIENvcGlsb3QiLAogICAgImNvbG9yMSI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJjb2xvcjIiOiAidmFyKC0tZ3JlZW4pIiwKICAgICJjb2xvckJnIjogInZhcigtLWFjY2VudC1iZykiLAogICAgImFkZGVkIjogIjIwMjYtMDQtMDEiCiAgfSwKICB7CiAgICAibmFtZSI6ICJBZ2VudGljIEFJIHggR3VpZGVkIENTTSBKb3VybmV5IiwKICAgICJzZWN0aW9uIjogIlByb2R1Y3QgTWFuYWdlbWVudCIsCiAgICAiZGVzYyI6ICJJbnRlcmFjdGl2ZSBtYXBwaW5nIG9mIGFnZW50aWMgQUkgd29ya2Zsb3dzIGFjcm9zcyB0aGUgNS1zdGFnZSBDU00gbGlmZWN5Y2xlIChPbmJvYXJkLCBFbmdhZ2UsIEFkb3B0LCBNb25pdG9yLCBFeHBhbmQpLiBGb3VyIEFJIG1vZGVzIHRheG9ub215LCBiZWZvcmUvYWZ0ZXIgY29tcGFyaXNvbnMsIHRpbWUgc2F2aW5ncyBtZXRyaWNzLCBPT0IgdnMgY3VzdG9tIGJ1aWxkIGFuYWx5c2lzLiIsCiAgICAidGFncyI6IFsiQWdlbnRpYyBBSSIsICJDU00gSm91cm5leSIsICJXb3JrZmxvd3MiLCAiVGltZSBTYXZpbmdzIl0sCiAgICAia2V5d29yZHMiOiBbImFnZW50aWMiLCAiQ1NNIiwgImpvdXJuZXkiLCAib25ib2FyZCIsICJlbmdhZ2UiLCAiYWRvcHQiLCAibW9uaXRvciIsICJleHBhbmQiLCAicGxheWJvb2siLCAiQ1JJUiIsICJmb3VyIG1vZGVzIiwgImFzc2lzdGl2ZSIsICJnZW5lcmF0aXZlIiwgInByZWRpY3RpdmUiLCAiYXV0b21hdGlvbiIsICJ0aW1lIHNhdmluZ3MiXSwKICAgICJ1cmwiOiAiYWdlbnRpYy1jc20tam91cm5leS8iLAogICAgImxpdmUiOiB0cnVlLAogICAgImFnZW50IjogIkpvdXJuZXkgQXJjaGl0ZWN0IiwKICAgICJjb2xvcjEiOiAidmFyKC0tcHVycGxlKSIsCiAgICAiY29sb3IyIjogInZhcigtLXJvc2UpIiwKICAgICJjb2xvckJnIjogInZhcigtLXB1cnBsZS1iZykiLAogICAgImFkZGVkIjogIjIwMjYtMDQtMDEiCiAgfSwKICB7CiAgICAibmFtZSI6ICJDU0EgRXhhbSBQcmVwIiwKICAgICJzZWN0aW9uIjogIkxlYXJuaW5nICYgRW5hYmxlbWVudCIsCiAgICAiZGVzYyI6ICI2MC1xdWVzdGlvbiBTZXJ2aWNlTm93IENTQSBwcmFjdGljZSBiYW5rLiBEb21haW4tZmlsdGVyZWQsIHNjb3JlZCwgd2l0aCBmdWxsIHJpZ2h0L3dyb25nIGV4cGxhbmF0aW9ucyBwZXIgcXVlc3Rpb24uIE1hcHBlZCB0byBvZmZpY2lhbCBadXJpY2ggYmx1ZXByaW50IHdlaWdodGluZ3MuIiwKICAgICJ0YWdzIjogWyJDU0EiLCAiQ2VydGlmaWNhdGlvbiIsICJFeGFtIFByZXAiLCAiVHJhaW5pbmciXSwKICAgICJrZXl3b3JkcyI6IFsiQ1NBIiwgImNlcnRpZmljYXRpb24iLCAiZXhhbSIsICJwcmFjdGljZSIsICJxdWVzdGlvbnMiLCAic3R1ZHkiLCAiYWRtaW4iLCAic3lzdGVtIGFkbWluaXN0cmF0b3IiLCAidHJhaW5pbmciLCAicXVpeiJdLAogICAgInVybCI6ICJjc2EtZXhhbS1wcmVwLyIsCiAgICAibGl2ZSI6IHRydWUsCiAgICAiYWdlbnQiOiAiRXhhbSBDb2FjaCIsCiAgICAiY29sb3IxIjogInZhcigtLWdyZWVuKSIsCiAgICAiY29sb3IyIjogInZhcigtLWFjY2VudCkiLAogICAgImNvbG9yQmciOiAidmFyKC0tZ3JlZW4tYmcpIiwKICAgICJhZGRlZCI6ICIyMDI2LTA0LTAzIgogIH0sCiAgewogICAgIm5hbWUiOiAiR3VpZGVkIENTTSBBZ2VudCDigJQgQWNjZWxlcmF0aW9uIFJvYWRtYXAiLAogICAgInNlY3Rpb24iOiAiUHJvZHVjdCBNYW5hZ2VtZW50IiwKICAgICJkZXNjIjogIkludGVyYWN0aXZlIGFjY2VsZXJhdGlvbiByb2FkbWFwIGZvciB0aGUgR3VpZGVkIENTTSBBZ2VudC4gUGhhc2UtYnktcGhhc2UgYnVpbGQgcGxhbiwgbWlsZXN0b25lcywgSlRCRC9DWEogbWFwcGluZywgYW5kIGFnZW50IGRldGFpbHMgYWNyb3NzIDEwIGFnZW50cy4iLAogICAgInRhZ3MiOiBbIkd1aWRlZCBDU00iLCAiQWNjZWxlcmF0aW9uIiwgIlJvYWRtYXAiLCAiQWdlbnRpYyJdLAogICAgImtleXdvcmRzIjogWyJndWlkZWQgY3NtIiwgImFjY2VsZXJhdGlvbiIsICJyb2FkbWFwIiwgImFnZW50aWMiLCAibWlsZXN0b25lcyIsICJqb3VybmV5LW1hcCIsICJqdGJkIiwgImNzbSBhZ2VudHMiLCAidGltZSBzYXZpbmdzIiwgIkNTUCIsICJDRUciLCAid29ya3Nob3AiLCAiUUlSIiwgImF1dG9tYXRpb24iXSwKICAgICJ1cmwiOiAiZ3VpZGVkLWNzbS1yb2FkbWFwLyIsCiAgICAibGl2ZSI6IHRydWUsCiAgICAiYWdlbnQiOiAiUm9hZG1hcCBQbGFubmVyIiwKICAgICJjb2xvcjEiOiAidmFyKC0tYWNjZW50KSIsCiAgICAiY29sb3IyIjogInZhcigtLWdyZWVuKSIsCiAgICAiY29sb3JCZyI6ICJ2YXIoLS1hY2NlbnQtYmcpIiwKICAgICJhZGRlZCI6ICIyMDI2LTA0LTIyIgogIH0KXQ==
+[
+  {
+    "name": "Support Notification Agent",
+    "section": "Product Management",
+    "desc": "Real-time case pattern detection. P1 concentrations, stale cases, misrouted tickets, SLA-only responses, cross-agent escalation.",
+    "tags": ["Alerts", "Patterns", "Escalation"],
+    "keywords": ["alerts", "cases", "support", "CRIR", "P1", "escalation", "patterns", "agent 13", "misrouted", "stale", "SLA"],
+    "url": "agentic-csm/",
+    "live": true,
+    "agent": "Agent 13",
+    "color1": "var(--rose)",
+    "color2": "var(--orange)",
+    "colorBg": "var(--rose-bg)",
+    "added": "2026-04-01"
+  },
+  {
+    "name": "CSQL Intelligence Hub",
+    "section": "Product Management",
+    "desc": "AI-powered Customer Success Qualified Lead workspace. Expansion signal detection, health-scored accounts, rich CSQL creation with QBR extraction, pipeline tracking, and CS revenue attribution.",
+    "tags": ["CSQL", "Expansion", "AI Copilot", "Revenue"],
+    "keywords": ["CSQL", "expansion", "signals", "health score", "pipeline", "revenue attribution", "QBR", "lead scoring", "handoff", "CSM", "cross-sell", "upsell"],
+    "url": "csql/",
+    "live": true,
+    "agent": "CSQL Copilot",
+    "color1": "var(--accent)",
+    "color2": "var(--green)",
+    "colorBg": "var(--accent-bg)",
+    "added": "2026-04-01"
+  },
+  {
+    "name": "Agentic AI x Guided CSM Journey",
+    "section": "Product Management",
+    "desc": "Interactive mapping of agentic AI workflows across the 5-stage CSM lifecycle (Onboard, Engage, Adopt, Monitor, Expand). Four AI modes taxonomy, before/after comparisons, time savings metrics, OOB vs custom build analysis.",
+    "tags": ["Agentic AI", "CSM Journey", "Workflows", "Time Savings"],
+    "keywords": ["agentic", "CSM", "journey", "onboard", "engage", "adopt", "monitor", "expand", "playbook", "CRIR", "four modes", "assistive", "generative", "predictive", "automation", "time savings"],
+    "url": "agentic-csm-journey/",
+    "live": true,
+    "agent": "Journey Architect",
+    "color1": "var(--purple)",
+    "color2": "var(--rose)",
+    "colorBg": "var(--purple-bg)",
+    "added": "2026-04-01"
+  },
+  {
+    "name": "CSA Exam Prep",
+    "section": "Learning & Enablement",
+    "desc": "60-question ServiceNow CSA practice bank. Domain-filtered, scored, with full right/wrong explanations per question. Mapped to official Zurich blueprint weightings.",
+    "tags": ["CSA", "Certification", "Exam Prep", "Training"],
+    "keywords": ["CSA", "certification", "exam", "practice", "questions", "study", "admin", "system administrator", "training", "quiz"],
+    "url": "csa-exam-prep/",
+    "live": true,
+    "agent": "Exam Coach",
+    "color1": "var(--green)",
+    "color2": "var(--accent)",
+    "colorBg": "var(--green-bg)",
+    "added": "2026-04-03"
+  },
+  {
+    "name": "Guided CSM Agent \u2014 Acceleration Roadmap",
+    "section": "Product Management",
+    "desc": "Interactive acceleration roadmap for the Guided CSM Agent. Phase-by-phase build plan, milestones, JTBD/CXJ mapping, and agent details across 10 agents.",
+    "tags": ["Guided CSM", "Acceleration", "Roadmap", "Agentic"],
+    "keywords": ["guided csm", "acceleration", "roadmap", "agentic", "milestones", "journey-map", "jtbd", "csm agents", "time savings", "CSP", "CEG", "workshop", "QIR", "automation"],
+    "url": "guided-csm-roadmap/",
+    "live": true,
+    "agent": "Roadmap Planner",
+    "color1": "var(--accent)",
+    "color2": "var(--green)",
+    "colorBg": "var(--accent-bg)",
+    "added": "2026-04-22"
+  },
+  {
+    "name": "Product Adoption Dashboard",
+    "section": "Product Management",
+    "desc": "Single-page product health view with narrative flow. Health verdict, prioritized focus areas, BU breakdown, critical/all app toggle, utilization by BU and meter, full methodology documentation.",
+    "tags": ["Adoption", "Usage", "NLU", "Dashboard"],
+    "keywords": ["adoption", "usage", "NLU", "undeployed", "critical apps", "license utilization", "health", "BU", "ACV", "dashboard", "product health"],
+    "url": "product-adoption-dashboard/",
+    "live": true,
+    "agent": "Health Analyst",
+    "color1": "var(--accent)",
+    "color2": "var(--orange)",
+    "colorBg": "var(--accent-bg)",
+    "added": "2026-05-07"
+  }
+]
