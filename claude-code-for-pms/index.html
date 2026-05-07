@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code for Product Managers</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f11;
+    --surface: #16181c;
+    --surface-hover: #1c1f25;
+    --border: #2a2d35;
+    --text: #e4e5e9;
+    --text-muted: #8b8f9a;
+    --accent: #e07a3a;
+    --accent-dim: rgba(224, 122, 58, 0.12);
+    --green: #5cb87a;
+    --green-dim: rgba(92, 184, 122, 0.12);
+    --blue: #5b9fd4;
+    --blue-dim: rgba(91, 159, 212, 0.12);
+    --purple: #9b7dd4;
+    --purple-dim: rgba(155, 125, 212, 0.12);
+    --radius: 10px;
+    --font: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 24px 64px; }
+
+  /* Header */
+  .header { margin-bottom: 48px; }
+  .header .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span { color: var(--accent); }
+  .header .subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 640px;
+  }
+
+  /* Setup Section */
+  .setup {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .setup h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .setup-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .setup-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .step-content h3 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .step-content p { font-size: 13px; color: var(--text-muted); }
+  .step-content code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  /* Tabs */
+  .tabs { margin-bottom: 40px; }
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-btn {
+    padding: 10px 18px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Use Case Cards */
+  .use-cases { display: grid; gap: 16px; }
+  .use-case {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .use-case:hover { border-color: #3a3d45; }
+  .uc-header {
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    user-select: none;
+  }
+  .uc-icon {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .uc-icon.orange { background: var(--accent-dim); }
+  .uc-icon.green { background: var(--green-dim); }
+  .uc-icon.blue { background: var(--blue-dim); }
+  .uc-icon.purple { background: var(--purple-dim); }
+  .uc-meta { flex: 1; }
+  .uc-meta h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .uc-meta p { font-size: 13px; color: var(--text-muted); }
+  .uc-toggle {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+  .use-case.open .uc-toggle { transform: rotate(180deg); }
+  .uc-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .use-case.open .uc-body { display: block; }
+
+  /* Code blocks */
+  .prompt-block {
+    margin-top: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .prompt-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .copy-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 11px;
+    font-family: var(--font);
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .copy-btn:hover { color: var(--text); }
+  .prompt-code {
+    padding: 14px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .prompt-code .comment { color: var(--text-muted); }
+
+  /* Output hint */
+  .output-hint {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--green-dim);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--green);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .output-hint .arrow { flex-shrink: 0; }
+
+  /* Tips Section */
+  .tips {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-top: 40px;
+  }
+  .tips h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .tip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .tip {
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .tip h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tip p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 32px 16px 48px; }
+    .header h1 { font-size: 26px; }
+    .setup-steps { grid-template-columns: 1fr; }
+    .tab-btn { padding: 10px 12px; font-size: 13px; }
+    .tip-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="badge">&#9654; Practical Guide</div>
+    <h1>Claude Code for <span>Product Managers</span></h1>
+    <p class="subtitle">You don't need to be an engineer. Claude Code lets you build working prototypes, run data analysis, automate workflows, and ship internal tools -- all from natural language in your terminal.</p>
+  </div>
+
+  <!-- Setup -->
+  <div class="setup">
+    <h2>Get Started in 2 Minutes</h2>
+    <div class="setup-steps">
+      <div class="setup-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Install</h3>
+          <p>Run <code>npm install -g @anthropic-ai/claude-code</code> or <code>brew install claude-code</code></p>
+        </div>
+      </div>
+      <div class="setup-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Navigate to a folder</h3>
+          <p><code>cd ~/my-project</code> -- or any empty folder to start fresh</p>
+        </div>
+      </div>
+      <div class="setup-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Launch</h3>
+          <p>Type <code>claude</code> and authenticate. Then just describe what you want.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs + Use Cases -->
+  <div class="tabs">
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="build">Build</button>
+      <button class="tab-btn" data-tab="analyze">Analyze</button>
+      <button class="tab-btn" data-tab="automate">Automate</button>
+      <button class="tab-btn" data-tab="understand">Understand</button>
+    </div>
+
+    <!-- BUILD -->
+    <div class="tab-panel active" id="tab-build">
+      <div class="use-cases">
+
+        <div class="use-case open">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon orange">&#128736;</div>
+            <div class="uc-meta">
+              <h3>Prototype a Feature Demo</h3>
+              <p>Go from PRD to working HTML prototype in minutes</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Build an interactive HTML prototype for a CSM account health dashboard.
+It should show:
+- A list of 8 mock accounts with health scores (green/yellow/red)
+- Clicking an account opens a detail panel with NPS trend, open risks, and last touchpoint
+- A filter bar to filter by health status
+Make it look polished, dark theme, single HTML file.</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Claude Code creates the file, opens a browser preview, and iterates if you ask for changes.
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon green">&#128196;</div>
+            <div class="uc-meta">
+              <h3>Generate a PRD Skeleton</h3>
+              <p>Scaffold a structured requirements doc from a brief</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Create a PRD markdown file for this feature:
+
+"Automated assignment of CSM accounts based on segment, 
+region, and current capacity. System should rebalance 
+nightly and flag exceptions for manager review."
+
+Include: problem statement, personas, user stories with 
+acceptance criteria, success metrics (with numbers), 
+data dependencies, and a risks section. Mark anything 
+you're guessing at as NEEDS INPUT.</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Produces a ready-to-edit .md file. Ask Claude Code to convert it to .docx if needed.
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon blue">&#127760;</div>
+            <div class="uc-meta">
+              <h3>Build an Internal Tool</h3>
+              <p>Ship a utility app your team actually uses</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Build a single-page expense tracker tool in HTML.
+- User pastes a Concur CSV export
+- Tool parses it and flags rows that violate policy:
+  meals > $75, flights without 14-day advance, missing receipts
+- Shows a summary table with pass/fail per row
+- Export a cleaned report as CSV</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Working tool, ready to share with your team. Claude Code can also push it to GitHub Pages.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ANALYZE -->
+    <div class="tab-panel" id="tab-analyze">
+      <div class="use-cases">
+
+        <div class="use-case open">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon purple">&#128202;</div>
+            <div class="uc-meta">
+              <h3>Analyze a CSV / Dataset</h3>
+              <p>Get insights from data without writing SQL or Python yourself</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">I have a CSV at ./nps_responses.csv with columns:
+account_name, score, segment, region, date, verbatim
+
+Analyze it and tell me:
+1. NPS by segment and region (table)
+2. Top 5 themes from detractor verbatims
+3. Month-over-month trend
+4. Generate a chart as an HTML file</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Claude Code writes a Python script, runs it, and gives you the results plus a rendered chart.
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon orange">&#128269;</div>
+            <div class="uc-meta">
+              <h3>Audit / Compare Spreadsheets</h3>
+              <p>Diff two exports, find mismatches, produce a report</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Compare these two Excel files:
+- ./sys_user_export.xlsx (CSP instance)
+- ./employee_export.xlsx (Core instance)
+
+Match on email address. Show me:
+- Records in CSP but not Core
+- Records in Core but not CSP
+- Records where name or department differs
+Output as a multi-tab Excel report.</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Produces a ready-to-share audit workbook. Great for data sync investigations.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- AUTOMATE -->
+    <div class="tab-panel" id="tab-automate">
+      <div class="use-cases">
+
+        <div class="use-case open">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon green">&#9889;</div>
+            <div class="uc-meta">
+              <h3>Generate Test Cases from Stories</h3>
+              <p>Turn user stories + AC into structured UAT suites</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Read ./stories.md which has 12 user stories with 
+acceptance criteria.
+
+For each story, generate UAT test cases in a table:
+Test ID | Story | Step | Expected Result | Pass/Fail
+
+Include positive paths, negative paths, and edge cases.
+Output as an Excel file with one tab per epic.</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Structured test suite ready for your QA cycle. Ask it to add more edge cases if coverage feels thin.
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon blue">&#128231;</div>
+            <div class="uc-meta">
+              <h3>Batch-Generate Stakeholder Comms</h3>
+              <p>Draft multiple audience-calibrated updates from one source</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Read ./sprint_retro_notes.md.
+
+Generate three versions of a status update:
+1. Executive summary (3 sentences, decisions needed)
+2. Engineering update (blockers, dependencies, next sprint)
+3. Cross-functional update (timeline impact, asks)
+
+Save each as a separate .md file in ./comms/</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Three files, each calibrated to audience. Edit and send.
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon purple">&#128260;</div>
+            <div class="uc-meta">
+              <h3>Scaffold a Workflow Script</h3>
+              <p>Automate a repetitive process end-to-end</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Write a Python script that:
+1. Reads a list of account names from ./accounts.txt
+2. For each account, calls the ServiceNow REST API 
+   (table: sn_customerservice_account) to get health score
+3. Writes results to a CSV with columns: 
+   account, score, last_updated
+4. Highlights any score below 50 in a summary at the end
+
+Use environment variables for credentials. 
+Add error handling and a progress indicator.</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Working script with error handling. Claude Code will also run and test it for you.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNDERSTAND -->
+    <div class="tab-panel" id="tab-understand">
+      <div class="use-cases">
+
+        <div class="use-case open">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon blue">&#128218;</div>
+            <div class="uc-meta">
+              <h3>Understand a Codebase</h3>
+              <p>Get up to speed on an engineering project fast</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">I'm a PM, not an engineer. Explain this repo to me:
+- What does it do, in plain language?
+- What are the main modules and how do they connect?
+- Where are the API endpoints defined?
+- What would break if we changed the account 
+  assignment logic?
+
+Draw a Mermaid diagram of the architecture.</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Claude Code reads the entire repo, explains it, and produces a visual architecture diagram.
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case">
+          <div class="uc-header" onclick="toggle(this)">
+            <div class="uc-icon orange">&#128270;</div>
+            <div class="uc-meta">
+              <h3>Review a Pull Request</h3>
+              <p>Understand what changed without reading every line</p>
+            </div>
+            <div class="uc-toggle">&#9662;</div>
+          </div>
+          <div class="uc-body">
+            <div class="prompt-block">
+              <div class="prompt-label"><span>Prompt</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+              <div class="prompt-code">Look at the latest PR on the main branch.
+Tell me in PM terms:
+- What user-facing behavior changed?
+- Does this match the acceptance criteria in story CSPRJ-1042?
+- Any risks I should flag before approving?</div>
+            </div>
+            <div class="output-hint">
+              <span class="arrow">&#8594;</span>
+              Translates code changes into product impact. Works with GitHub and GitLab.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tips -->
+  <div class="tips">
+    <h2>Power Tips for PMs</h2>
+    <div class="tip-grid">
+      <div class="tip">
+        <h4>&#128221; Use CLAUDE.md</h4>
+        <p>Drop a CLAUDE.md file in your project root with context about your product, team conventions, and preferences. Claude Code reads it automatically every session.</p>
+      </div>
+      <div class="tip">
+        <h4>&#128257; Iterate, Don't Restart</h4>
+        <p>Say "make the table sortable" or "add a filter for region" -- Claude Code edits in place. Treat it like pair programming, not a one-shot prompt.</p>
+      </div>
+      <div class="tip">
+        <h4>&#128230; Ask for Files</h4>
+        <p>Be explicit about output format: "save as .xlsx", "create an HTML file", "write to ./output/report.md". Claude Code will create real files you can share.</p>
+      </div>
+      <div class="tip">
+        <h4>&#128640; Push to GitHub Pages</h4>
+        <p>Built a demo? Ask Claude Code to commit and push it. Instant shareable link for stakeholders -- no deploy pipeline needed.</p>
+      </div>
+      <div class="tip">
+        <h4>&#128736; Use /commands</h4>
+        <p>Type <code>/help</code> for available slash commands. <code>/clear</code> resets context, <code>/resume</code> picks up where you left off. <code>/context</code> shows what Claude can see.</p>
+      </div>
+      <div class="tip">
+        <h4>&#9881; Available Everywhere</h4>
+        <p>Terminal CLI, VS Code extension, desktop app, and browser at claude.ai/code. Use whichever fits your workflow -- all share the same agent.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Claude Code for Product Managers -- Reference Guide
+  </div>
+
+</div>
+
+<script>
+function toggle(header) {
+  const card = header.closest('.use-case');
+  card.classList.toggle('open');
+}
+
+function copyBlock(btn) {
+  const code = btn.closest('.prompt-block').querySelector('.prompt-code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

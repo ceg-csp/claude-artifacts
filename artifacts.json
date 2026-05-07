@@ -82,5 +82,19 @@
     "color2": "var(--orange)",
     "colorBg": "var(--accent-bg)",
     "added": "2026-05-07"
+  },
+  {
+    "name": "Claude Code for Product Managers",
+    "section": "Learning & Enablement",
+    "desc": "Interactive guide to using Claude Code as a PM. Tabbed use cases (Build, Analyze, Automate, Understand) with copy-pasteable prompts and power tips.",
+    "tags": ["Claude Code", "PM Guide", "Enablement"],
+    "keywords": ["claude code", "product manager", "PM", "guide", "prompts", "prototype", "automate", "analyze", "terminal", "enablement", "getting started"],
+    "url": "claude-code-for-pms/",
+    "live": true,
+    "agent": "Guide Builder",
+    "color1": "var(--accent)",
+    "color2": "var(--green)",
+    "colorBg": "var(--accent-bg)",
+    "added": "2026-05-07"
   }
 ]
