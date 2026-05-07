@@ -3,9 +3,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Adoption Dashboard</title>
-<script>window.location.href='https://ceg-csp.github.io/claude-artifacts/product-adoption-dashboard/';</script>
-<meta http-equiv="refresh" content="0;url=https://ceg-csp.github.io/claude-artifacts/product-adoption-dashboard/">
+<title>Product Adoption | Acme Corporation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg0:#f5f6f8;--bg1:#ffffff;--bg2:#f7f8fa;--bg3:#eef1f5;--bg4:#e4e8ed;
+  --int:#2b6cb0;--int-h:#3182ce;--int-bg:rgba(43,108,176,0.06);
+  --t1:#1a202c;--t2:#4a5568;--t3:#718096;--t4:#a0aec0;
+  --ok:#38a169;--warn:#d69e2e;--crit:#e53e3e;--info:#3182ce;
+  --bdr:#e2e8f0;--bdr2:#cbd5e0;
+  --now:#2f855a;--teal:#319795;
+  --card-shadow:0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-webkit-font-smoothing:antialiased;line-height:1.5;}
+.page{max-width:1440px;margin:0 auto;padding:20px 28px 48px;}
+
+/* HEADER */
+.top-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:2px solid var(--bdr);margin-bottom:20px;}
+.top-bar h1{font-size:13px;font-weight:600;color:var(--t3);letter-spacing:0.5px;text-transform:uppercase;}
+.acct{text-align:right;}
+.acct-name{font-size:22px;font-weight:700;color:var(--t1);}
+.acct-meta{font-size:11px;color:var(--t3);margin-top:2px;}
+
+/* VERDICT */
+.verdict{background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;padding:20px 24px;margin-bottom:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden;}
+.verdict::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;}
+.verdict.amber::before{background:var(--warn);}
+.verdict.red::before{background:var(--crit);}
+.verdict.green::before{background:var(--ok);}
+.verdict-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.verdict-label .dot{width:8px;height:8px;border-radius:50%;}
+.verdict.amber .verdict-label{color:var(--warn);}.verdict.amber .dot{background:var(--warn);}
+.verdict.red .verdict-label{color:var(--crit);}.verdict.red .dot{background:var(--crit);}
+.verdict.green .verdict-label{color:var(--ok);}.verdict.green .dot{background:var(--ok);}
+.verdict p{font-size:13.5px;color:var(--t2);line-height:1.7;}
+.verdict strong{color:var(--t1);}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.kpi{background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;padding:16px 20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden;}
+.kpi::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0;}
+.kpi.g::after{background:var(--ok);}.kpi.a::after{background:var(--warn);}.kpi.r::after{background:var(--crit);}.kpi.b::after{background:var(--int);}
+.kpi-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:6px;}
+.kpi-val{font-size:30px;font-weight:700;line-height:1;}
+.kpi-sub{font-size:11px;color:var(--t3);margin-top:6px;}.kpi-sub b{font-weight:600;color:var(--t2);}
+.up{color:var(--ok);font-weight:600;}.dn{color:var(--crit);font-weight:600;}.fl{color:var(--t4);}
+
+/* SECTION */
+.sec{display:flex;align-items:center;gap:12px;margin:28px 0 12px;}
+.sec-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;}
+.sec-line{flex:1;height:1px;background:var(--bdr);}
+
+/* FOCUS */
+.focus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:20px;}
+.focus-card{background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px;box-shadow:var(--card-shadow);border-left:4px solid var(--crit);position:relative;}
+.focus-card.warn{border-left-color:var(--warn);}
+.focus-num{position:absolute;top:12px;right:14px;font-size:20px;font-weight:700;color:var(--bg4);}
+.fc-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.fc-bu{font-size:10px;color:var(--t3);margin-bottom:6px;}
+.fc-why{font-size:11.5px;color:var(--t2);line-height:1.55;}
+
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+.toggle{display:flex;background:var(--bg3);border-radius:6px;overflow:hidden;border:1px solid var(--bdr);}
+.toggle-btn{padding:6px 16px;font-size:11px;font-weight:600;color:var(--t3);cursor:pointer;border:none;background:none;font-family:inherit;transition:all 0.15s;}
+.toggle-btn.active{background:var(--int);color:#fff;}
+.toggle-btn:hover:not(.active){background:var(--bg4);color:var(--t2);}
+.filter-hint{font-size:10px;color:var(--t4);font-style:italic;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:4px;background:var(--bg1);border-radius:8px;overflow:hidden;border:1px solid var(--bdr);box-shadow:var(--card-shadow);}
+.tbl th{background:var(--bg2);color:var(--t3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:10px 10px;text-align:left;border-bottom:2px solid var(--bdr);}
+.tbl th.r{text-align:right;}.tbl th.c{text-align:center;}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--bdr);color:var(--t1);vertical-align:middle;}
+.tbl td.r{text-align:right;color:var(--t2);}.tbl td.c{text-align:center;}
+.tbl tr:hover td{background:rgba(43,108,176,0.02);}
+.tbl .bu-group{background:var(--bg2);}
+.tbl .bu-group td{font-weight:700;font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.5px;padding:7px 10px;border-bottom:1px solid var(--bdr);}
+
+/* USAGE BADGES */
+.ubadge{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:10px;font-weight:700;letter-spacing:-0.2px;}
+.ubadge.H{background:rgba(56,161,105,0.12);color:var(--ok);}
+.ubadge.M{background:rgba(49,151,149,0.12);color:var(--teal);}
+.ubadge.L{background:rgba(214,158,46,0.12);color:var(--warn);}
+.ubadge.N{background:rgba(229,62,62,0.1);color:var(--crit);}
+.ubadge.X{background:rgba(160,174,192,0.15);color:var(--t4);}
+
+/* RISK TAG */
+.risk-tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;}
+.risk-tag.focus{background:rgba(229,62,62,0.08);color:var(--crit);}
+.risk-tag.watch{background:rgba(214,158,46,0.1);color:var(--warn);}
+.risk-tag.on-track{background:rgba(56,161,105,0.08);color:var(--ok);}
+.risk-tag.grace{background:var(--bg3);color:var(--t4);border:1px dashed var(--bdr2);}
+
+/* YOY */
+.yoy{display:inline-flex;align-items:center;gap:2px;font-size:11px;font-weight:600;padding:2px 6px;border-radius:3px;}
+.yoy.pos{background:rgba(56,161,105,0.08);color:var(--ok);}
+.yoy.neg{background:rgba(229,62,62,0.08);color:var(--crit);}
+.yoy.flat{color:var(--t4);}
+
+/* STACKED BAR */
+.sbar{display:flex;height:14px;border-radius:3px;overflow:hidden;background:var(--bg3);min-width:100px;}
+.sbar div{height:100%;}
+.sbar .h{background:var(--ok);}.sbar .m{background:var(--teal);}.sbar .l{background:var(--warn);}.sbar .n{background:var(--crit);opacity:0.6;}.sbar .x{background:var(--t4);opacity:0.4;}
+
+/* NLU INLINE */
+.nlu-inline{display:flex;align-items:center;gap:6px;}
+.nlu-track{width:60px;height:5px;background:var(--bg3);border-radius:3px;}
+.nlu-fill{height:100%;border-radius:3px;}
+.nlu-v{font-size:11px;font-weight:700;min-width:36px;}
+
+/* SPARKLINE */
+.spark{display:flex;align-items:flex-end;gap:1.5px;height:20px;}
+.spark div{width:3px;border-radius:1px;min-height:2px;}
+
+/* LEGEND */
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--t3);font-weight:500;}
+.legend-dot{width:8px;height:8px;border-radius:2px;}
+
+/* UTILIZATION TABLE (matching CSP mock) */
+.util-wrap{background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;box-shadow:var(--card-shadow);margin-bottom:20px;}
+.util-header{padding:14px 16px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;}
+.util-header h3{font-size:13px;font-weight:700;color:var(--t1);}
+.util-header .util-sub{font-size:11px;color:var(--t3);}
+.util-tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.util-tbl th{background:var(--bg2);color:var(--t3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;padding:9px 14px;text-align:left;border-bottom:1px solid var(--bdr);}
+.util-tbl th.r{text-align:right;}
+.util-tbl td{padding:9px 14px;border-bottom:1px solid var(--bdr);color:var(--t1);vertical-align:middle;}
+.util-tbl td.r{text-align:right;}
+.util-tbl .grp{cursor:pointer;background:var(--bg2);}
+.util-tbl .grp:hover{background:var(--bg3);}
+.util-tbl .grp td{font-weight:700;font-size:12px;}
+.util-tbl .grp .arrow{display:inline-block;transition:transform 0.2s;font-size:10px;margin-right:6px;color:var(--t3);}
+.util-tbl .grp.open .arrow{transform:rotate(90deg);}
+.util-tbl .child{background:var(--bg1);}
+.util-tbl .child td{padding-left:34px;font-size:12px;color:var(--t2);}
+.util-tbl .child.hidden{display:none;}
+.pct-bar{display:inline-block;height:6px;border-radius:3px;min-width:2px;}
+
+.footer{text-align:center;font-size:10px;color:var(--t4);padding-top:20px;border-top:1px solid var(--bdr);margin-top:12px;}
+
+/* DOCS PANEL */
+.docs-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:999;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.docs-overlay.open{opacity:1;pointer-events:auto;}
+.docs-panel{position:fixed;top:0;right:0;bottom:0;width:520px;max-width:90vw;background:var(--bg1);border-left:1px solid var(--bdr);box-shadow:-4px 0 24px rgba(0,0,0,0.08);z-index:1000;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;padding:0;}
+.docs-panel.open{transform:translateX(0);}
+.docs-header{position:sticky;top:0;background:var(--bg1);padding:20px 24px 16px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:flex-start;z-index:2;}
+.docs-header h2{font-size:16px;font-weight:700;color:var(--t1);}
+.docs-header .docs-sub{font-size:11px;color:var(--t3);margin-top:2px;}
+.docs-close{background:none;border:1px solid var(--bdr);border-radius:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t3);font-size:16px;font-family:inherit;transition:all 0.15s;}
+.docs-close:hover{background:var(--bg3);color:var(--t1);}
+.docs-body{padding:20px 24px 40px;}
+.docs-section{margin-bottom:28px;}
+.docs-section h3{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.docs-section h3 .doc-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.docs-section h3 .doc-icon.blue{background:var(--int-bg);color:var(--int);}
+.docs-section h3 .doc-icon.green{background:rgba(56,161,105,0.08);color:var(--ok);}
+.docs-section h3 .doc-icon.amber{background:rgba(214,158,46,0.08);color:var(--warn);}
+.docs-section h3 .doc-icon.red{background:rgba(229,62,62,0.08);color:var(--crit);}
+.docs-section p{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:8px;}
+.docs-section .doc-rule{padding:10px 12px;background:var(--bg2);border:1px solid var(--bdr);border-radius:6px;margin:8px 0;font-size:11.5px;color:var(--t2);line-height:1.6;}
+.docs-section .doc-rule strong{color:var(--t1);}
+.docs-section .doc-rule code{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg3);padding:1px 5px;border-radius:3px;color:var(--int);}
+.doc-table{width:100%;border-collapse:collapse;font-size:11px;margin:8px 0;}
+.doc-table th{background:var(--bg2);color:var(--t3);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;padding:7px 10px;text-align:left;border-bottom:1px solid var(--bdr);}
+.doc-table td{padding:7px 10px;border-bottom:1px solid var(--bdr);color:var(--t2);}
+
+/* HELP ICON */
+.help-btn{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--bdr);border-radius:6px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;color:var(--t3);transition:all 0.15s;}
+.help-btn:hover{background:var(--bg3);color:var(--t1);border-color:var(--bdr2);}
+.help-btn svg{width:14px;height:14px;}
+
+@media(max-width:900px){.kpi-row{grid-template-columns:1fr;}.focus-grid{grid-template-columns:1fr;}}
+</style>
 </head>
-<body>Redirecting...</body>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="top-bar">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <h1>Product Adoption</h1>
+    <button class="help-btn" onclick="openDocs()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Methodology
+    </button>
+  </div>
+  <div class="acct">
+    <div class="acct-name">Acme Corporation</div>
+    <div class="acct-meta">Enterprise &bull; $4.2M Total ACV &bull; Cloud &bull; Data as of Jan 2026</div>
+  </div>
+</div>
+
+<!-- VALUE STATEMENT -->
+<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:16px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;">
+  <div style="width:28px;height:28px;border-radius:6px;background:var(--int-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--int)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+  </div>
+  <div>
+    <p style="font-size:12px;font-weight:700;color:var(--int);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px;">What This Page Does For You</p>
+    <p style="font-size:13px;color:var(--t1);line-height:1.65;margin-bottom:6px;">I open one page and within a minute I know where this account stands — what's working, what's stuck, and the three things I should go after first based on where the money is.</p>
+    <p style="font-size:13px;color:var(--t2);line-height:1.65;">When I need to prep for a QBR or a renewal conversation, I'm not jumping between three dashboards trying to piece it together. The story is already there, the data backs it up, and I can explain how every number was calculated if someone asks.</p>
+  </div>
+</div>
+
+<!-- 1. VERDICT -->
+<div class="verdict amber">
+  <div class="verdict-label"><span class="dot"></span>Product Health Summary</div>
+  <p>Acme has <strong>strong ITSM core engagement</strong> (Incident and Change at High Use, 92% NLU) but <strong>3 critical apps remain undeployed</strong> on their highest-value BU, driving a <strong>38% weighted undeployed score</strong>. CSM adoption has stalled — 38% NLU with flat activity for 12 months. The <strong>$2.8M ITSM BU accounts for 70% of the undeployed risk</strong> due to ACV weighting. HRSD is the bright spot: fully deployed, NLU at 106%. Immediate focus: CMDB Health, Event Management, and CSM Workspace.</p>
+</div>
+
+<!-- 2. KPIs -->
+<div class="sec"><span class="sec-title">Key Metrics</span><span class="sec-line"></span></div>
+<div class="kpi-row">
+  <div class="kpi a">
+    <div class="kpi-label">ACV-Weighted Undeployed % (Critical Apps)</div>
+    <div class="kpi-val" style="color:var(--warn);">38%</div>
+    <div class="kpi-sub"><span class="dn">&#9660; 4%</span> vs prior month &bull; <b>$1.6M</b> in undeployed ACV</div>
+  </div>
+  <div class="kpi g">
+    <div class="kpi-label">Net License Utilization (Dollarized)</div>
+    <div class="kpi-val" style="color:var(--ok);">87%</div>
+    <div class="kpi-sub"><span class="up">&#9650; 3%</span> vs prior month &bull; 8 meters, $4.2M purchased</div>
+  </div>
+  <div class="kpi b">
+    <div class="kpi-label">Critical Apps Deployed</div>
+    <div class="kpi-val" style="color:var(--int);">9 <span style="font-size:16px;color:var(--t3);font-weight:400;">/ 14</span></div>
+    <div class="kpi-sub"><b>3 undeployed</b> (past grace) &bull; 2 within 180-day grace</div>
+  </div>
+</div>
+
+<!-- 3. FOCUS AREAS -->
+<div class="sec"><span class="sec-title">Where to Focus</span><span class="sec-line"></span></div>
+<div class="focus-grid">
+  <div class="focus-card">
+    <div class="focus-num">1</div>
+    <div class="fc-title">CMDB Health <span class="risk-tag focus">Undeployed</span></div>
+    <div class="fc-bu">ITSM &bull; $2.8M ACV BU &bull; Licensed Aug 2023</div>
+    <div class="fc-why">Plugin activated, zero health checks running. Critical App on the highest-ACV BU — single largest contributor to the 38% undeployed score.</div>
+  </div>
+  <div class="focus-card">
+    <div class="focus-num">2</div>
+    <div class="fc-title">Event Management <span class="risk-tag focus">Undeployed</span></div>
+    <div class="fc-bu">ITOM &bull; $680K ACV BU &bull; Licensed Oct 2024</div>
+    <div class="fc-why">Discovery is at High Use but Event Management hasn't been configured. Likely blocked on monitoring tool integration.</div>
+  </div>
+  <div class="focus-card">
+    <div class="focus-num">3</div>
+    <div class="fc-title">CSM Workspace <span class="risk-tag focus">Stalled</span></div>
+    <div class="fc-bu">CSM &bull; $200K ACV BU &bull; Licensed Jan 2025</div>
+    <div class="fc-why">Entire CSM BU stalled — 38% NLU, flat activity 12 months. Needs enablement push or executive re-alignment on use case.</div>
+  </div>
+  <div class="focus-card warn">
+    <div class="focus-num">4</div>
+    <div class="fc-title">App Engine Units <span class="risk-tag watch">20% NLU</span></div>
+    <div class="fc-bu">Platform &bull; $60K meter value</div>
+    <div class="fc-why">Purchased App Engine capacity, barely consuming it. Enablement opportunity or speculative buy that may not renew.</div>
+  </div>
+</div>
+
+<!-- 4. BU BREAKDOWN -->
+<div class="sec"><span class="sec-title">Business Unit Breakdown</span><span class="sec-line"></span></div>
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--ok);"></div>High Use</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--teal);"></div>Medium Use</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--warn);"></div>Low Use</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--crit);opacity:0.6;"></div>Activated No Use</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--t4);opacity:0.4;"></div>Not In Use</div>
+</div>
+<table class="tbl">
+  <thead>
+    <tr><th>Business Unit</th><th class="r">ACV</th><th class="c">Apps</th><th>Usage Distribution</th><th class="r">Undeployed %</th><th>NLU</th><th class="c">18-Mo Trend</th><th>Signal</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:700;">ITSM</td><td class="r">$2.8M</td><td class="c">6</td>
+      <td><div class="sbar"><div class="h" style="width:33%;"></div><div class="m" style="width:17%;"></div><div class="l" style="width:17%;"></div><div class="n" style="width:17%;"></div><div class="x" style="width:16%;"></div></div></td>
+      <td class="r" style="color:var(--warn);font-weight:700;">33%</td>
+      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:92%;background:var(--ok);"></div></div><span class="nlu-v" style="color:var(--ok);">92%</span></div></td>
+      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:10px;background:var(--ok);"></div><div style="height:12px;background:var(--ok);"></div><div style="height:14px;background:var(--ok);"></div><div style="height:13px;background:var(--ok);"></div><div style="height:16px;background:var(--ok);"></div><div style="height:15px;background:var(--ok);"></div><div style="height:18px;background:var(--ok);"></div><div style="height:17px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:19px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div></div></td>
+      <td><span class="risk-tag watch">2 critical undeployed</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;">ITOM</td><td class="r">$680K</td><td class="c">4</td>
+      <td><div class="sbar"><div class="h" style="width:25%;"></div><div class="l" style="width:25%;"></div><div class="n" style="width:25%;"></div><div class="x" style="width:25%;"></div></div></td>
+      <td class="r" style="color:var(--crit);font-weight:700;">50%</td>
+      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:64%;background:var(--warn);"></div></div><span class="nlu-v" style="color:var(--warn);">64%</span></div></td>
+      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:8px;background:var(--t4);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:8px;background:var(--crit);"></div><div style="height:6px;background:var(--crit);"></div><div style="height:7px;background:var(--t4);"></div><div style="height:9px;background:var(--ok);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:9px;background:var(--t4);"></div><div style="height:7px;background:var(--crit);"></div><div style="height:8px;background:var(--t4);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:12px;background:var(--ok);"></div></div></td>
+      <td><span class="risk-tag focus">1 critical undeployed</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;">HRSD</td><td class="r">$520K</td><td class="c">3</td>
+      <td><div class="sbar"><div class="h" style="width:33%;"></div><div class="m" style="width:34%;"></div><div class="m" style="width:33%;"></div></div></td>
+      <td class="r" style="color:var(--ok);font-weight:700;">0%</td>
+      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:100%;background:var(--int);"></div></div><span class="nlu-v" style="color:var(--int);">106%</span></div></td>
+      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:10px;background:var(--ok);"></div><div style="height:14px;background:var(--ok);"></div><div style="height:16px;background:var(--ok);"></div><div style="height:18px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div></div></td>
+      <td><span class="risk-tag on-track">Fully deployed</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;">CSM</td><td class="r">$200K</td><td class="c">2</td>
+      <td><div class="sbar"><div class="l" style="width:50%;"></div><div class="n" style="width:50%;"></div></div></td>
+      <td class="r" style="color:var(--crit);font-weight:700;">50%</td>
+      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:38%;background:var(--crit);"></div></div><span class="nlu-v" style="color:var(--crit);">38%</span></div></td>
+      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:4px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:3px;background:var(--crit);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:3px;background:var(--crit);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:5px;background:var(--t4);"></div></div></td>
+      <td><span class="risk-tag focus">Stalled adoption</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 5. APPLICATION DETAIL -->
+<div class="sec"><span class="sec-title">Application Detail</span><span class="sec-line"></span></div>
+<div class="toggle-row">
+  <div class="toggle">
+    <button class="toggle-btn active" onclick="toggleApps(this,'critical')">Critical Apps</button>
+    <button class="toggle-btn" onclick="toggleApps(this,'all')">All Licensed Apps</button>
+  </div>
+  <span class="filter-hint" id="app-count">Showing 14 critical applications</span>
+</div>
+<div style="overflow-x:auto;">
+<table class="tbl" id="app-table">
+  <thead>
+    <tr><th>Application</th><th>BU</th><th class="c">Usage</th><th>Activity Metric</th><th class="r">Most Recent</th><th class="c">% YOY</th><th>Licensed</th><th>First Use</th><th>Partner</th><th>Signal</th></tr>
+  </thead>
+  <tbody id="app-body"></tbody>
+</table>
+</div>
+
+<!-- 6. UTILIZATION (matching CSP mock) -->
+<div class="sec"><span class="sec-title">License Utilization</span><span class="sec-line"></span></div>
+<div class="util-wrap">
+  <div class="util-header">
+    <h3>Utilization <span style="font-weight:400;color:var(--t3);font-size:12px;"> &mdash; Business unit totals breakdown</span></h3>
+    <div class="toggle" id="util-toggle">
+      <button class="toggle-btn active" onclick="toggleUtil(this,'bu')">By BU</button>
+      <button class="toggle-btn" onclick="toggleUtil(this,'meter')">By Meter</button>
+    </div>
+  </div>
+  <div id="util-bu">
+  <table class="util-tbl">
+    <thead><tr><th>BU</th><th class="r">Net Value</th><th class="r">% Net License</th><th class="r">% Underutilization</th><th class="r">% Overutilization</th></tr></thead>
+    <tbody>
+      <tr class="grp open" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Technology Workflow</td><td class="r" style="font-weight:600;">$3,480K</td><td class="r">78%</td><td class="r" style="color:var(--crit);">-22%</td><td class="r">0</td></tr>
+      <tr class="child"><td>ITSM</td><td class="r">$2,800K</td><td class="r">92%</td><td class="r" style="color:var(--ok);">-8%</td><td class="r">0</td></tr>
+      <tr class="child"><td>ITOM</td><td class="r">$680K</td><td class="r">64%</td><td class="r" style="color:var(--crit);">-36%</td><td class="r">0</td></tr>
+      <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Core Business</td><td class="r" style="font-weight:600;">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">6%</td></tr>
+      <tr class="child hidden"><td>HRSD</td><td class="r">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">6%</td></tr>
+      <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>CRM and Industry</td><td class="r" style="font-weight:600;">$200K</td><td class="r">38%</td><td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td></tr>
+      <tr class="child hidden"><td>CSM</td><td class="r">$200K</td><td class="r">38%</td><td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div id="util-meter" style="display:none;">
+  <table class="util-tbl">
+    <thead><tr><th>Meter Type</th><th class="r">Purchased ($)</th><th class="r">Consumed ($)</th><th class="r">NLU %</th><th class="r">Gap</th></tr></thead>
+    <tbody>
+      <tr><td>Fulfiller Users</td><td class="r">$1,680K</td><td class="r">$1,596K</td><td class="r" style="font-weight:600;color:var(--ok);">95%</td><td class="r" style="color:var(--ok);">-$84K</td></tr>
+      <tr><td>ITIL Users</td><td class="r">$840K</td><td class="r">$890K</td><td class="r" style="font-weight:600;color:var(--int);">106%</td><td class="r" style="color:var(--int);">+$50K</td></tr>
+      <tr><td>Employee Users</td><td class="r">$520K</td><td class="r">$452K</td><td class="r" style="font-weight:600;color:var(--ok);">87%</td><td class="r">-$68K</td></tr>
+      <tr><td>Subscription Units</td><td class="r">$680K</td><td class="r">$435K</td><td class="r" style="font-weight:600;color:var(--warn);">64%</td><td class="r" style="color:var(--warn);">-$245K</td></tr>
+      <tr><td>Unrestricted Users</td><td class="r">$320K</td><td class="r">$288K</td><td class="r" style="font-weight:600;color:var(--ok);">90%</td><td class="r">-$32K</td></tr>
+      <tr><td>Portal Visits</td><td class="r">$100K</td><td class="r">$72K</td><td class="r" style="font-weight:600;color:var(--warn);">72%</td><td class="r" style="color:var(--warn);">-$28K</td></tr>
+      <tr><td>App Engine Units</td><td class="r">$60K</td><td class="r">$12K</td><td class="r" style="font-weight:600;color:var(--crit);">20%</td><td class="r" style="color:var(--crit);">-$48K</td></tr>
+      <tr style="background:var(--bg2);"><td style="font-weight:700;">Total (Weighted)</td><td class="r" style="font-weight:700;">$4,200K</td><td class="r" style="font-weight:700;">$3,745K</td><td class="r" style="font-weight:700;color:var(--ok);">87%</td><td class="r" style="font-weight:700;">-$455K</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="footer">ServiceNow Confidential &bull; Product Adoption Dashboard Prototype &bull; Sample Data &bull; Not Connected to Live Systems</div>
+</div>
+
+<script>
+const apps=[
+  {app:"Incident Management",bu:"ITSM",crit:true,usage:"H",metric:"Incidents created by user/mo",val:"16,158",yoy:2,ydir:"neg",lic:"Aug 2023",first:"Mar 2023",partner:"Cognizant",signal:"on-track"},
+  {app:"Change Management",bu:"ITSM",crit:true,usage:"H",metric:"Change requests closed/mo",val:"739",yoy:48,ydir:"neg",lic:"Aug 2023",first:"Mar 2023",partner:"Cognizant",signal:"on-track"},
+  {app:"Request Management",bu:"ITSM",crit:true,usage:"M",metric:"Service Catalog requests/mo",val:"21,145",yoy:19,ydir:"pos",lic:"Aug 2023",first:"Mar 2023",partner:"Cognizant",signal:"on-track"},
+  {app:"Problem Management",bu:"ITSM",crit:true,usage:"L",metric:"Problems created/mo",val:"22",yoy:47,ydir:"pos",lic:"Aug 2023",first:"Mar 2023",partner:"Cognizant",signal:"watch"},
+  {app:"CMDB Health",bu:"ITSM",crit:true,usage:"N",metric:"CMDB health checks/mo",val:"0",yoy:0,ydir:"flat",lic:"Aug 2023",first:"—",partner:"Cognizant",signal:"focus"},
+  {app:"Virtual Agent",bu:"ITSM",crit:true,usage:"X",metric:"VA conversations/mo",val:"0",yoy:0,ydir:"flat",lic:"Oct 2024",first:"—",partner:"—",signal:"grace"},
+  {app:"Discovery",bu:"ITOM",crit:true,usage:"H",metric:"CIs discovered/mo",val:"48,200",yoy:12,ydir:"pos",lic:"Oct 2024",first:"Dec 2024",partner:"Cognizant",signal:"on-track"},
+  {app:"Service Mapping",bu:"ITOM",crit:true,usage:"L",metric:"Services mapped/mo",val:"14",yoy:0,ydir:"flat",lic:"Oct 2024",first:"Jan 2025",partner:"Cognizant",signal:"watch"},
+  {app:"Event Management",bu:"ITOM",crit:true,usage:"N",metric:"Events processed/mo",val:"0",yoy:0,ydir:"flat",lic:"Oct 2024",first:"—",partner:"—",signal:"focus"},
+  {app:"HR Case Management",bu:"HRSD",crit:true,usage:"H",metric:"HR Cases created/mo",val:"6,274",yoy:103,ydir:"pos",lic:"Apr 2023",first:"May 2023",partner:"Cognizant",signal:"on-track"},
+  {app:"Employee Center",bu:"HRSD",crit:true,usage:"M",metric:"EC Pro monthly searches",val:"76",yoy:98,ydir:"neg",lic:"Apr 2023",first:"—",partner:"—",signal:"on-track"},
+  {app:"Lifecycle Management",bu:"HRSD",crit:true,usage:"M",metric:"Lifecycle events/mo",val:"340",yoy:22,ydir:"pos",lic:"Apr 2023",first:"Mar 2024",partner:"—",signal:"on-track"},
+  {app:"CSM Workspace",bu:"CSM",crit:true,usage:"N",metric:"CSM cases managed/mo",val:"0",yoy:0,ydir:"flat",lic:"Jan 2025",first:"—",partner:"—",signal:"focus"},
+  {app:"Now Assist",bu:"Account",crit:true,usage:"X",metric:"AI interactions/mo",val:"0",yoy:0,ydir:"flat",lic:"Sep 2025",first:"—",partner:"—",signal:"grace"},
+  {app:"Performance Analytics",bu:"ITSM",crit:false,usage:"H",metric:"PA indicators on fact tables",val:"10,866",yoy:17,ydir:"pos",lic:"Aug 2023",first:"—",partner:"—",signal:"on-track"},
+  {app:"SOW Applications",bu:"ITSM",crit:false,usage:"M",metric:"Total transactions in SOW",val:"1,193,592",yoy:16,ydir:"pos",lic:"Aug 2023",first:"Sep 2024",partner:"—",signal:"on-track"},
+  {app:"Hardware Asset Mgmt",bu:"Asset Mgmt",crit:false,usage:"L",metric:"HW normalization status",val:"1,378",yoy:4,ydir:"pos",lic:"Sep 2023",first:"Feb 2024",partner:"Cognizant",signal:"watch"},
+  {app:"Employee Journey Mgmt",bu:"HRSD",crit:false,usage:"L",metric:"Journey events/mo",val:"12",yoy:0,ydir:"flat",lic:"Apr 2023",first:"Mar 2024",partner:"—",signal:"watch"},
+  {app:"Cloud Encryption",bu:"AI Platform",crit:false,usage:"H",metric:"Encryption status",val:"1",yoy:0,ydir:"pos",lic:"Oct 2024",first:"Dec 2024",partner:"—",signal:"on-track"},
+  {app:"Impact-in-Platform",bu:"Impact",crit:false,usage:"L",metric:"Impact interactions/mo",val:"520",yoy:0,ydir:"flat",lic:"Sep 2024",first:"—",partner:"—",signal:"watch"},
+];
+const sigMap={focus:{c:"focus",t:"Focus"},watch:{c:"watch",t:"Watch"},"on-track":{c:"on-track",t:"On Track"},grace:{c:"grace",t:"180d Grace"}};
+const order={N:0,X:1,L:2,M:3,H:4};
+
+function renderApps(f){
+  const list=f==='critical'?apps.filter(a=>a.crit):apps;
+  document.getElementById('app-count').textContent=f==='critical'?`Showing ${list.length} critical applications`:`Showing all ${list.length} licensed applications`;
+  const groups={};list.forEach(a=>{if(!groups[a.bu])groups[a.bu]=[];groups[a.bu].push(a);});
+  Object.values(groups).forEach(g=>g.sort((a,b)=>(order[a.usage]||9)-(order[b.usage]||9)));
+  let h='';
+  for(const[bu,al]of Object.entries(groups)){
+    h+=`<tr class="bu-group"><td colspan="10">${bu}</td></tr>`;
+    al.forEach(a=>{
+      const y=a.yoy===0?'<span class="yoy flat">—</span>':a.ydir==='pos'?`<span class="yoy pos">&#9650; ${a.yoy}%</span>`:`<span class="yoy neg">&#9660; ${a.yoy}%</span>`;
+      const s=sigMap[a.signal]||{c:'',t:''};
+      const fu=a.first==='—'?'color:var(--crit);font-weight:600;':'color:var(--t2);';
+      h+=`<tr><td style="font-weight:500;padding-left:20px;">${a.app}</td><td style="color:var(--t3);font-size:11px;">${a.bu}</td><td class="c"><span class="ubadge ${a.usage}">${a.usage}</span></td><td style="font-size:11px;color:var(--t3);">${a.metric}</td><td class="r" style="font-family:'JetBrains Mono',monospace;font-size:11px;">${a.val}</td><td class="c">${y}</td><td style="font-size:11px;color:var(--t3);">${a.lic}</td><td style="font-size:11px;${fu}">${a.first}</td><td style="font-size:11px;color:var(--t3);">${a.partner}</td><td><span class="risk-tag ${s.c}">${s.t}</span></td></tr>`;
+    });
+  }
+  document.getElementById('app-body').innerHTML=h;
+}
+function toggleApps(btn,f){document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderApps(f);}
+
+function toggleGroup(row){
+  row.classList.toggle('open');
+  let next=row.nextElementSibling;
+  while(next&&next.classList.contains('child')){
+    next.classList.toggle('hidden');
+    next=next.nextElementSibling;
+  }
+}
+
+function toggleUtil(btn,view){
+  btn.parentElement.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('util-bu').style.display=view==='bu'?'block':'none';
+  document.getElementById('util-meter').style.display=view==='meter'?'block':'none';
+}
+
+renderApps('critical');
+</script>
+<!-- DOCS OVERLAY + PANEL -->
+<div class="docs-overlay" id="docsOverlay" onclick="closeDocs()"></div>
+<div class="docs-panel" id="docsPanel">
+  <div class="docs-header">
+    <div>
+      <h2>How This Dashboard Works</h2>
+      <div class="docs-sub">Methodology, logic, and data sources behind each section</div>
+    </div>
+    <button class="docs-close" onclick="closeDocs()">&times;</button>
+  </div>
+  <div class="docs-body">
+
+    <div class="docs-section">
+      <h3><span class="doc-icon amber">1</span>Product Health Summary</h3>
+      <p>The summary at the top is a plain-English narrative synthesized from the underlying metrics. It's designed to give a CSM the full picture in 15 seconds. Here's how each statement is derived:</p>
+      <div class="doc-rule">
+        <strong>Engagement assessment</strong> — driven by Usage Levels of critical apps on the highest-ACV BU. If the majority of critical apps on the largest BU are at High or Medium Use, engagement is "strong." If most are Low Use or Undeployed, it's "weak."
+      </div>
+      <div class="doc-rule">
+        <strong>Undeployed risk callout</strong> — triggered when any critical app is past the 180-day grace period and still classified as Undeployed (Activated - No Use or Not In Use). The ACV-weighted contribution is calculated as:<br><br>
+        <code>BU Undeployed % x BU ACV / Total ACV</code><br><br>
+        This surfaces which BU is driving the most dollar-weighted risk. In this example, ITSM's 33% undeployed on $2.8M ACV = $924K undeployed, which is 70% of the total $1.3M undeployed ACV.
+      </div>
+      <div class="doc-rule">
+        <strong>Stalled adoption flag</strong> — triggered when a BU shows NLU below 50% AND activity trend is flat or declining for 6+ consecutive months. Both conditions must be true — low NLU alone could mean a new BU still ramping.
+      </div>
+      <div class="doc-rule">
+        <strong>Bright spot identification</strong> — any BU with 0% undeployed, NLU above 80%, and an upward activity trend is called out as a positive signal.
+      </div>
+      <div class="doc-rule">
+        <strong>Health color (amber/red/green)</strong> — determined by the worst signal across the three KPIs:
+        <br>&#8226; <strong style="color:var(--ok);">Green:</strong> Undeployed &lt; 20%, NLU &gt; 75%, no critical apps undeployed past grace
+        <br>&#8226; <strong style="color:var(--warn);">Amber:</strong> Undeployed 20-50% OR NLU 50-75% OR 1-3 critical apps undeployed
+        <br>&#8226; <strong style="color:var(--crit);">Red:</strong> Undeployed &gt; 50% OR NLU &lt; 50% OR 4+ critical apps undeployed
+      </div>
+    </div>
+
+    <div class="docs-section">
+      <h3><span class="doc-icon red">2</span>Where to Focus (Prioritization Logic)</h3>
+      <p>Focus areas are ranked by a weighted priority score combining three factors:</p>
+      <div class="doc-rule">
+        <strong>Priority Score</strong> = (ACV Weight x 0.5) + (Critical App Flag x 0.3) + (Time Past Grace x 0.2)
+        <br><br>
+        <strong>ACV Weight:</strong> BU ACV as a % of total account ACV. Higher-value BUs rank higher.<br>
+        <strong>Critical App Flag:</strong> 1 if the app is in the 53 critical apps list, 0 otherwise.<br>
+        <strong>Time Past Grace:</strong> Months past the 180-day grace period, normalized. Longer-neglected apps rank higher.
+      </div>
+      <p>The "why it matters" narrative on each card is derived from:</p>
+      <div class="doc-rule">
+        <strong>Deployment status</strong> — Is the plugin activated? Is there any raw signal in the Customer Usage Dashboard?<br>
+        <strong>BU context</strong> — Are sibling apps in the same BU deployed? (e.g., Discovery is High Use but Event Management is undeployed = likely integration blocker, not awareness issue)<br>
+        <strong>NLU cross-reference</strong> — If BU NLU is also low, the issue is broader than one app (entire BU stalled vs. single app missed)
+      </div>
+    </div>
+
+    <div class="docs-section">
+      <h3><span class="doc-icon blue">3</span>Key Metrics</h3>
+      <table class="doc-table">
+        <thead><tr><th>Metric</th><th>Formula</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:600;">ACV-Weighted Undeployed %</td><td>Sum of (BU Undeployed % x BU ACV) / Total Account ACV. Only counts critical apps, only after 180-day grace period.</td><td>Usage telemetry + entitlement data</td></tr>
+          <tr><td style="font-weight:600;">Net License Utilization</td><td>Sum of (Meter $ Consumed) / Sum of (Meter $ Purchased) x 100. Dollarized across 20+ meter types. Can exceed 100% (over-consumption).</td><td>Licensing + consumption data</td></tr>
+          <tr><td style="font-weight:600;">Critical Apps Deployed</td><td>Count of critical apps with Usage Level = Deployed (High, Medium, or Low Use) / Total entitled critical apps. Grace = licensed less than 180 days ago.</td><td>Usage telemetry + critical apps list (53 apps, signed off by BU GMs)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="docs-section">
+      <h3><span class="doc-icon green">4</span>Signal Definitions</h3>
+      <p>Signals on the BU table and Application table follow these rules:</p>
+      <table class="doc-table">
+        <thead><tr><th>Signal</th><th>Criteria</th></tr></thead>
+        <tbody>
+          <tr><td><span class="risk-tag focus">Focus</span></td><td>Critical app is Undeployed (Activated - No Use or Not In Use) and past 180-day grace. OR: BU has NLU &lt; 50% with flat/declining activity for 6+ months.</td></tr>
+          <tr><td><span class="risk-tag watch">Watch</span></td><td>App is at Low Use, or NLU meter is between 50-70%, or activity trend is declining but not yet flat for 6 months.</td></tr>
+          <tr><td><span class="risk-tag on-track">On Track</span></td><td>App is at Medium or High Use, NLU &gt; 70%, activity trend stable or growing.</td></tr>
+          <tr><td><span class="risk-tag grace">180d Grace</span></td><td>App was licensed less than 180 days ago. Not yet counted in undeployed calculations. Monitoring only.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="docs-section">
+      <h3><span class="doc-icon blue">5</span>Usage Level Badges</h3>
+      <p>Each application is assigned a Usage Level based on BU-defined definitions. These definitions set thresholds against telemetry data (e.g., transactions closed, records created). Some definitions normalize for customer size, others use absolute thresholds — always check the specific definition.</p>
+      <table class="doc-table">
+        <thead><tr><th>Badge</th><th>Level</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ubadge H">H</span></td><td>High Use</td><td>Volume exceeds highest threshold. Strong engagement.</td></tr>
+          <tr><td><span class="ubadge M">M</span></td><td>Medium Use</td><td>Volume meets mid-range threshold. Healthy with growth room.</td></tr>
+          <tr><td><span class="ubadge L">L</span></td><td>Low Use</td><td>Volume barely meets minimum. Early-stage or declining.</td></tr>
+          <tr><td><span class="ubadge N">N</span></td><td>Never Used</td><td>Plugin activated but zero transactional activity.</td></tr>
+          <tr><td><span class="ubadge X">X</span></td><td>Not In Use</td><td>Plugin not installed or activated. Expansion opportunity.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="docs-section">
+      <h3><span class="doc-icon amber">6</span>Utilization Table</h3>
+      <p>The Utilization section offers two views:</p>
+      <div class="doc-rule">
+        <strong>By BU:</strong> Grouped by BU Workflow (e.g., Technology Workflow contains ITSM + ITOM). Shows Net Value (ACV), % Net License utilization, % Underutilization (negative = unused capacity), and % Overutilization (positive = over-consumption). Expandable groups let you drill from workflow to individual BU.
+      </div>
+      <div class="doc-rule">
+        <strong>By Meter:</strong> Shows each licensing meter type (Fulfiller Users, ITIL Users, Subscription Units, etc.) with dollarized Purchased vs. Consumed values. The Gap column shows the dollar delta — negative means unused capacity, positive means over-consumption. NLU can exceed 100% when more licenses are being consumed than purchased.
+      </div>
+    </div>
+
+    <div class="docs-section">
+      <h3><span class="doc-icon blue">7</span>Known Limitations</h3>
+      <div class="doc-rule">
+        <strong>On-premises customers:</strong> No telemetry data available. Shows as "Not Measurable."<br>
+        <strong>Regulated markets:</strong> US-based (including GCC) are measurable. Non-US regulated are currently not.<br>
+        <strong>Multi-instance:</strong> Usage reflects the highest-activity instance at account level, not an aggregate.<br>
+        <strong>Size normalization:</strong> Varies by application — some definitions adjust for customer size, others use absolute thresholds.<br>
+        <strong>Pre-fix / Post-fix:</strong> NLU may not appear for subset BUs when licenses were sold as a bundled SKU. The coverage exists but isn't always visible at the subset level.<br>
+        <strong>Trend data:</strong> Up to 18 months of monthly trend data available in PowerBI.
+      </div>
+    </div>
+
+    <div class="docs-section" style="margin-bottom:0;">
+      <h3><span class="doc-icon green">8</span>Data Sources & Resources</h3>
+      <div class="doc-rule">
+        <strong>Telemetry:</strong> Monthly collection from customer production instances, processed against BU-defined definitions.<br>
+        <strong>Critical Apps list:</strong> 53 applications (52 BU + 1 Now Assist), signed off by BU & WF GMs and STEP-CEG leadership (Dec 2025).<br>
+        <strong>ACV / Licensing:</strong> Entitlement and contract data.<br><br>
+        <a href="https://app.powerbi.com/groups/me/apps/e7a9ec59-ba43-434e-a776-a4054704b1f6/reports/359372cf-39ac-4fcd-a397-7b39e7e125bb/ReportSectionf35666a2c84bcdcb0983?experience=power-bi" target="_blank" style="color:var(--int);font-weight:500;text-decoration:none;">Customer Dashboard (Overview & Products)</a><br>
+        <a href="https://app.powerbi.com/groups/me/apps/1bdd0788-7b8c-4bff-81e6-0e37959750a4/reports/e4803f43-0b28-4119-ad0b-1766cb961148/56473a3243dd04b02891?experience=power-bi&bookmarkGuid=1fe0625a91adedd38cab" target="_blank" style="color:var(--int);font-weight:500;text-decoration:none;">License Utilization & Critical Insights</a><br>
+        <a href="https://app.powerbi.com/groups/d82c337f-9e77-4448-b7f3-5b8460510bf8/reports/3d7adc61-0040-4d0f-a159-f4e47eaa05b2/ReportSection?experience=power-bi" target="_blank" style="color:var(--int);font-weight:500;text-decoration:none;">Usage Definitions & Critical Apps Dashboard</a><br>
+        <a href="https://servicenow.sharepoint.com/sites/criticalandemergingfunctionality" target="_blank" style="color:var(--int);font-weight:500;text-decoration:none;">Critical & Emerging Functionality SharePoint</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function openDocs(){document.getElementById('docsOverlay').classList.add('open');document.getElementById('docsPanel').classList.add('open');document.body.style.overflow='hidden';}
+function closeDocs(){document.getElementById('docsOverlay').classList.remove('open');document.getElementById('docsPanel').classList.remove('open');document.body.style.overflow='';}
+</script>
+</body>
 </html>
