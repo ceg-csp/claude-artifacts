@@ -145,6 +145,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-web
 
 .footer{text-align:center;font-size:10px;color:var(--t4);padding-top:20px;border-top:1px solid var(--bdr);margin-top:12px;}
 
+/* REPORT ISSUE BUTTON */
+.report-btn{display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--bdr);border-radius:5px;padding:4px 10px;cursor:pointer;font-family:inherit;font-size:10px;font-weight:600;color:var(--t3);transition:all 0.15s;text-decoration:none;}
+.report-btn:hover{background:var(--bg3);color:var(--crit);border-color:var(--crit);}
+.report-btn svg{width:12px;height:12px;}
+.sec-actions{display:flex;align-items:center;gap:8px;margin-left:auto;}
+
+/* COLLAPSIBLE */
+.collapsible-header{cursor:pointer;user-select:none;}
+.collapsible-header .chevron{display:inline-block;transition:transform 0.2s;font-size:10px;color:var(--t4);margin-left:6px;}
+.collapsible-header.collapsed .chevron{transform:rotate(-90deg);}
+.collapsible-body.collapsed{display:none;}
+
+/* WIDGET */
+.widget{background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;box-shadow:var(--card-shadow);overflow:hidden;margin-bottom:20px;}
+.widget-header{padding:12px 16px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);}
+.widget-header h3{font-size:13px;font-weight:700;color:var(--t1);}
+.widget-header .widget-count{font-size:11px;font-weight:400;color:var(--t3);margin-left:8px;}
+.widget-body{max-height:420px;overflow-y:auto;overflow-x:auto;}
+.widget-body .tbl{margin-bottom:0;border:none;border-radius:0;box-shadow:none;}
+.widget-body .tbl th{position:sticky;top:0;z-index:2;}
+
+/* TABS (ServiceNow style) */
+.sn-tabs{display:flex;border-bottom:2px solid var(--bdr);margin-bottom:0;}
+.sn-tab{padding:10px 20px;font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.sn-tab:hover{color:var(--t1);}
+.sn-tab.active{color:var(--int);border-bottom-color:var(--int);}
+.tab-body{display:none;}
+.tab-body.active{display:block;}
+
 /* DOCS PANEL */
 .docs-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:999;opacity:0;pointer-events:none;transition:opacity 0.25s;}
 .docs-overlay.open{opacity:1;pointer-events:auto;}
@@ -211,7 +240,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-web
 
 <!-- 1. VERDICT -->
 <div class="verdict amber">
-  <div class="verdict-label"><span class="dot"></span>Product Health Summary</div>
+  <div class="verdict-label"><span class="dot"></span>Product Adoption Summary</div>
   <p>Acme has <strong>strong ITSM core engagement</strong> (Incident and Change at High Use, 92% NLU) but <strong>3 critical apps remain undeployed</strong> on their highest-value BU, driving a <strong>38% weighted undeployed score</strong>. CSM adoption has stalled — 38% NLU with flat activity for 12 months. The <strong>$2.8M ITSM BU accounts for 70% of the undeployed risk</strong> due to ACV weighting. HRSD is the bright spot: fully deployed, NLU at 106%. Immediate focus: CMDB Health, Event Management, and CSM Workspace.</p>
 </div>
 
@@ -313,64 +342,81 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-web
   </tbody>
 </table>
 
-<!-- 5. APPLICATION DETAIL -->
-<div class="sec"><span class="sec-title">Application Detail</span><span class="sec-line"></span></div>
-<div class="toggle-row">
-  <div class="toggle">
-    <button class="toggle-btn active" onclick="toggleApps(this,'critical')">Critical Apps</button>
-    <button class="toggle-btn" onclick="toggleApps(this,'all')">All Licensed Apps</button>
-  </div>
-  <span class="filter-hint" id="app-count">Showing 14 critical applications</span>
-</div>
-<div style="overflow-x:auto;">
-<table class="tbl" id="app-table">
-  <thead>
-    <tr><th>Application</th><th>BU</th><th class="c">Usage</th><th>Activity Metric</th><th class="r">Most Recent</th><th class="c">% YOY</th><th>Licensed</th><th>First Use</th><th>Partner</th><th>Signal</th></tr>
-  </thead>
-  <tbody id="app-body"></tbody>
-</table>
-</div>
-
-<!-- 6. UTILIZATION (matching CSP mock) -->
-<div class="sec"><span class="sec-title">License Utilization</span><span class="sec-line"></span></div>
-<div class="util-wrap">
-  <div class="util-header">
-    <h3>Utilization <span style="font-weight:400;color:var(--t3);font-size:12px;"> &mdash; Business unit totals breakdown</span></h3>
-    <div class="toggle" id="util-toggle">
-      <button class="toggle-btn active" onclick="toggleUtil(this,'bu')">By BU</button>
-      <button class="toggle-btn" onclick="toggleUtil(this,'meter')">By Meter</button>
+<!-- 5. APPLICATION DETAIL (Widget) -->
+<div class="sec"><span class="sec-title">Application Detail</span><span class="sec-line"></span><div class="sec-actions"><a class="report-btn" href="#" title="Report a data issue with application profiles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Report Issue</a></div></div>
+<div class="widget">
+  <div class="widget-header">
+    <div style="display:flex;align-items:center;">
+      <div class="toggle" style="margin-right:12px;">
+        <button class="toggle-btn active" onclick="toggleApps(this,'critical')">Critical Apps</button>
+        <button class="toggle-btn" onclick="toggleApps(this,'all')">All Licensed Apps</button>
+      </div>
+      <span class="filter-hint" id="app-count" style="color:var(--t4);">Showing 14 critical applications</span>
     </div>
   </div>
-  <div id="util-bu">
+  <div class="widget-body">
+    <table class="tbl" id="app-table">
+      <thead>
+        <tr><th>Application</th><th>BU</th><th class="c">Usage</th><th>Activity Metric</th><th class="r">Most Recent</th><th class="c">% YOY</th><th>Licensed</th><th>First Use</th><th>Partner</th><th>Signal</th></tr>
+      </thead>
+      <tbody id="app-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 6. LICENSE UTILIZATION (Tabs) -->
+<div class="sec"><span class="sec-title collapsible-header" onclick="toggleSection('util-section',this)">License Utilization <span class="chevron">&#9660;</span></span><span class="sec-line"></span><div class="sec-actions"><a class="report-btn" href="#" title="Report a data issue with license utilization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Report Issue</a></div></div>
+<div id="util-section" class="collapsible-body">
+<div class="widget">
+  <div class="sn-tabs">
+    <button class="sn-tab active" onclick="switchTab(this,'tab-bu')">Business Unit Profile</button>
+    <button class="sn-tab" onclick="switchTab(this,'tab-sku')">Product Utilization</button>
+  </div>
+  <!-- TAB: Business Unit Profile -->
+  <div id="tab-bu" class="tab-body active" style="padding:0;">
   <table class="util-tbl">
     <thead><tr><th>BU</th><th class="r">Net Value</th><th class="r">% Net License</th><th class="r">% Underutilization</th><th class="r">% Overutilization</th></tr></thead>
     <tbody>
       <tr class="grp open" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Technology Workflow</td><td class="r" style="font-weight:600;">$3,480K</td><td class="r">78%</td><td class="r" style="color:var(--crit);">-22%</td><td class="r">0</td></tr>
       <tr class="child"><td>ITSM</td><td class="r">$2,800K</td><td class="r">92%</td><td class="r" style="color:var(--ok);">-8%</td><td class="r">0</td></tr>
       <tr class="child"><td>ITOM</td><td class="r">$680K</td><td class="r">64%</td><td class="r" style="color:var(--crit);">-36%</td><td class="r">0</td></tr>
-      <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Core Business</td><td class="r" style="font-weight:600;">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">6%</td></tr>
-      <tr class="child hidden"><td>HRSD</td><td class="r">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">6%</td></tr>
+      <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Core Business</td><td class="r" style="font-weight:600;">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">+6%</td></tr>
+      <tr class="child hidden"><td>HRSD</td><td class="r">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">+6%</td></tr>
       <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>CRM and Industry</td><td class="r" style="font-weight:600;">$200K</td><td class="r">38%</td><td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td></tr>
       <tr class="child hidden"><td>CSM</td><td class="r">$200K</td><td class="r">38%</td><td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td></tr>
     </tbody>
   </table>
   </div>
-  <div id="util-meter" style="display:none;">
+
+  <!-- TAB: Product Utilization (flat list) -->
+  <div id="tab-sku" class="tab-body" style="padding:0;max-height:420px;overflow-y:auto;">
   <table class="util-tbl">
-    <thead><tr><th>Meter Type</th><th class="r">Purchased ($)</th><th class="r">Consumed ($)</th><th class="r">NLU %</th><th class="r">Gap</th></tr></thead>
+    <thead style="position:sticky;top:0;z-index:2;"><tr><th>Business Unit</th><th>Product</th><th class="r">Purchase Date</th><th class="r">Product ACV</th><th class="r">Usage ACV</th><th class="r">% NLU</th><th class="r">% Under</th><th class="r">% Over</th></tr></thead>
     <tbody>
-      <tr><td>Fulfiller Users</td><td class="r">$1,680K</td><td class="r">$1,596K</td><td class="r" style="font-weight:600;color:var(--ok);">95%</td><td class="r" style="color:var(--ok);">-$84K</td></tr>
-      <tr><td>ITIL Users</td><td class="r">$840K</td><td class="r">$890K</td><td class="r" style="font-weight:600;color:var(--int);">106%</td><td class="r" style="color:var(--int);">+$50K</td></tr>
-      <tr><td>Employee Users</td><td class="r">$520K</td><td class="r">$452K</td><td class="r" style="font-weight:600;color:var(--ok);">87%</td><td class="r">-$68K</td></tr>
-      <tr><td>Subscription Units</td><td class="r">$680K</td><td class="r">$435K</td><td class="r" style="font-weight:600;color:var(--warn);">64%</td><td class="r" style="color:var(--warn);">-$245K</td></tr>
-      <tr><td>Unrestricted Users</td><td class="r">$320K</td><td class="r">$288K</td><td class="r" style="font-weight:600;color:var(--ok);">90%</td><td class="r">-$32K</td></tr>
-      <tr><td>Portal Visits</td><td class="r">$100K</td><td class="r">$72K</td><td class="r" style="font-weight:600;color:var(--warn);">72%</td><td class="r" style="color:var(--warn);">-$28K</td></tr>
-      <tr><td>App Engine Units</td><td class="r">$60K</td><td class="r">$12K</td><td class="r" style="font-weight:600;color:var(--crit);">20%</td><td class="r" style="color:var(--crit);">-$48K</td></tr>
-      <tr style="background:var(--bg2);"><td style="font-weight:700;">Total (Weighted)</td><td class="r" style="font-weight:700;">$4,200K</td><td class="r" style="font-weight:700;">$3,745K</td><td class="r" style="font-weight:700;color:var(--ok);">87%</td><td class="r" style="font-weight:700;">-$455K</td></tr>
+      <tr><td style="color:var(--t3);">ITSM</td><td>Approver User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$8,705K</td><td class="r">$4,386K</td><td class="r" style="font-weight:600;">50%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-53%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+3%</td></tr>
+      <tr><td style="color:var(--t3);">ITSM</td><td>ITSA Unlimited - Fulfiller User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$3,160K</td><td class="r">$2,654K</td><td class="r" style="font-weight:600;">84%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-16%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">Risk</td><td>AI Control Tower - Subscription Unit</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$2,012K</td><td class="r">$47K</td><td class="r" style="font-weight:600;">2%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-98%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">Moveworks</td><td>EmployeeWorks - User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$1,883K</td><td class="r">$0K</td><td class="r" style="color:var(--crit);font-weight:600;">0%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-100%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">ITSM</td><td>ITSA Unlimited (Including Creator)</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$864K</td><td class="r">$534K</td><td class="r" style="font-weight:600;">62%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-38%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">Source to Pay</td><td>Source To Pay Operations Pro - User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$780K</td><td class="r">$0K</td><td class="r" style="color:var(--crit);font-weight:600;">0%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-100%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">Workflow Data Fabric</td><td>Workflow Data Fabric Pro - Credit Pack</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$693K</td><td class="r">$8K</td><td class="r" style="font-weight:600;">1%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-99%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">ITOM</td><td>Cloud Observability - Subscription Unit</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$531K</td><td class="r">$577K</td><td class="r" style="font-weight:600;color:var(--int);">109%</td><td class="r">0%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+9%</td></tr>
+      <tr><td style="color:var(--t3);">HR</td><td>HR Service Delivery Enterprise - User v6</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$3,980K</td><td class="r">$0K</td><td class="r" style="color:var(--crit);font-weight:600;">0%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-100%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">ITSM</td><td>Time Card User - User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$254K</td><td class="r">$116K</td><td class="r" style="font-weight:600;">46%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-57%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+3%</td></tr>
+      <tr><td style="color:var(--t3);">ITOM</td><td>Discovery Application - Devices</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$221K</td><td class="r">$345K</td><td class="r" style="font-weight:600;color:var(--int);">156%</td><td class="r">0%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+56%</td></tr>
+      <tr><td style="color:var(--t3);">HR</td><td>HR Service Automation - Fulfiller User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$195K</td><td class="r">$235K</td><td class="r" style="font-weight:600;color:var(--int);">121%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-4%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+25%</td></tr>
+      <tr><td style="color:var(--t3);">Asset Management</td><td>Hardware Asset Mgmt Pro - Sub Unit v3</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$132K</td><td class="r">$396K</td><td class="r" style="font-weight:600;color:var(--int);">300%</td><td class="r">0%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+200%</td></tr>
+      <tr><td style="color:var(--t3);">Workflow Data Fabric</td><td>Additional Process Mining Records</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$125K</td><td class="r">$0K</td><td class="r" style="color:var(--crit);font-weight:600;">0%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-100%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">Creator App Engine</td><td>App Engine Enterprise - Fulfiller User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$60K</td><td class="r">$12K</td><td class="r" style="font-weight:600;color:var(--crit);">20%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-80%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">ITOM</td><td>Discovery Application - Servers</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$34K</td><td class="r">$22K</td><td class="r" style="font-weight:600;">63%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-37%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">ITOM</td><td>Discovery Application - Tier 1</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$9K</td><td class="r">$5K</td><td class="r" style="font-weight:600;">63%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-37%</td><td class="r">0%</td></tr>
+      <tr><td style="color:var(--t3);">AI Platform</td><td>Cloud Encryption - Application</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$0K</td><td class="r">$0K</td><td class="r" style="color:var(--t4);">—</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr><td style="color:var(--t3);">ITSM</td><td>Now Assist for Enterprise v3 - Module</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$0K</td><td class="r">$0K</td><td class="r" style="color:var(--t4);">—</td><td class="r">—</td><td class="r">—</td></tr>
     </tbody>
   </table>
   </div>
-</div>
+</div><!-- end widget -->
+</div><!-- end collapsible-body -->
 
 <div class="footer">ServiceNow Confidential &bull; Product Adoption Dashboard Prototype &bull; Sample Data &bull; Not Connected to Live Systems</div>
 </div>
@@ -429,11 +475,17 @@ function toggleGroup(row){
   }
 }
 
-function toggleUtil(btn,view){
-  btn.parentElement.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+function switchTab(btn,tabId){
+  btn.parentElement.querySelectorAll('.sn-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('util-bu').style.display=view==='bu'?'block':'none';
-  document.getElementById('util-meter').style.display=view==='meter'?'block':'none';
+  btn.closest('.widget').querySelectorAll('.tab-body').forEach(b=>b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+}
+
+function toggleSection(id,header){
+  const body=document.getElementById(id);
+  body.classList.toggle('collapsed');
+  header.classList.toggle('collapsed');
 }
 
 renderApps('critical');
@@ -451,7 +503,7 @@ renderApps('critical');
   <div class="docs-body">
 
     <div class="docs-section">
-      <h3><span class="doc-icon amber">1</span>Product Health Summary</h3>
+      <h3><span class="doc-icon amber">1</span>Product Adoption Summary</h3>
       <p>The summary at the top is a plain-English narrative synthesized from the underlying metrics. It's designed to give a CSM the full picture in 15 seconds. Here's how each statement is derived:</p>
       <div class="doc-rule">
         <strong>Engagement assessment</strong> — driven by Usage Levels of critical apps on the highest-ACV BU. If the majority of critical apps on the largest BU are at High or Medium Use, engagement is "strong." If most are Low Use or Undeployed, it's "weak."
@@ -541,7 +593,7 @@ renderApps('critical');
         <strong>By BU:</strong> Grouped by BU Workflow (e.g., Technology Workflow contains ITSM + ITOM). Shows Net Value (ACV), % Net License utilization, % Underutilization (negative = unused capacity), and % Overutilization (positive = over-consumption). Expandable groups let you drill from workflow to individual BU.
       </div>
       <div class="doc-rule">
-        <strong>By Meter:</strong> Shows each licensing meter type (Fulfiller Users, ITIL Users, Subscription Units, etc.) with dollarized Purchased vs. Consumed values. The Gap column shows the dollar delta — negative means unused capacity, positive means over-consumption. NLU can exceed 100% when more licenses are being consumed than purchased.
+        <strong>By SKU:</strong> Shows each individual product/SKU purchased by the customer, grouped by BU Workflow (collapsible). Columns: Product, Purchase Date, Product ACV (what was purchased), Usage ACV (what is being consumed), % NLU, % Under Utilization (red = unused capacity), and % Over Utilization (blue = over-consumption). NLU can exceed 100% when more licenses are consumed than purchased. SKUs with $0 ACV indicate entitled but unactivated products.
       </div>
     </div>
 
