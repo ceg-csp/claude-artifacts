@@ -56,7 +56,7 @@
     "added": "2026-04-03"
   },
   {
-    "name": "Guided CSM Agent \u2014 Acceleration Roadmap",
+    "name": "Guided CSM Agent — Acceleration Roadmap",
     "section": "Product Management",
     "desc": "Interactive acceleration roadmap for the Guided CSM Agent. Phase-by-phase build plan, milestones, JTBD/CXJ mapping, and agent details across 10 agents.",
     "tags": ["Guided CSM", "Acceleration", "Roadmap", "Agentic"],
@@ -96,5 +96,19 @@
     "color2": "var(--green)",
     "colorBg": "var(--accent-bg)",
     "added": "2026-05-07"
+  },
+  {
+    "name": "Support Intelligence Agent — Prototype",
+    "section": "Product Management",
+    "desc": "Clickable CSP prototype showing V1 support snapshot in sidebar and V2 full Support Intelligence tab with critical cases, stuck cases, upcoming changes, relationship context, and all open cases table.",
+    "tags": ["Support", "Prototype", "CSM", "CSP"],
+    "keywords": ["support intelligence", "support agent", "CSM", "CSP", "cases", "P1", "escalation", "snapshot", "prototype", "account 360", "stuck cases", "changes", "relationship context", "V1", "V2"],
+    "url": "support-intelligence-prototype/",
+    "live": true,
+    "agent": "Support Intel",
+    "color1": "var(--accent)",
+    "color2": "var(--rose)",
+    "colorBg": "var(--accent-bg)",
+    "added": "2026-05-11"
   }
 ]
