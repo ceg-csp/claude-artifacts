@@ -99,8 +99,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .case-id-link{color:#185FA5;cursor:pointer;font-weight:500}
 .age-warn{color:#E24B4A;font-weight:500}
 .age-normal{color:#666}
-.days-select{font-size:11px;color:#aaa;font-weight:400;font-family:inherit;border:none;border-bottom:1px dashed #ccc;background:transparent;cursor:pointer;padding:0 2px;line-height:1;appearance:none;-webkit-appearance:none;width:42px;text-align:center}
-.days-select:focus{outline:none;border-bottom-color:#185FA5}
+.days-wrap{display:inline-flex;align-items:center;gap:1px;border-bottom:1px dashed #bbb;cursor:pointer;padding-bottom:1px}
+.days-wrap:hover{border-bottom-color:#888}
+.days-select{font-size:11px;color:#aaa;font-weight:400;font-family:inherit;border:none;background:transparent;cursor:pointer;padding:0;margin:0;line-height:1;appearance:none;-webkit-appearance:none;width:auto;min-width:56px}
+.days-select:focus{outline:none}
+.days-caret{font-size:8px;color:#bbb;line-height:1}
 </style>
 </head>
 <body>
@@ -213,7 +216,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             </div>
           </div>
           <div>
-            <div class="section-head">Stuck cases <span class="section-sub">No activity for <select class="days-select" id="stuck-days"><option value="7">7d</option><option value="14" selected>14d</option><option value="21">21d</option><option value="30">30d</option><option value="45">45d</option></select> or more</span></div>
+            <div class="section-head">Stuck cases <span class="section-sub">No activity for <span class="days-wrap"><select class="days-select" id="stuck-days"><option value="7">7 days</option><option value="14" selected>14 days</option><option value="21">21 days</option><option value="30">30 days</option><option value="45">45 days</option></select><span class="days-caret">▾</span></span> or more</span></div>
             <div class="case-card" style="border-left:3px solid #EF9F27;border-radius:0 8px 8px 0">
               <div class="case-top"><span class="case-title">Integration timeout on HRIS sync</span><span class="pill pill-amber">P2</span></div>
               <div class="case-meta">INC0011923 · Open 18 days · Owner: <strong>Dana Cho</strong></div>
