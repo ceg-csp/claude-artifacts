@@ -13,7 +13,957 @@
     --mono:'DM Mono',monospace; --sans:'DM Sans',sans-serif;
     --amber:#f0a432; --blue:#4aa8e8; --purple:#9b82f8;
   }
+  html.light {
+    --navy:#f0f4f8; --green:#1a8a3a; --green-dk:#136b2d; --green-dim:rgba(26,138,58,0.08);
+    --track:#adc4d8; --surface:#ffffff; --card:#e8eef4; --card-h:#dde8f2;
+    --bdim:rgba(0,0,0,0.1); --white:#0d1e2d; --muted:rgba(13,30,45,0.5);
+    --amber:#a05a00; --blue:#0a5a96; --purple:#4a30a0;
+  }
+  html.light body,
+  html.light .main,
+  html.light .panel { background:#edf2f7; color:#0d1e2d; }
+  html.light .ph { background:#ffffff; border-bottom-color:rgba(0,0,0,0.12); }
+  html.light .ph h1 { color:#0d1e2d; }
+  html.light .ph p,
+  html.light .ph-r,
+  html.light .ph-r span { color:rgba(13,30,45,0.55); }
+  html.light .live { color:#1a8a3a; }
+  html.light .mode-toggle { background:#f0f4f8; border-color:rgba(0,0,0,0.15); color:rgba(13,30,45,0.6); }
+  html.light .mode-toggle:hover { border-color:#1a8a3a; color:#0d1e2d; }
+  html.light .toggle-track { background:#1a8a3a; }
+  html.light .toggle-thumb { left:14px; background:#fff; }
+  html.light .tabs { background:#f0f4f8; border-bottom:1px solid rgba(0,0,0,0.1); }
+  html.light .tab { color:rgba(13,30,45,0.45); }
+  html.light .tab:hover { color:#0d1e2d; }
+  html.light .tab.active { color:#1a8a3a; border-bottom-color:#1a8a3a; }
+  html.light .goal-banner { background:rgba(26,138,58,0.07); border-color:rgba(26,138,58,0.25); }
+  html.light .goal-banner .gl { color:#0d1e2d; }
+  html.light .goal-banner .gl strong { color:#1a8a3a; }
+  html.light .goal-banner .gr { color:rgba(13,30,45,0.5); }
+  html.light .rl { color:rgba(13,30,45,0.45); }
+  html.light .atl { background:#adc4d8; }
+  html.light .afl { background:#1a8a3a; }
+  html.light .ahd { border-left-color:#adc4d8; }
+  html.light .ahd.lit { border-left-color:#1a8a3a; }
+  html.light .mnp { color:rgba(13,30,45,0.45); }
+  html.light .mnw.isact .mnp { color:#1a8a3a; }
+  html.light .mnw.isdone .mnp { color:#1a8a3a; opacity:.6; }
+  html.light .mn { background:#edf2f7; border-color:#adc4d8; }
+  html.light .mn.done { background:#1a8a3a; border-color:#1a8a3a; }
+  html.light .mn.act { background:#1a8a3a; border-color:#fff; }
+  html.light .mc { background:#ffffff; border-color:rgba(0,0,0,0.1); }
+  html.light .mc:hover { background:#f5f9fc; border-color:rgba(26,138,58,0.3); }
+  html.light .mc.act { background:#f5f9fc; border-color:#1a8a3a; }
+  html.light .mc.act::before { background:#1a8a3a; }
+  html.light .mcp { color:rgba(13,30,45,0.3); }
+  html.light .mc.act .mcp { color:#1a8a3a; }
+  html.light .mct { color:#0d1e2d; }
+  html.light .mc-inc { color:#0a5a96; }
+  html.light .mc-cum { color:#1a8a3a; }
+  html.light .dp { background:#ffffff; border-color:rgba(0,0,0,0.1); }
+  html.light .dph { border-bottom-color:rgba(0,0,0,0.08); }
+  html.light .dph h2 { color:#0d1e2d; }
+  html.light .dph p { color:rgba(13,30,45,0.55); }
+  html.light .dpn { background:rgba(160,90,0,.07); border-color:rgba(160,90,0,.25); color:#a05a00; }
+  html.light .dp-stat .val { color:#1a8a3a; }
+  html.light .dp-stat .val.blue { color:#0a5a96; }
+  html.light .dp-stat .lbl { color:rgba(13,30,45,0.5); }
+  html.light .dp-stats { border-left:none; }
+  html.light .dp-stat { border-left-color:rgba(0,0,0,0.1); }
+  html.light .ag { background:#edf2f7; }
+  html.light .ac { background:#ffffff; border-color:rgba(0,0,0,0.1); }
+  html.light .ac:hover { border-color:rgba(26,138,58,0.3); }
+  html.light .ac-detail { border-top-color:rgba(0,0,0,0.08); }
+  html.light .anum { color:rgba(13,30,45,0.35); }
+  html.light .aname { color:#0d1e2d; }
+  html.light .vtag.v1 { background:rgba(26,138,58,.12); color:#1a8a3a; border-color:rgba(26,138,58,.35); }
+  html.light .vtag.v2 { background:rgba(10,90,150,.12); color:#0a5a96; border-color:rgba(10,90,150,.35); }
+  html.light .ahrs { color:#0a5a96; }
+  html.light .imp-row .imp-badge.imp-1,
+  html.light .imp-1 { color:#1a8a3a; }
+  html.light .imp-row .imp-badge.imp-2,
+  html.light .imp-2 { color:#0a5a96; }
+  html.light .imp-row .imp-badge.imp-3,
+  html.light .imp-3 { color:rgba(13,30,45,0.25); }
+  html.light .imp-label { color:inherit; }
+  html.light .dll { color:rgba(13,30,45,0.4); }
+  html.light .di { color:rgba(13,30,45,0.72); }
+  html.light .jtbd .di::before { color:#1a8a3a; }
+  html.light .pain .di::before { color:#a05a00; }
+  html.light .empty { color:rgba(13,30,45,0.45); }
+  html.light .leg { border-top-color:rgba(0,0,0,0.1); }
+  html.light .li { color:rgba(13,30,45,0.55); }
+  html.light .tbl-wrap,
+  html.light .matrix-wrap { background:#ffffff; border-color:rgba(0,0,0,0.1); }
+  html.light .tbl-hdr,
+  html.light .matrix-hdr { border-bottom-color:rgba(0,0,0,0.08); }
+  html.light .tbl-hdr h2,
+  html.light .matrix-hdr h2 { color:#0d1e2d; }
+  html.light .tbl-hdr p,
+  html.light .matrix-hdr p { color:rgba(13,30,45,0.55); }
+  html.light table.ref thead tr,
+  html.light table.mtbl thead tr { background:rgba(0,0,0,0.04); }
+  html.light table.ref thead th,
+  html.light table.mtbl thead th { color:rgba(13,30,45,0.5); }
+  html.light table.ref tbody tr,
+  html.light table.mtbl tbody tr { border-bottom-color:rgba(0,0,0,0.07); }
+  html.light table.ref tbody tr:hover,
+  html.light table.mtbl tbody tr:hover { background:rgba(26,138,58,.04); }
+  html.light table.ref tbody td { color:#0d1e2d; }
+  html.light .td-num { color:rgba(13,30,45,0.38); }
+  html.light .td-name { color:#0d1e2d; }
+  html.light .td-desc { color:rgba(13,30,45,0.62); }
+  html.light .td-phase { color:rgba(13,30,45,0.5); }
+  html.light .td-adj { color:#0a5a96; }
+  html.light .td-total-name { color:#0d1e2d; }
+  html.light .td-total-adj { color:#1a8a3a; }
+  html.light table.mtbl tbody td { color:rgba(13,30,45,0.45); }
+  html.light table.mtbl tbody td.ac { color:#0d1e2d; }
+  html.light table.mtbl tbody td.pos { color:#0a5a96; font-weight:600; }
+  html.light table.mtbl tfoot tr.r-inc td { background:rgba(10,90,150,.05); color:#0a5a96; }
+  html.light table.mtbl tfoot tr.r-inc td.ac { color:rgba(13,30,45,0.5); }
+  html.light table.mtbl tfoot tr.r-cum td { color:#1a8a3a; }
+  html.light table.mtbl tfoot tr.r-cum td.ac { color:rgba(13,30,45,0.5); }
+  html.light table.mtbl tfoot tr.r-pct td { background:rgba(26,138,58,.06); color:#1a8a3a; border-top-color:rgba(26,138,58,.2); }
+  html.light table.mtbl tfoot tr.r-pct td.ac { color:#1a8a3a; }
+  html.light .matrix-scroll { background:#ffffff; }
+  /* Workshop panel */
+  html.light #ws-grid > div { background:#ffffff; border-color:rgba(0,0,0,0.1); }
+  body { font-family:var(--sans); background:var(--navy); color:var(--white); min-height:100vh; font-size:14px; }
+  .ph { background:rgba(3,18,28,.9); border-bottom:1px solid var(--bdim); padding:16px 40px; display:flex; align-items:center; justify-content:space-between; }
+  .ph h1 { font-size:16px; font-weight:500; }
+  .ph p { font-size:12px; color:var(--muted); margin-top:1px; }
+  .ph-r { display:flex; align-items:center; gap:14px; font-size:11px; color:var(--muted); font-family:var(--mono); }
+  .live { display:flex; align-items:center; gap:5px; color:var(--green); }
+  .ldot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .tabs { display:flex; border-bottom:1px solid var(--bdim); background:rgba(3,18,28,.6); padding:0 40px; }
+  .tab { padding:12px 20px; font-size:13px; font-weight:500; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; user-select:none; }
+  .tab:hover { color:var(--white); }
+  .tab.active { color:var(--green); border-bottom-color:var(--green); }
+  .panel { display:none; padding:24px 40px 48px; }
+  .panel.active { display:block; }
+  .goal-banner { background:rgba(99,223,78,0.07); border:1px solid rgba(99,223,78,0.2); border-radius:8px; padding:10px 16px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .goal-banner .gl { font-size:12px; color:var(--white); line-height:1.5; }
+  .goal-banner .gl strong { color:var(--green); }
+  .goal-banner .gr { font-size:11px; font-family:var(--mono); color:var(--muted); white-space:nowrap; }
+  .rl { font-size:11px; font-family:var(--mono); color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:14px; }
+  .aw { position:relative; height:56px; display:flex; align-items:center; margin-bottom:20px; }
+  .atl { position:absolute; left:0; right:30px; top:50%; height:6px; background:var(--track); border-radius:3px; transform:translateY(-50%); }
+  .afl { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:var(--green); transition:width .5s cubic-bezier(.4,0,.2,1); }
+  .ahd { position:absolute; right:0; top:50%; transform:translateY(-50%); width:0; height:0; border-top:12px solid transparent; border-bottom:12px solid transparent; border-left:22px solid var(--track); transition:border-left-color .3s; }
+  .ahd.lit { border-left-color:var(--green); }
+  .mns { position:absolute; left:0; right:30px; top:50%; transform:translateY(-50%); display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
+  .mnw { position:relative; display:flex; flex-direction:column; align-items:center; cursor:pointer; pointer-events:all; }
+  .mn { width:14px; height:14px; border-radius:50%; border:2px solid var(--track); background:var(--navy); transition:all .2s; z-index:3; }
+  .mn.done { background:var(--green); border-color:var(--green); }
+  .mn.act { width:18px; height:18px; background:var(--green); border-color:#fff; box-shadow:0 0 0 3px rgba(99,223,78,.3); }
+  .mnl { position:absolute; top:16px; font-size:10px; color:var(--muted); white-space:nowrap; font-family:var(--mono); }
+  .mnp { position:absolute; bottom:16px; font-size:11px; font-family:var(--mono); font-weight:500; color:var(--muted); white-space:nowrap; }
+  .mnw.isact .mnl, .mnw.isact .mnp { color:var(--green); }
+  .mnw.isdone .mnp { color:var(--green); opacity:.6; }
+  .msc { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:20px; }
+  .mc { background:var(--card); border:1px solid var(--bdim); border-radius:10px; padding:12px 10px 14px; cursor:pointer; transition:all .2s; position:relative; min-height:118px; }
+  .mc::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:10px 10px 0 0; background:transparent; transition:background .2s; }
+  .mc:hover { background:var(--card-h); border-color:rgba(99,223,78,.3); }
+  .mc.act { border-color:var(--green); background:var(--card-h); }
+  .mc.act::before { background:var(--green); }
+  .mcp { font-size:24px; font-weight:300; font-family:var(--mono); color:var(--muted); line-height:1; margin-bottom:3px; }
+  .mc.act .mcp { color:var(--green); }
+  .mcd { font-size:11px; color:var(--muted); font-family:var(--mono); margin-bottom:3px; }
+  .mct { font-size:13px; font-weight:500; color:var(--white); line-height:1.3; margin-bottom:6px; }
+  .mc-inc { font-size:11px; font-family:var(--mono); color:var(--blue); font-weight:500; margin-top:5px; }
+  .mc-cum { font-size:11px; font-family:var(--mono); color:var(--green); font-weight:500; margin-top:2px; }
+  .dp { background:var(--surface); border:1px solid var(--bdim); border-radius:12px; overflow:hidden; animation:si .2s ease; }
+  @keyframes si { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+  .dph { padding:16px 20px 14px; border-bottom:1px solid var(--bdim); display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+  .dph h2 { font-size:17px; font-weight:500; margin-bottom:3px; }
+  .dph p { font-size:13px; color:var(--muted); }
+  .dpn { background:rgba(240,164,50,.1); border:1px solid rgba(240,164,50,.25); border-radius:6px; padding:7px 12px; font-size:11px; color:var(--amber); line-height:1.5; margin-top:8px; }
+  .dp-stats { display:flex; flex-shrink:0; }
+  .dp-stat { padding:0 16px; text-align:right; border-left:1px solid var(--bdim); }
+  .dp-stat:first-child { border-left:none; padding-left:0; }
+  .dp-stat .val { font-size:28px; font-weight:300; font-family:var(--mono); color:var(--green); line-height:1; }
+  .dp-stat .val.blue { color:var(--blue); font-size:22px; }
+  .dp-stat .lbl { font-size:11px; color:var(--muted); font-family:var(--mono); }
+  .ag { padding:16px 20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; }
+  .ac { background:var(--card); border:1px solid var(--bdim); border-radius:10px; overflow:hidden; transition:border-color .2s; }
+  .ac:hover { border-color:rgba(99,223,78,.25); }
+  .imp-row { display:flex; align-items:center; gap:5px; margin-top:2px; margin-bottom:4px; }
+  .imp-badge { font-size:11px; letter-spacing:2px; flex-shrink:0; }
+  .imp-label { font-size:9px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.06em; }
+  .imp-1 { color:#63DF4E; }
+  .imp-2 { color:#4aa8e8; }
+  .imp-3 { color:rgba(240,245,249,0.3); }
+  .ac-top { display:flex; align-items:flex-start; gap:8px; padding:11px 13px 8px; }
+  .anum { font-size:12px; font-family:var(--mono); color:var(--muted); flex-shrink:0; width:18px; margin-top:2px; }
+  .ainfo { flex:1; min-width:0; }
+  .aname { font-size:13px; font-weight:500; color:var(--white); line-height:1.3; margin-bottom:5px; }
+  .ameta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .vtag { display:inline-block; font-size:9px; font-weight:600; padding:1px 6px; border-radius:8px; }
+  .v1 { background:rgba(99,223,78,.15); color:var(--green); border:1px solid rgba(99,223,78,.4); }
+  .v2 { background:rgba(74,168,232,.15); color:var(--blue); border:1px solid rgba(74,168,232,.4); }
+  .v3 { background:rgba(155,130,248,.15); color:var(--purple); border:1px solid rgba(155,130,248,.4); }
+  .ahrs { font-size:12px; font-family:var(--mono); color:var(--blue); font-weight:500; }
+  .ac-detail { border-top:1px solid var(--bdim); padding:10px 13px; }
+  .dl { margin-bottom:7px; }
+  .dl:last-child { margin-bottom:0; }
+  .dll { font-size:10px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:3px; }
+  .di { display:flex; align-items:flex-start; gap:5px; font-size:12px; color:rgba(240,245,249,.75); line-height:1.45; margin-bottom:2px; }
+  .di::before { content:'›'; flex-shrink:0; font-size:11px; }
+  .jtbd .di::before { color:var(--green); }
+  .pain .di::before { color:var(--amber); }
+  .empty { padding:24px 20px; font-size:13px; color:var(--muted); text-align:center; }
+  .leg { display:flex; gap:16px; margin-top:16px; padding-top:12px; border-top:1px solid var(--bdim); flex-wrap:wrap; align-items:center; }
+  .li { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--muted); }
+  .ls { height:12px; padding:0 6px; border-radius:8px; font-size:9px; font-weight:600; display:flex; align-items:center; }
+  /* Agent ref table */
+  .tbl-wrap { background:var(--surface); border:1px solid var(--bdim); border-radius:12px; overflow:hidden; }
+  .tbl-hdr { padding:16px 20px 12px; border-bottom:1px solid var(--bdim); }
+  .tbl-hdr h2 { font-size:17px; font-weight:500; }
+  .tbl-hdr p { font-size:13px; color:var(--muted); margin-top:2px; }
+  table.ref { width:100%; border-collapse:collapse; }
+  table.ref thead tr { background:rgba(0,0,0,.3); }
+  table.ref thead th { padding:10px 14px; text-align:left; font-size:11px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:500; white-space:nowrap; }
+  table.ref tbody tr { border-bottom:1px solid var(--bdim); }
+  table.ref tbody tr:last-child { border-bottom:none; }
+  table.ref tbody tr:hover { background:rgba(99,223,78,.04); }
+  table.ref tbody td { padding:12px 14px; font-size:13px; vertical-align:top; }
+  table.ref tfoot tr { background:rgba(99,223,78,.08); border-top:2px solid rgba(99,223,78,.3); }
+  table.ref tfoot td { padding:10px 14px; font-size:12px; font-family:var(--mono); font-weight:500; }
+  .td-num { font-family:var(--mono); color:var(--muted); font-size:11px; text-align:center; width:40px; }
+  .td-name { font-weight:500; color:var(--white); }
+  .td-desc { color:var(--muted); font-size:11px; line-height:1.5; }
+  .td-phase { font-size:11px; color:var(--muted); white-space:nowrap; width:160px; }
+  .td-adj { font-family:var(--mono); color:var(--blue); font-weight:500; text-align:right; width:110px; }
+  .td-total-name { color:var(--white); font-family:var(--sans); }
+  .td-total-adj { color:var(--green); text-align:right; }
+  /* Matrix table */
+  .matrix-wrap { background:var(--surface); border:1px solid var(--bdim); border-radius:12px; overflow:hidden; }
+  .matrix-hdr { padding:16px 20px 12px; border-bottom:1px solid var(--bdim); }
+  .matrix-hdr h2 { font-size:17px; font-weight:500; }
+  .matrix-hdr p { font-size:13px; color:var(--muted); margin-top:2px; }
+  .matrix-scroll { overflow-x:auto; }
+  table.mtbl { width:100%; border-collapse:collapse; min-width:600px; }
+  table.mtbl thead tr { background:rgba(0,0,0,.3); }
+  table.mtbl thead th { padding:10px 14px; font-size:11px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:500; text-align:right; white-space:nowrap; }
+  table.mtbl thead th.ac { text-align:left; min-width:180px; }
+  table.mtbl tbody tr { border-bottom:1px solid var(--bdim); }
+  table.mtbl tbody tr:hover { background:rgba(99,223,78,.04); }
+  table.mtbl tbody td { padding:10px 14px; font-size:12px; font-family:var(--mono); text-align:right; color:var(--muted); }
+  table.mtbl tbody td.ac { text-align:left; font-family:var(--sans); color:var(--white); font-size:12px; font-weight:500; }
+  table.mtbl tbody td.pos { color:var(--blue); font-weight:600; }
+  table.mtbl tfoot tr.r-inc td { background:rgba(74,168,232,.08); border-top:2px solid var(--bdim); padding:9px 14px; font-size:11px; font-family:var(--mono); text-align:right; color:var(--blue); font-weight:600; }
+  table.mtbl tfoot tr.r-inc td.ac { text-align:left; font-family:var(--sans); font-size:11px; color:var(--muted); font-weight:400; }
+  table.mtbl tfoot tr.r-cum td { padding:9px 14px; font-size:11px; font-family:var(--mono); text-align:right; color:var(--green); font-weight:600; }
+  table.mtbl tfoot tr.r-cum td.ac { text-align:left; font-family:var(--sans); font-size:11px; color:var(--muted); font-weight:400; }
+  table.mtbl tfoot tr.r-pct td { background:rgba(99,223,78,.08); border-top:1px solid rgba(99,223,78,.2); padding:9px 14px; font-size:12px; font-family:var(--mono); text-align:right; color:var(--green); font-weight:700; }
+  table.mtbl tfoot tr.r-pct td.ac { text-align:left; font-family:var(--sans); font-size:12px; color:var(--green); font-weight:500; }
 </style>
 </head>
-<body>placeholder</body>
+<body>
+
+<div class="ph">
+  <div>
+    <h1>Guided CSM Agent — Acceleration Roadmap</h1>
+    <p>CEG Customer Experience &amp; Technology · CSP AI Workshop · Updated 5/14/26</p>
+  </div>
+  <div class="ph-r">
+    <div class="live"><div class="ldot"></div>Active initiative</div>
+    <span>v1.0 · May 14, 2026</span>
+    <div class="mode-toggle" onclick="toggleMode()" id="modeBtn">
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span id="modeLabel">Dark mode</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('overview',this)">Overview</div>
+  <div class="tab" onclick="switchTab('jtbd',this)">JTBD / CXJ</div>
+  <div class="tab" onclick="switchTab('agents',this)">Agent Details</div>
+  <div class="tab" onclick="switchTab('roadmap',this)">Roadmap</div>
+  <div class="tab" onclick="switchTab('matrix',this)">Math Check</div>
+</div>
+
+<!-- ROADMAP -->
+<div class="panel" id="panel-roadmap">
+  <div class="goal-banner">
+    <div class="gl"><strong>Goal:</strong> Accelerate 75% of total Guided CSM work. Their current baseline is <strong>58.7 hrs/wk</strong> (48.7 task hrs + 10 hrs customer meetings). These 10 agents will cover <strong>44.0 hrs/wk</strong> of administrative tasks, freeing up time for our teams to focus on customer meetings and contractual deliverables.</div>
+    <div class="gr">58.7 hrs/wk baseline &nbsp;·&nbsp; 44.0 hrs/wk accelerated &nbsp;·&nbsp; 14.7 hrs/wk human-in-loop</div>
+  </div>
+  
+  <div class="rl">Agent rollout phases — click any phase to explore</div>
+  <div class="aw">
+    <div class="atl"><div class="afl" id="afl"></div></div>
+    <div class="ahd" id="ahd"></div>
+    <div class="mns" id="mns"></div>
+  </div>
+  <div class="msc" id="msc"></div>
+  <div class="dp" id="dp"></div>
+  <div class="leg">
+    <span style="font-size:11px;color:var(--muted);margin-right:4px">Versions:</span>
+    <div class="li"><span class="ls vtag v1">V1</span>Initial</div>
+    <div class="li"><span class="ls vtag v2">V2</span>Enhanced</div>
+
+    <div class="li" style="margin-left:8px;border-left:1px solid var(--bdim);padding-left:16px"><span style="color:var(--blue);font-size:11px;font-family:var(--mono)">+X.X hrs</span>&nbsp;= hrs accelerated this milestone</div>
+    <div class="li"><span style="color:var(--green);font-size:11px;font-family:var(--mono)">X.X hrs cumul</span>&nbsp;= cumulative hrs accelerated</div>
+  </div>
+</div>
+
+
+<!-- OVERVIEW -->
+<div class="panel active" id="panel-overview">
+  <div style="display:flex;flex-direction:column;gap:32px;">
+    <div>
+      <div style="font-size:16px;font-weight:600;color:var(--white);margin-bottom:6px;">Initiative Overview</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">CEG Customer Experience & Technology</div>
+      <div style="background:var(--surface);border:1px solid var(--bdim);border-radius:10px;padding:18px 20px;">
+        <div style="font-size:12px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;">Completed to date</div>
+        <div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">CXJ and JTBD mapping completed and validated across the full Guided CSM journey</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">JTBD time assessments completed and validated with practitioners</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Agent build strategy validated with Anthropic</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Cross-functional alignment (plus Auctor team) workshop completed week of 4/13</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Detailed one-pager requirements documents created for all 10 agents and shared with DT (CCX)</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Recurring LT status update communications in design</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Aligned with Impact Product on customer experience components and need for ongoing interlock</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Aligned with broader CEG AI Native Transformation initiative for ongoing evolution</span></div><div style="display:flex;gap:8px;margin-bottom:8px;"><span style="color:var(--green);flex-shrink:0;margin-top:1px;">&#8226;</span><span style="font-size:14px;color:var(--white);line-height:1.5;">Roadmap dates and phases across all 10 agents hardened <span style="font-size:11px;font-weight:600;color:var(--green);font-family:var(--mono);">NEW</span></span></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:16px;font-weight:600;color:var(--white);margin-bottom:6px;">Workshop Participants</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">28 participants across 13 functions</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;">
+        <div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Auctor</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Atticus Colwell</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">George Martin</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">CSM / CSG Delivery</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Eoin Corcoran</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Nimril Dsilva</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Nolan Taylor</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">William Newhouse</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">CSP</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Garin Landry</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Jon High</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Roland Deex</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Jane Lee</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Dave Nesselrode</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Pradeep Bansal</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Customer Insights</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Margaret Rodriguez</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Data & Analytics</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Becky Cooper Nadis</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Design</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Vincent Li</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Dave Wright</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Engineering</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Muthu</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Raja</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Facilitators</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Vinith Perla</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Sabrina Sampey</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Impact Product Management</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Scott Zailer</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Nick Long</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Platform & AI</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Ritesh Shah</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Product Management</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Ashish</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Ben Gabrielson</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Scale Leaders</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Ronan Rafferty</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Veena Aaradhya</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Nobuki Fujinaka</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Katherine S</div>
+    </div><div style="background:var(--card);border:1px solid var(--bdim);border-radius:10px;padding:14px;">
+      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">StratOps & Planning</div>
+      <div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Marius Sluijters</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Ben Duignan</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Calum Sellars</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Shay Raddant</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Owen Gardner</div><div style="font-size:13px;color:var(--white);padding:4px 8px;background:rgba(255,255,255,0.06);border-radius:6px;margin-bottom:4px;">Adele Langley Ellis</div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- JTBD / CXJ -->
+<div class="panel" id="panel-jtbd">
+    <!-- Customer Journey Map -->
+    <div style="margin-bottom:24px;">
+      <div style="font-size:13px;font-weight:500;color:var(--white);margin-bottom:14px;">10 agents mapped to the Guided customer journey</div>
+
+      <!-- Journey arrow track -->
+      <div style="position:sticky;top:0;z-index:20;background:var(--navy);padding-bottom:4px;">
+      <div style="display:flex;gap:2px;margin-bottom:0;overflow-x:auto;">
+        <div style="background:#6b4fbb;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);padding:10px 22px 10px 14px;flex:1;min-width:140px;">
+          <div style="font-size:11px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;">Deal Close / Handoff</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.75);">Day 0–1</div>
+        </div>
+        <div style="background:#4a8fd4;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,14px 100%,0 50%);padding:10px 22px 10px 22px;flex:1.3;min-width:150px;">
+          <div style="font-size:11px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;">Onboard &amp; Learn</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.75);">Days 1–60</div>
+        </div>
+        <div style="background:#1a8a8a;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,14px 100%,0 50%);padding:10px 22px 10px 22px;flex:1;min-width:120px;">
+          <div style="font-size:11px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;">Deploy</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.75);">Days 60–90</div>
+        </div>
+        <div style="background:#29b6a0;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,14px 100%,0 50%);padding:10px 22px 10px 22px;flex:0.8;min-width:110px;">
+          <div style="font-size:11px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;">Go-Live</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.75);">Day 90</div>
+        </div>
+        <div style="background:#3ab86e;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,14px 100%,0 50%);padding:10px 22px 10px 22px;flex:1.4;min-width:160px;">
+          <div style="font-size:11px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;">Use &amp; Get Product Support</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.75);">Days 90–180</div>
+        </div>
+        <div style="background:#63DF4E;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,14px 50%);padding:10px 14px 10px 22px;flex:1;min-width:120px;">
+          <div style="font-size:11px;font-weight:600;color:rgba(3,45,66,0.8);text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;">Realize Value</div>
+          <div style="font-size:11px;color:rgba(3,45,66,0.6);">Day 180+</div>
+        </div>
+      </div>
+
+      </div>
+      <!-- Agent-to-journey mapping grid -->
+      <div style="background:var(--surface);border:1px solid var(--bdim);border-radius:12px;overflow:hidden;">
+        <table style="width:100%;border-collapse:collapse;">
+          <thead style="position:sticky;top:0;z-index:10;">
+            <tr style="background:#0a2535;">
+              <th style="padding:10px 14px;text-align:left;font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:500;width:200px;background:#0a2535;">Agent</th>
+              <th style="padding:10px 8px;text-align:center;font-size:11px;font-family:var(--mono);color:#c4b0ff;font-weight:700;width:13%;">Deal Close/<br>Handoff</th>
+              <th style="padding:10px 8px;text-align:center;font-size:11px;font-family:var(--mono);color:#7fd4f8;font-weight:700;width:17%;">Onboard<br>&amp; Learn</th>
+              <th style="padding:10px 8px;text-align:center;font-size:11px;font-family:var(--mono);color:#4aa8e8;width:13%;">Deploy</th>
+              <th style="padding:10px 8px;text-align:center;font-size:11px;font-family:var(--mono);color:#5dd8c4;font-weight:700;width:12%;">Go-Live</th>
+              <th style="padding:10px 8px;text-align:center;font-size:11px;font-family:var(--mono);color:#6dd49a;font-weight:700;width:18%;">Use &amp; Get<br>Support</th>
+              <th style="padding:10px 8px;text-align:center;font-size:11px;font-family:var(--mono);color:#8ff270;font-weight:700;width:14%;">Realize<br>Value</th>
+            </tr>
+          </thead>
+          <tbody id="journey-map-body"></tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+    (function(){
+      // Agent journey mappings with JTBD per phase
+      var journeyAgents = [
+        {num:1, name:"Pre-Interlock Intelligence Agent",
+         phases:{
+           "deal":   "Prepare for Interlock with full account context · Review customer goals, risks, and history before first contact",
+           "onboard":null,"deploy":null,"golive":null,"support":null,"value":null
+         }
+        },
+        {num:10, name:"Product Adoption Roadmap Agent",
+         phases:{
+           "deal":   null,
+           "onboard":"Build Product Adoption Roadmap from SKU entitlements · Populate customer objectives and outcomes from sales handoff",
+           "deploy": "Keep PAR current as roadmap evolves · Track implementation milestones vs. plan",
+           "golive": "Identify capability gaps at go-live · Surface adoption actions",
+           "support":"Prepare next-best-action capability roadmap ahead of QIR",
+           "value":  null
+         }
+        },
+        {num:4, name:"Scheduling Automation Agent",
+         phases:{
+           "deal":   null,
+           "onboard":"Establish recurring internal and customer-facing meeting cadence · Coordinate internal and external availability",
+           "deploy": "Schedule QIR, governance reviews, and customer-facing calls · Confirm internal and customer availability before invites are sent",
+           "golive": null,
+           "support":"Sustain monthly/quarterly customer call cadence · Schedule renewal and RAM review meetings · Coordinate across internal and external stakeholder calendars",
+           "value":  null
+         }
+        },
+        {num:6, name:"Portfolio Intelligence Agent",
+         phases:{
+           "deal":   null,
+           "onboard":"Confirm critical apps installed by Day 60 · Identify purchased vs. deployed gaps",
+           "deploy": "Monitor implementation milestones vs. CIP targets · Detect blockers and flag delays",
+           "golive": "Validate go-live adoption signals across portfolio",
+           "support":"Proactively monitor portfolio health · Identify at-risk accounts before escalation",
+           "value":  null
+         }
+        },
+        {num:9, name:"Support Intelligence Agent",
+         phases:{
+           "deal":   null,"onboard":null,"deploy":null,"golive":null,
+           "support":"Stay ahead of support issues before customers escalate · Identify case risk patterns and known resolutions",
+           "value":  null
+         }
+        },
+        {num:7, name:"CRIR Risk Mitigation Agent",
+         phases:{
+           "deal":   null,"onboard":null,"deploy":null,"golive":null,
+           "support":"Respond to adoption risk signals with a structured mitigation plan · Identify root cause and recommended recovery actions",
+           "value":  null
+         }
+        },
+        {num:5, name:"Resource Connection Agent",
+         phases:{
+           "deal":   null,"onboard":null,"deploy":null,"golive":null,
+           "support":"Connect customer to the right internal expert for post-QIR questions and ad hoc needs · Surface relevant knowledge base articles, accelerators, and digital resources for self-serve resolution",
+           "value":  "Engage specialist teams to support renewal and upgrade conversations · Identify knowledge base content and digital assets to support value conversations"
+         }
+        },
+        {num:2, name:"QIR Research Agent",
+         phases:{
+           "deal":   null,"onboard":null,"deploy":null,"golive":null,"support":null,
+           "value":  "Prepare comprehensive QIR with health, adoption gaps, and value vs. CIP targets · Build customer-specific value story with per-product ROI"
+         }
+        },
+        {num:3, name:"Post-Meeting Synthesis + Email Management Agent",
+         phases:{
+           "deal":   null,
+           "onboard":"Capture and distribute post-kickoff summary and action items",
+           "deploy": "Manage routine customer communications without consuming CSM time",
+           "golive": null,
+           "support":"Complete post-meeting follow-up — commitments tracked, records updated, next steps distributed",
+           "value":  "Ensure QIR outcomes and action items are captured and followed through"
+         }
+        },
+        {num:8, name:"Value Realization Agent",
+         phases:{
+           "deal":   null,"onboard":null,"deploy":null,"golive":null,"support":null,
+           "value":  "Demonstrate ROI across all purchased products · Deliver executive-ready value story tied to the customer's specific investment"
+         }
+        },
+      ];
+      var phaseKeys=["deal","onboard","deploy","golive","support","value"];
+      var phaseColors={"deal":"#9b82f8","onboard":"#4aa8e8","deploy":"#2abfcf","golive":"#29b6a0","support":"#3ab86e","value":"#63DF4E"};
+      var tbody=document.getElementById("journey-map-body");
+      if(!tbody) return;
+      journeyAgents.forEach(function(ag,idx){
+        var tr=document.createElement("tr");
+        tr.style.cssText="border-bottom:1px solid var(--bdim);"+( idx%2===1?"background:rgba(255,255,255,0.02)":"");
+        var html="<td style='padding:10px 14px;font-size:13px;font-weight:500;color:var(--white);vertical-align:top;'>"
+          +"<span style='font-size:9px;font-family:var(--mono);color:var(--muted);display:block;margin-bottom:2px;'>"+String(ag.num).padStart(2,"0")+"</span>"
+          +ag.name+"</td>";
+        phaseKeys.forEach(function(pk){
+          var txt=ag.phases[pk];
+          var col=phaseColors[pk];
+          if(txt){
+            var items=txt.split(' · ');
+            var bHtml=items.map(function(b){return '<div style="display:flex;gap:5px;margin-bottom:4px;"><span style="flex-shrink:0;">&bull;</span><span>'+b+'</span></div>';}).join('');
+            html+="<td style='padding:8px;vertical-align:top;'>"
+              +"<div style='background:"+col+"28;border:1px solid "+col+"55;border-radius:6px;padding:7px 9px;font-size:12px;color:rgba(240,245,249,0.92);line-height:1.45;text-align:left;'>"+bHtml+"</div>"
+              +"</td>";
+          } else {
+            html+="<td style='padding:8px;vertical-align:middle;text-align:center;'>"
+              +"<span style='color:var(--bdim);font-size:14px;'>—</span></td>";
+          }
+        });
+        html+="</tr>";
+        tr.innerHTML=html;
+        tbody.appendChild(tr);
+      });
+    })();
+    </script>
+
+
+</div>
+
+<!-- AGENT REFERENCE -->
+<div class="panel" id="panel-agents">
+  <div class="tbl-wrap">
+    
+    <div style="padding:24px 24px 20px;">
+      <div style="font-size:13px;font-weight:500;color:var(--white);margin-bottom:16px;">58.7 hrs/wk — full CSM role breakdown</div>
+      <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap;">
+        <div style="flex-shrink:0;position:relative;">
+          <canvas id="pieChart" width="240" height="240" style="cursor:pointer;"></canvas>
+        </div>
+        <div style="flex:1;min-width:240px;padding-top:8px;">
+          <div style="display:flex;flex-direction:column;gap:10px;" id="pie-legend"></div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bdim);font-size:11px;color:var(--muted);line-height:1.6;">
+            Baseline includes 48.7 hrs of task work and 10 hrs of customer meetings and contractual deliverables. Not every CSM performs all of these for every customer today due to capacity constraints.
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    (function(){
+      var slices=[
+        {name:"Accelerated by agents", hrs:44.0, color:"#63DF4E"},
+        {name:"Customer Meetings &amp; Contractual Obligations", hrs:10.0, color:"#4aa8e8"},
+        {name:"Human-in-Loop / Agentic Oversight", hrs:4.7, color:"#f0a432"},
+      ];
+      var TOTAL=58.7;
+      var canvas=document.getElementById('pieChart');
+      if(!canvas) return;
+      var ctx=canvas.getContext('2d');
+      var cx=120,cy=120,r=108,inner=54,gap=0.015;
+      var active=-1;
+      var angles=[];
+      var a=-Math.PI/2;
+      slices.forEach(function(s){
+        var sweep=(s.hrs/TOTAL)*(2*Math.PI)-gap;
+        angles.push({start:a+gap/2,end:a+sweep+gap/2});
+        a+=sweep+gap;
+      });
+
+      function pct(h){return Math.round(h/TOTAL*1000)/10;}
+
+      function draw(hi){
+        ctx.clearRect(0,0,240,240);
+        // Draw non-hovered slices first, hovered slice last to prevent overlap
+        var drawOrder=slices.map(function(_,i){return i;});
+        if(hi>=0){drawOrder.splice(drawOrder.indexOf(hi),1);drawOrder.push(hi);}
+        drawOrder.forEach(function(i){
+          var s=slices[i];
+          var ang=angles[i];
+          var isHi=hi===i;
+          ctx.beginPath();
+          ctx.moveTo(cx,cy);
+          ctx.arc(cx,cy,isHi?r+7:r,ang.start,ang.end);
+          ctx.closePath();
+          ctx.fillStyle=s.color;
+          ctx.globalAlpha=hi>=0&&!isHi?0.35:1;
+          ctx.fill();
+          ctx.globalAlpha=1;
+          ctx.strokeStyle='#0a2535';
+          ctx.lineWidth=2;
+          ctx.stroke();
+        });
+        ctx.beginPath();
+        ctx.arc(cx,cy,inner,0,2*Math.PI);
+        ctx.fillStyle='#0a2535';
+        ctx.fill();
+        ctx.fillStyle='#f0f5f9';
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        if(hi>=0){
+          var s=slices[hi];
+          ctx.font='700 17px "DM Mono",monospace';
+          ctx.fillStyle=s.color;
+          ctx.fillText(s.hrs.toFixed(1)+' hrs',cx,cy-8);
+          ctx.font='400 11px "DM Sans",sans-serif';
+          ctx.fillStyle='rgba(240,245,249,0.5)';
+          ctx.fillText(pct(s.hrs)+'% of total',cx,cy+10);
+        } else {
+          ctx.font='700 18px "DM Mono",monospace';
+          ctx.fillStyle='#f0f5f9';
+          ctx.fillText('58.7',cx,cy-8);
+          ctx.font='400 11px "DM Sans",sans-serif';
+          ctx.fillStyle='rgba(240,245,249,0.5)';
+          ctx.fillText('hrs / wk',cx,cy+10);
+        }
+      }
+
+      function getSlice(x,y){
+        var dx=x-cx,dy=y-cy,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<inner||dist>r+10) return -1;
+        var ang=Math.atan2(dy,dx);
+        for(var i=0;i<angles.length;i++){
+          var s=angles[i].start,e=angles[i].end;
+          while(ang<s-0.01) ang+=2*Math.PI;
+          while(ang>e+0.01) ang-=2*Math.PI;
+          if(ang>=s&&ang<=e) return i;
+        }
+        return -1;
+      }
+
+      canvas.addEventListener('mousemove',function(ev){
+        var rect=canvas.getBoundingClientRect();
+        var x=(ev.clientX-rect.left)*(240/rect.width);
+        var y=(ev.clientY-rect.top)*(240/rect.height);
+        var hit=getSlice(x,y);
+        if(hit!==active){active=hit;draw(active);updateLegend(active);}
+      });
+      canvas.addEventListener('mouseleave',function(){active=-1;draw(-1);updateLegend(-1);});
+
+      // Build legend
+      var leg=document.getElementById('pie-legend');
+      slices.forEach(function(s,i){
+        var row=document.createElement('div');
+        row.id='leg-'+i;
+        row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:all .15s;';
+        row.innerHTML='<span style="width:12px;height:12px;border-radius:3px;background:'+s.color+';flex-shrink:0;display:inline-block;"></span>'
+          +'<span style="font-size:12px;color:rgba(240,245,249,0.85);flex:1;">'+s.name+'</span>'
+          +'<span style="font-family:var(--mono);font-size:11px;color:rgba(240,245,249,0.5);white-space:nowrap;">'+s.hrs.toFixed(1)+' hrs &nbsp;<strong style="color:'+s.color+'">'+pct(s.hrs)+'%</strong></span>';
+        row.addEventListener('mouseenter',function(){active=i;draw(i);updateLegend(i);});
+        row.addEventListener('mouseleave',function(){active=-1;draw(-1);updateLegend(-1);});
+        leg.appendChild(row);
+      });
+
+      function updateLegend(hi){
+        slices.forEach(function(s,i){
+          var row=document.getElementById('leg-'+i);
+          if(!row) return;
+          if(hi<0){row.style.background='transparent';row.style.opacity='1';}
+          else if(hi===i){row.style.background='rgba(255,255,255,0.06)';row.style.opacity='1';}
+          else{row.style.background='transparent';row.style.opacity='0.35';}
+        });
+      }
+
+      draw(-1);
+    })();
+    </script>
+
+    <div class="tbl-hdr">
+      <h2>Agent Reference — All 10 Agents</h2>
+      <p>Full descriptions, time savings, and phase assignment. Hours reflect 75% acceleration target.</p>
+    </div>
+    <div style="margin:0 0 0;padding:12px 20px;background:rgba(99,223,78,0.07);border-bottom:1px solid rgba(99,223,78,0.15);font-size:13px;color:var(--muted);line-height:1.6;">
+      <strong style="color:var(--white);">Note:</strong> Many of these agents can be extended beyond Guided CSMs to support <strong style="color:var(--white);">CSM, CSE, CSG, and PA</strong> roles. The scope and time savings represented here reflect the Guided CSM use case specifically. We will be conducting similar workshops for these other CEG roles as part of the larger CEG AI Native Strategy.
+    </div>
+    <table class="ref">
+      <thead><tr><th style="width:40px;text-align:center">#</th><th>Agent</th><th>Description</th><th style="width:160px">Milestone</th><th style="width:100px;text-align:center">Importance to<br>Cust Exp</th><th style="width:140px;text-align:right">Hrs/wk accelerated</th></tr></thead>
+      <tbody>
+        <tr><td class="td-num">1</td><td class="td-name">Pre-Interlock Intelligence Agent</td><td class="td-desc">The Pre-Interlock Intelligence Agent generates a structured account brief for CSMs when they receive a new account assignment, pulling from Account Plan data, Dynamics, Surf, and Customer Dashboard. CSMs walk into Interlocks prepared to drive strategic conversation instead of spending time hunting information across four systems.</td><td class="td-phase">Phase 1 (V1) · Phase 2 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#63DF4E;letter-spacing:2px;">★★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Critical</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:15%;background:#4aa8e8;border-radius:3px;"></div></div><span>1.3</span></div></td></tr>
+        <tr><td class="td-num">2</td><td class="td-name">QIR Research Agent</td><td class="td-desc">The QIR Research Agent auto-generates a comprehensive QIR brief inside CSP by pulling business outcomes, health scores, adoption data, value reports, and historical customer context from multiple sources into a single ready-to-use artifact — replacing hours of manual prep and ensuring every QIR is grounded in data.</td><td class="td-phase">Phase 2 (V1) · Phase 3 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#63DF4E;letter-spacing:2px;">★★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Critical</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:100%;background:#63DF4E;border-radius:3px;"></div></div><span>8.6</span></div></td></tr>
+        <tr><td class="td-num">3</td><td class="td-name">Post-Meeting Synthesis + Email Management Agent</td><td class="td-desc">The Post-Meeting Synthesis + Email Management Agent listens to every customer interaction and automatically generates customer-facing summaries, internal notes, structured action items, and CSP touchpoints — all without CSM intervention, shifting capacity from documentation to strategic customer engagement.</td><td class="td-phase">Phase 2 (V1) · Phase 3 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:rgba(240,245,249,0.35);letter-spacing:2px;">★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Supporting</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:97%;background:#63DF4E;border-radius:3px;"></div></div><span>8.3</span></div></td></tr>
+        <tr><td class="td-num">4</td><td class="td-name">Scheduling Automation Agent</td><td class="td-desc">The Scheduling Automation Agent coordinates meetings across calendars, time zones, and platforms — eliminating the daily scheduling overhead for CSMs managing large portfolios. It handles recurring ceremonies, ad-hoc requests, and rules-based triggers, so CSMs stay focused on customers, not calendars.</td><td class="td-phase">Phase 2 (V1) · Phase 3 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:rgba(240,245,249,0.35);letter-spacing:2px;">★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Supporting</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:52%;background:#63DF4E;border-radius:3px;"></div></div><span>4.5</span></div></td></tr>
+        <tr><td class="td-num">5</td><td class="td-name">Resource Connection Agent</td><td class="td-desc">The Resource Connection Agent solves two problems CSMs face every week: finding the right digital content for a customer question and getting to the right human expert when a question needs specialist input. Both are handled inside CSP, without tab switching, manual searches, or waiting weeks for a response.</td><td class="td-phase">Phase 2 (V1) · Phase 3 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#4aa8e8;letter-spacing:2px;">★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Important</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:100%;background:#4aa8e8;border-radius:3px;"></div></div><span>8.6</span></div></td></tr>
+        <tr><td class="td-num">6</td><td class="td-name">Portfolio Intelligence Agent</td><td class="td-desc">The Portfolio Intelligence Agent runs behind the scenes to surface prioritized next-best actions on the CSM's landing page. It helps users — especially those managing large books of business — decide which accounts and tasks deserve attention first. It aggregates human-generated escalations, system-generated risk signals, scheduled tasks, and inbound customer outreach into a ranked, actionable feed.</td><td class="td-phase">Phase 2 (V1) · Phase 3 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:rgba(240,245,249,0.35);letter-spacing:2px;">★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Supporting</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:26%;background:#63DF4E;border-radius:3px;"></div></div><span>2.2</span></div></td></tr>
+        <tr><td class="td-num">7</td><td class="td-name">CRIR Risk Mitigation Plan Agent</td><td class="td-desc">The CRIR Risk Mitigation Plan Agent bridges the gap between risk identification and risk resolution by converting every risk record into a structured, actionable mitigation plan. Each risk record is automatically enriched with prioritized next-best actions, recommended owners, and relevant accelerators and resources — turning risk signals into a ready-to-execute response.</td><td class="td-phase">Phase 3 (V1)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#4aa8e8;letter-spacing:2px;">★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Important</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:34%;background:#4aa8e8;border-radius:3px;"></div></div><span>2.9</span></div></td></tr>
+        <tr><td class="td-num">8</td><td class="td-name">Value Realization Agent</td><td class="td-desc">The Value Realization Agent accelerates the end-to-end value lifecycle by generating a tailored Value Blueprint for each customer, mapping their desired business outcomes and KPIs to a structured roadmap of capabilities. Each quarter, the agent automatically produces a Value Outcome Review that tracks progress against the blueprint, quantifies realized value, and surfaces next-best actions.</td><td class="td-phase">Phase 2 (V1) · Phase 3 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#63DF4E;letter-spacing:2px;">★★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Critical</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:3%;background:#f0a432;border-radius:3px;"></div></div><span>0.3</span></div></td></tr>
+        <tr><td class="td-num">9</td><td class="td-name">Support Intelligence Agent</td><td class="td-desc">The Support Intelligence Agent automatically surfaces active support cases, critical escalations, and recurring problem trends for Customer Success Managers (CSMs) across their customer accounts — replacing the manual effort of hunting down case data that today can take up to two weeks through standard channels.</td><td class="td-phase">Phase 1 (V1) · Phase 2 (V2)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#4aa8e8;letter-spacing:2px;">★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Important</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:84%;background:#63DF4E;border-radius:3px;"></div></div><span>7.2</span></div></td></tr>
+        <tr><td class="td-num">10</td><td class="td-name">Product Adoption Roadmap Agent</td><td class="td-desc">The Product Adoption Roadmap Agent generates data-driven, personalized adoption roadmaps for customers based on their business objectives, entitled products, and industry context. It replaces guesswork with institutional knowledge by pre-populating roadmap templates with proven sequencing and milestones — serving CSMs and customers who need a clear, evidence-based path to value realization from their ServiceNow investment.</td><td class="td-phase">Phase 2 (V1)</td><td style="text-align:center;vertical-align:middle;"><div style="font-size:12px;color:#63DF4E;letter-spacing:2px;">★★★</div><div style="font-size:9px;color:rgba(240,245,249,0.4);font-family:var(--mono);margin-top:2px;">Critical</div></td><td class="td-adj"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;"><div style="width:60px;height:6px;border-radius:3px;background:var(--bdim);overflow:hidden;"><div style="height:100%;width:1%;background:#f0a432;border-radius:3px;"></div></div><span>0.1</span></div></td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td class="td-num">—</td><td class="td-total-name">Total (10 agents)</td><td class="td-desc" style="color:var(--muted)">75% of 58.7 hrs/wk baseline accelerated · 14.7 hrs/wk human-in-loop retained</td><td class="td-phase">Phase 1 · Phase 2 · Phase 3</td><td></td><td class="td-total-adj" style="text-align:right;font-family:var(--mono);color:var(--green);font-size:13px;font-weight:600;">44.0</td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- MATH CHECK -->
+<div class="panel" id="panel-matrix">
+  <div class="matrix-wrap">
+    <div class="matrix-hdr">
+      <h2>Math Check — Incremental Hours by Agent &amp; Milestone</h2>
+      <p>Blue cells = hrs accelerated at that milestone (incremental only). Green rows = cumulative running totals and % accelerated.</p>
+    </div>
+    <div class="matrix-scroll" id="matrix-table"></div>
+  </div>
+</div>
+
+<script>
+var AGENT_HRS={1:1.3,2:8.6,3:8.3,4:4.5,5:8.6,6:2.2,7:2.9,8:0.3,9:7.2,10:0.1};
+var IMP={1:1,2:1,3:3,4:3,5:2,6:3,7:2,8:1,9:2,10:1};
+var V_SPLITS={1:{v1:0.8,v2:0.5},2:{v1:4.3,v2:4.3},3:{v1:4.2,v2:4.1},4:{v1:2.2,v2:2.3},5:{v1:4.3,v2:4.3},6:{v1:1.1,v2:1.1},8:{v1:0.2,v2:0.1},9:{v1:3.6,v2:3.6},10:{v1:0.1,v2:0.0}};
+var SPLIT={1:1,2:1,3:1,4:1,5:1,6:1,8:1,9:1,10:1};
+var TOTAL_AUTO=44.0;
+var TOTAL=58.7;
+
+function avh(id,tag){if(V_SPLITS[id])return V_SPLITS[id][tag]||0;return AGENT_HRS[id]||0;}
+
+function incHrs(msIdx,rid,rtag){
+  var h=avh(rid,rtag);
+  for(var i=0;i<msIdx;i++){
+    for(var j=0;j<MS[i].refs.length;j++){
+      var r=MS[i].refs[j];
+      if(r.id===rid){
+        if(SPLIT[rid]){if(r.tag===rtag)return 0;}
+        else{return 0;}
+      }
+    }
+  }
+  return h;
+}
+
+var agents=[
+  {n:1,name:"Pre-Interlock Intelligence Agent",jtbd:{"v1":["Enable existing 'Handoff Brief' skill","'Account Plan' skill insights integration (CACV, health score, customer challenges)"],"v2":["Native UX for account pre-brief in CSP data","Automated brief creation on account assignment","Predetermined next best action recommendations"]},pain:["Customer goals documented in sales then lost at handoff","CSMs manually search across Customer Dashboard, Surf, and Dynamics before every interlock","Data consistency gaps between Dynamics, CSP, and Surf slow preparation"]},
+  {n:2,name:"QIR Research Agent",jtbd:{"v1":["Auto create Impact Kickoff presentation with Impact overview, customer context and entitlements"],"v2":["Auto create QIR presentation with Impact initiatives, product adoption, and platform health insights","Improved QIR presentation with Scan Engine data","Improved QIR presentation with Accelerator Recommendations"]},pain:["Proving value requires manual CSM effort that does not scale","Expert knowledge remains inaccessible at scale","Most customers get only generic value stories; QIR/QBR action items go untracked"]},
+  {n:3,name:"Post-Meeting Synthesis + Email Management Agent",jtbd:{"v1":["Customer Meeting Identification","Automated touchpoint creation","Meeting Transcript Retrieval","Create Meeting Summary / Insights","Meeting Hub"],"v2":["Auto create success plays, tasks and risks from meeting summary","Customer-facing meeting summary","Selected emails from Outlook into CSP"]},pain:["No systematic way to follow up on QIR/QBR action items","Every routine email requires the same manual effort as a complex one","Inbox management competes directly with strategic customer work at scale"]},
+  {n:4,name:"Scheduling Automation Agent",jtbd:{"v1":["Automated Meeting Scheduling","Internal Participant Coordination","Meeting Management"],"v2":["Intelligent Agenda Builder","Dynamic Scheduling"]},pain:["Manual coordination across 50+ account teams is physically impossible at scale","Monthly cadence maintained by remembering, not systems — highly inconsistent","Inconsistent customer experience created by manual scheduling failures"]},
+  {n:5,name:"Resource Connection Agent",jtbd:{"v1":["In-Platform Knowledge Search","Expanded Source Coverage"],"v2":["Conversational Multi-Turn Search","Human Expert Finder"]},pain:["Expert knowledge inaccessible at scale — manual SME search takes significant time per instance","A2E program not scalable for broader customer access","Slow expert access is a top NPS/CSAT detractor and drives escalation burden"]},
+  {n:6,name:"Portfolio Intelligence Agent",jtbd:{"v1":["Surface list of accounts that need immediate attention based on multiple signals","Multi-signal account scoring"],"v2":["Configurable prioritization rules framework","Generate next best actions for prioritized accounts"]},pain:["CSMs cannot proactively monitor large account portfolios — gaps go undetected until too late","Current engagement is reactive, triggered only by NPS/CSAT scores","Manual scanning plus Day 60 app check consumes hours of CSM time per week"]},
+  {n:7,name:"CRIR Risk Mitigation Plan Agent",jtbd:["Intelligent Action Planning","Resource and Expertise Matching"],pain:["~11 CRIR records per month receive no mitigation plan — manual setup cost is too high","Inconsistent plan quality when CSMs lack a structured starting point","Risk deferred or closed without action due to CSM bandwidth constraints"]},
+  {n:8,name:"Value Realization Agent",jtbd:{"v1":["Value Story with Value Melody","Auto-publish Value Blueprint","Automated Value Outcome Reporting"],"v2":["Build Value Narrative and Recommendations","Outcome Reporting — Workspace Experience"]},pain:["BVAs manually built or skipped entirely — inconsistent value story at scale","Historical context lost with every internal or external turnover","Most customers receive generic value stories rather than account-specific narratives"]},
+  {n:9,name:"Support Intelligence Agent",jtbd:{"v1":["Case Summaries using existing Claude prompt","Cases, Problems, Change and Instance information"],"v2":["Native Workspace UX for CSMs to review Cases, Problems, Changes and Instance information","P1/P2 Proactive Alerting"]},pain:["CSMs have no real-time visibility into customer support cases — case data arrives up to 2 weeks late","CSMs learn about open issues when the customer brings them up on a call, forcing an I'll follow up response","No alerting system exists for critical cases — support management is entirely reactive"]},
+  {n:10,name:"Product Adoption Roadmap Agent",jtbd:{"v1":["Automated CapMap usage refresh","Entitlement-Based PAR Generation","Pre-Meeting Roadmap Brief"],"v2":["Usage Intensity per Capability","Plugins and Agents per Capability","Peer Benchmarking","Multi-Product Roadmap View"]},pain:["PARs built from scratch or generic templates — quality varies by CSM seniority","Institutional knowledge lives in senior CSMs heads and is never captured or shared","Newer CSMs start every account from a blank page regardless of prior success patterns","Interlock process from sales to CS is slow — CSMs start without full context"]}
+];
+
+var MS=[
+  {date:"Phase 0",  pct:0,  hrs:0,    inc:0,    title:"Phase 0 — Kickoff",  note:"Architecture and data source audit completed with DT — phase target dates confirmed for 6/1, 7/1, and 9/1.",refs:[]},
+  {date:"Phase 1",  pct:7,  hrs:4.4,  inc:4.4,  title:"Phase 1",  note:"Dates are targets. Agents within each phase are unlikely to release on the exact same day — working to get more precision per agent as development and testing proceeds.",refs:[{id:1,tag:"v1"},{id:9,tag:"v1"}]},
+  {date:"Phase 2",  pct:42, hrs:24.9, inc:20.5, title:"Phase 2",  note:"Dates are targets. Agents within each phase are unlikely to release on the exact same day — working to get more precision per agent as development and testing proceeds.",refs:[{id:1,tag:"v2"},{id:2,tag:"v1"},{id:3,tag:"v1"},{id:4,tag:"v1"},{id:5,tag:"v1"},{id:6,tag:"v1"},{id:8,tag:"v1"},{id:9,tag:"v2"},{id:10,tag:"v1"}]},
+  {date:"Phase 3",  pct:75, hrs:44.0, inc:19.1, title:"Phase 3",  note:"Dates are targets. Agents within each phase are unlikely to release on the exact same day — working to get more precision per agent as development and testing proceeds.##25% human-in-loop: Customer meetings · Deliver Customer Impact Plan · Deliver Value Blueprint · Manage Product Adoption Roadmap · Monitor and intervene on agent quality.",refs:[{id:2,tag:"v2"},{id:3,tag:"v2"},{id:4,tag:"v2"},{id:5,tag:"v2"},{id:6,tag:"v2"},{id:7,tag:"v1"},{id:8,tag:"v2"}]}
+];
+
+var N=MS.length,active=0;
+function ab(id){for(var i=0;i<agents.length;i++){if(agents[i].n===id)return agents[i];}return null;}
+function tl(t){return t==='v1'?'V1':t==='v2'?'V2':'V3';}
+function pad(n){return n<10?'0'+n:''+n;}
+function r1(x){return Math.round(x*10)/10;}
+
+function switchTab(name,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('panel-'+name).classList.add('active');
+  if(name==='matrix')buildMatrix();
+}
+
+function render(){
+  var m=MS[active];
+  // Arrow fill: node i at position i/(N-1) * 90% of track width
+  var fp=active===0?0:Math.round((active/(N-1))*100);
+  document.getElementById('afl').style.width=fp+'%';
+  if(active===N-1)document.getElementById('ahd').classList.add('lit');
+  else document.getElementById('ahd').classList.remove('lit');
+
+  var nh='';
+  for(var i=0;i<N;i++){
+    var ms=MS[i],isA=i===active,isDone=i<active;
+    var ds=ms.date.split('-')[0].trim();
+    nh+='<div class="mnw'+(isA?' isact':'')+(isDone?' isdone':'')+'" onclick="sel('+i+')">'
+      +'<div class="mnp">'+ms.pct+'%</div>'
+      +'<div class="mn'+(isA?' act':isDone?' done':'')+'"></div>'
+      +'</div>';
+  }
+  document.getElementById('mns').innerHTML=nh;
+
+  var ch='';
+  for(var i=0;i<N;i++){
+    var ms=MS[i],isA=i===active;
+    var hb=ms.hrs>0
+      ?'<div class="mc-cum">'+ms.hrs.toFixed(1)+' cumul hrs/wk accelerated</div>'
+      :'<div class="mc-cum" style="color:var(--muted);font-size:10px;">—</div>';
+    ch+='<div class="mc'+(isA?' act':'')+'" onclick="sel('+i+')">'
+      +'<div class="mcp">'+ms.pct+'%</div>'
+      +'<div class="mct">'+ms.title+'</div>'
+      +(ms.date!='Phase 0'?'<div style="font-size:11px;font-family:var(--mono);color:var(--green);margin-top:3px;opacity:0.8;">'+({'Phase 1':'6/1/2026','Phase 2':'7/1/2026','Phase 3':'9/1/2026'}[ms.date]||'')+'</div>':'')
+      +hb+'</div>';
+  }
+  document.getElementById('msc').innerHTML=ch;
+
+  var noteHtml='';
+  if(m.note){
+    var nitems=m.note.split('##');
+    var nbullets=nitems.map(function(b){
+      var isRisk=b.indexOf('RISK:')===0;
+      var txt=isRisk?b.replace('RISK: ','').replace('RISK:',''):b;
+      var color=isRisk?'var(--amber)':'rgba(240,245,249,0.85)';
+      var prefix=isRisk?'<span style="color:var(--amber);font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:.06em;margin-right:4px;">Risk</span>':'';
+      return '<div style="display:flex;gap:6px;margin-bottom:5px;"><span style="flex-shrink:0;color:rgba(240,245,249,0.4);margin-top:1px;">&#8226;</span><span style="color:'+color+';">'+prefix+txt+'</span></div>';
+    }).join('');
+    noteHtml='<div style="margin-top:10px;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:11px;line-height:1.6;">'+nbullets+'</div>';
+  }
+  var newRefs=[];
+  for(var j=0;j<m.refs.length;j++){if(incHrs(active,m.refs[j].id,m.refs[j].tag)>0)newRefs.push(m.refs[j]);}
+
+  var ab2='';
+  if(newRefs.length===0){
+    ab2='<div class="empty">No agents deployed at this stage — architecture and requirements in progress.</div>';
+  }else{
+    ab2='<div class="ag">';
+    for(var j=0;j<newRefs.length;j++){
+      var ref=newRefs[j],ag=ab(ref.id);if(!ag)continue;
+      var h=incHrs(active,ref.id,ref.tag);
+      var jtbdRaw=ag.jtbd;
+      var jtbdList=Array.isArray(jtbdRaw)?jtbdRaw:
+        (jtbdRaw[ref.tag]?jtbdRaw[ref.tag]:jtbdRaw['v1']?jtbdRaw['v1']:[]);
+      var jh='';for(var k=0;k<jtbdList.length;k++)jh+='<div class="di">'+jtbdList[k]+'</div>';
+      var ph='';for(var k=0;k<ag.pain.length;k++)ph+='<div class="di">'+ag.pain[k]+'</div>';
+      ab2+='<div class="ac"><div class="ac-top"><div class="anum">'+pad(ref.id)+'</div>'
+        +'<div class="ainfo"><div class="aname">'+ag.name+'</div>'
+        +(function(){var lvl=IMP[ref.id];var stars='★'.repeat(4-lvl);var lbl=lvl===1?'Critical':lvl===2?'Important':'Supporting';return '<div class="imp-row"><span class="imp-badge imp-'+lvl+'">'+stars+'</span><span class="imp-label imp-'+lvl+'"> '+lbl+'</span></div>';})()
+        +'<div class="ameta"><span class="vtag '+ref.tag+'">'+tl(ref.tag)+'</span>'
+        +'<span class="ahrs">+'+h.toFixed(1)+' hrs/wk accelerated</span></div></div></div>'
+        +'<div class="ac-detail">'
+        +'<div class="dl jtbd"><div class="dll">Core Capabilities</div>'+jh+'</div>'
+        +'<div class="dl pain"><div class="dll">Pain points addressed</div>'+ph+'</div>'
+        +'</div></div>';
+    }
+    ab2+='</div>';
+  }
+
+  var sub='Initiative start';
+  if(m.pct>0) sub='';
+
+  document.getElementById('dp').innerHTML=
+    '<div class="dph"><div><h2>'+m.title+'</h2>'+(sub?'<p>'+sub+'</p>':'')+noteHtml+'</div>'
+    +'<div class="dp-stats">'
+    +'<div class="dp-stat"><div class="val">'+m.pct+'%</div><div class="lbl">accelerated</div></div>'
+    +'<div class="dp-stat"><div class="val blue">+'+(m.inc>0?m.inc.toFixed(1):'—')+'</div><div class="lbl">hrs/wk accelerated</div></div>'
+    +'<div class="dp-stat"><div class="val">'+(m.hrs>0?m.hrs.toFixed(1):'—')+'</div><div class="lbl">cumul hrs/wk accelerated</div></div>'
+    +'</div></div>'+ab2;
+}
+
+function sel(i){active=i;render();}
+
+function buildMatrix(){
+  var names={1:'Pre-Interlock Intel',2:'QIR Research',3:'Post-Meeting+Email',
+    4:'Scheduling',5:'Resource Connection',6:'Portfolio Intel',
+    7:'CRIR Mitigation',8:'Value Realization',9:'Support Intel',10:'PAR Agent'};
+
+  // Compute per-agent per-milestone incremental hrs
+  var mat={};var agTot={};
+  for(var aid=1;aid<=10;aid++){mat[aid]=[];agTot[aid]=0;}
+  for(var mi=0;mi<N;mi++){
+    for(var aid=1;aid<=10;aid++){
+      var h=0;
+      for(var j=0;j<MS[mi].refs.length;j++){
+        if(MS[mi].refs[j].id===aid)h+=incHrs(mi,aid,MS[mi].refs[j].tag);
+      }
+      h=r1(h);mat[aid].push(h);agTot[aid]=r1(agTot[aid]+h);
+    }
+  }
+  // Column totals
+  var colInc=[],cumR=0,colCum=[],colPct=[];
+  for(var mi=0;mi<N;mi++){
+    var ct=0;for(var aid=1;aid<=10;aid++)ct+=mat[aid][mi];
+    ct=r1(ct);colInc.push(ct);
+    cumR=r1(cumR+ct);colCum.push(cumR);
+    colPct.push(Math.round(cumR/TOTAL_AUTO*75));
+  }
+
+  var h='<table class="mtbl"><thead><tr><th class="ac">Agent</th>';
+  for(var mi=0;mi<N;mi++)h+='<th>'+MS[mi].title+'</th>';
+  h+='<th>Total</th></tr></thead><tbody>';
+
+  for(var aid=1;aid<=10;aid++){
+    h+='<tr><td class="ac">'+pad(aid)+' '+names[aid]+'</td>';
+    for(var mi=0;mi<N;mi++){
+      var v=mat[aid][mi];
+      h+='<td class="'+(v>0?'pos':'')+'">'+( v>0?'+'+v.toFixed(1):'—')+'</td>';
+    }
+    h+='<td class="'+(agTot[aid]>0?'pos':'')+'">'+agTot[aid].toFixed(1)+'</td></tr>';
+  }
+
+  h+='</tbody><tfoot>'
+    +'<tr class="r-inc"><td class="ac">Incremental hrs accelerated</td>';
+  var grandInc=0;
+  for(var mi=0;mi<N;mi++){h+='<td>'+(colInc[mi]>0?'+'+colInc[mi].toFixed(1):'—')+'</td>';grandInc=r1(grandInc+colInc[mi]);}
+  h+='<td>'+grandInc.toFixed(1)+'</td></tr>';
+
+  h+='<tr class="r-cum"><td class="ac">Cumulative hrs accelerated</td>';
+  for(var mi=0;mi<N;mi++)h+='<td>'+(colCum[mi]>0?colCum[mi].toFixed(1):'—')+'</td>';
+  h+='<td>'+colCum[N-1].toFixed(1)+'</td></tr>';
+
+  h+='<tr class="r-pct"><td class="ac">% Accelerated (of '+TOTAL+' hrs target)</td>';
+  for(var mi=0;mi<N;mi++)h+='<td>'+(colPct[mi]>0?colPct[mi]+'%':'—')+'</td>';
+  h+='<td>'+colPct[N-1]+'%</td></tr>';
+
+  h+='</tfoot></table>';
+  document.getElementById('matrix-table').innerHTML=h;
+}
+
+render();
+function toggleMode(){
+  var isLight=document.documentElement.classList.toggle('light');
+  document.getElementById('modeLabel').textContent=isLight?'Light mode':'Dark mode';
+  var el=document.getElementById('light-overrides');
+  if(isLight){
+    if(!el){el=document.createElement('style');el.id='light-overrides';document.head.appendChild(el);}
+    el.textContent=[
+      'html.light [style*="color:rgba(240,245,249"]{color:#1a2b3c!important}',
+      'html.light [style*="color: rgba(240,245,249"]{color:#1a2b3c!important}',
+      'html.light [style*="color:rgba(240,245,249,0.85)"]{color:#0d1e2d!important}',
+      'html.light [style*="color:rgba(240,245,249,0.9)"]{color:#0d1e2d!important}',
+      'html.light [style*="color:rgba(240,245,249,0.92)"]{color:#0d1e2d!important}',
+      'html.light [style*="color:rgba(240,245,249,.75)"]{color:rgba(13,30,45,0.75)!important}',
+      'html.light [style*="color:rgba(240,245,249,0.75)"]{color:rgba(13,30,45,0.75)!important}',
+      'html.light [style*="color:rgba(240,245,249,0.5)"]{color:rgba(13,30,45,0.55)!important}',
+      'html.light [style*="color:rgba(240,245,249,0.4)"]{color:rgba(13,30,45,0.5)!important}',
+      'html.light [style*="color:rgba(240,245,249,0.45)"]{color:rgba(13,30,45,0.5)!important}',
+      'html.light [style*="color:rgba(240,245,249,0.35)"]{color:rgba(13,30,45,0.4)!important}',
+      'html.light [style*="color:rgba(240,245,249,0.3)"]{color:rgba(13,30,45,0.35)!important}',
+      'html.light [style*="color:var(--muted)"]{color:rgba(13,30,45,0.55)!important}',
+      'html.light [style*="color:var(--white)"]{color:#0d1e2d!important}',
+      'html.light [style*="background:rgba(255,255,255,0.0"]{background:rgba(0,0,0,0.05)!important}',
+      'html.light [style*="background:rgba(0,0,0,0.3)"]{background:rgba(0,0,0,0.04)!important}',
+      'html.light [style*="background:var(--surface)"]{background:#ffffff!important}',
+      'html.light [style*="background:var(--card)"]{background:#f0f4f8!important}',
+      'html.light [style*="background:#0a2535"]{background:#ffffff!important}',
+      'html.light [style*="border-top:1px solid var(--bdim)"]{border-top-color:rgba(0,0,0,0.1)!important}',
+      'html.light [style*="border-bottom:1px solid var(--bdim)"]{border-bottom-color:rgba(0,0,0,0.1)!important}',
+      'html.light [style*="border:1px solid var(--bdim)"]{border-color:rgba(0,0,0,0.1)!important}',
+      'html.light [style*="border:1px solid rgba(255,255,255"]{border-color:rgba(0,0,0,0.12)!important}',
+      'html.light #ws-grid>div{background:#ffffff!important}',
+      'html.light #ws-grid [style*="rgba(255,255,255,0.05)"]{background:rgba(0,0,0,0.05)!important}',
+      'html.light .imp-label{color:inherit!important}',
+    ].join('\n');
+  } else {
+    if(el) el.textContent='';
+  }
+}
+</script>
+
+</body>
 </html>
