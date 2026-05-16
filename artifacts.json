@@ -256,24 +256,5 @@
     "color2": "var(--rose)",
     "colorBg": "var(--accent-bg)",
     "added": "2026-05-11"
-  },
-  {
-    "name": "Smoke Test",
-    "section": "Product Management",
-    "desc": "Smoke test artifact, safe to delete.",
-    "tags": [
-      "Test"
-    ],
-    "keywords": [
-      "smoke",
-      "test"
-    ],
-    "url": "test-smoke/",
-    "live": false,
-    "agent": "Test",
-    "color1": "var(--accent)",
-    "color2": "var(--green)",
-    "colorBg": "var(--accent-bg)",
-    "added": "2026-05-16"
   }
 ]
