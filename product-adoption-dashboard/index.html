@@ -174,6 +174,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-web
 .tab-body{display:none;}
 .tab-body.active{display:block;}
 
+/* SEARCH */
+.search-wrap{position:relative;flex:1;max-width:260px;}
+.search-input{width:100%;padding:6px 10px 6px 30px;border:1px solid var(--bdr);border-radius:6px;background:var(--bg0);font-family:inherit;font-size:11px;color:var(--t1);outline:none;transition:border-color 0.15s;}
+.search-input:focus{border-color:var(--int);}
+.search-input::placeholder{color:var(--t4);}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--t4);pointer-events:none;}
+
 /* DOCS PANEL */
 .docs-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:999;opacity:0;pointer-events:none;transition:opacity 0.25s;}
 .docs-overlay.open{opacity:1;pointer-events:auto;}
@@ -293,65 +300,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-web
   </div>
 </div>
 
-<!-- 4. BU BREAKDOWN -->
-<div class="sec"><span class="sec-title">Business Unit Breakdown</span><span class="sec-line"></span></div>
-<div class="legend">
-  <div class="legend-item"><div class="legend-dot" style="background:var(--ok);"></div>High Use</div>
-  <div class="legend-item"><div class="legend-dot" style="background:var(--teal);"></div>Medium Use</div>
-  <div class="legend-item"><div class="legend-dot" style="background:var(--warn);"></div>Low Use</div>
-  <div class="legend-item"><div class="legend-dot" style="background:var(--crit);opacity:0.6;"></div>Activated No Use</div>
-  <div class="legend-item"><div class="legend-dot" style="background:var(--t4);opacity:0.4;"></div>Not In Use</div>
-</div>
-<table class="tbl">
-  <thead>
-    <tr><th>Business Unit</th><th class="r">ACV</th><th class="c">Apps</th><th>Usage Distribution</th><th class="r">Undeployed %</th><th>NLU</th><th class="c">18-Mo Trend</th><th>Signal</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="font-weight:700;">ITSM</td><td class="r">$2.8M</td><td class="c">6</td>
-      <td><div class="sbar"><div class="h" style="width:33%;"></div><div class="m" style="width:17%;"></div><div class="l" style="width:17%;"></div><div class="n" style="width:17%;"></div><div class="x" style="width:16%;"></div></div></td>
-      <td class="r" style="color:var(--warn);font-weight:700;">33%</td>
-      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:92%;background:var(--ok);"></div></div><span class="nlu-v" style="color:var(--ok);">92%</span></div></td>
-      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:10px;background:var(--ok);"></div><div style="height:12px;background:var(--ok);"></div><div style="height:14px;background:var(--ok);"></div><div style="height:13px;background:var(--ok);"></div><div style="height:16px;background:var(--ok);"></div><div style="height:15px;background:var(--ok);"></div><div style="height:18px;background:var(--ok);"></div><div style="height:17px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:19px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div></div></td>
-      <td><span class="risk-tag watch">2 critical undeployed</span></td>
-    </tr>
-    <tr>
-      <td style="font-weight:700;">ITOM</td><td class="r">$680K</td><td class="c">4</td>
-      <td><div class="sbar"><div class="h" style="width:25%;"></div><div class="l" style="width:25%;"></div><div class="n" style="width:25%;"></div><div class="x" style="width:25%;"></div></div></td>
-      <td class="r" style="color:var(--crit);font-weight:700;">50%</td>
-      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:64%;background:var(--warn);"></div></div><span class="nlu-v" style="color:var(--warn);">64%</span></div></td>
-      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:8px;background:var(--t4);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:8px;background:var(--crit);"></div><div style="height:6px;background:var(--crit);"></div><div style="height:7px;background:var(--t4);"></div><div style="height:9px;background:var(--ok);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:9px;background:var(--t4);"></div><div style="height:7px;background:var(--crit);"></div><div style="height:8px;background:var(--t4);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:12px;background:var(--ok);"></div></div></td>
-      <td><span class="risk-tag focus">1 critical undeployed</span></td>
-    </tr>
-    <tr>
-      <td style="font-weight:700;">HRSD</td><td class="r">$520K</td><td class="c">3</td>
-      <td><div class="sbar"><div class="h" style="width:33%;"></div><div class="m" style="width:34%;"></div><div class="m" style="width:33%;"></div></div></td>
-      <td class="r" style="color:var(--ok);font-weight:700;">0%</td>
-      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:100%;background:var(--int);"></div></div><span class="nlu-v" style="color:var(--int);">106%</span></div></td>
-      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:10px;background:var(--ok);"></div><div style="height:14px;background:var(--ok);"></div><div style="height:16px;background:var(--ok);"></div><div style="height:18px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div></div></td>
-      <td><span class="risk-tag on-track">Fully deployed</span></td>
-    </tr>
-    <tr>
-      <td style="font-weight:700;">CSM</td><td class="r">$200K</td><td class="c">2</td>
-      <td><div class="sbar"><div class="l" style="width:50%;"></div><div class="n" style="width:50%;"></div></div></td>
-      <td class="r" style="color:var(--crit);font-weight:700;">50%</td>
-      <td><div class="nlu-inline"><div class="nlu-track"><div class="nlu-fill" style="width:38%;background:var(--crit);"></div></div><span class="nlu-v" style="color:var(--crit);">38%</span></div></td>
-      <td class="c"><div class="spark" style="justify-content:center;"><div style="height:4px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:3px;background:var(--crit);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:3px;background:var(--crit);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:5px;background:var(--t4);"></div></div></td>
-      <td><span class="risk-tag focus">Stalled adoption</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- 5. APPLICATION DETAIL (Widget) -->
+<!-- 4. APPLICATION DETAIL (Widget) -->
 <div class="sec"><span class="sec-title">Application Detail</span><span class="sec-line"></span><div class="sec-actions"><a class="report-btn" href="#" title="Report a data issue with application profiles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Report Issue</a></div></div>
 <div class="widget">
   <div class="widget-header">
-    <div style="display:flex;align-items:center;">
-      <div class="toggle" style="margin-right:12px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="toggle">
         <button class="toggle-btn active" onclick="toggleApps(this,'critical')">Critical Apps</button>
         <button class="toggle-btn" onclick="toggleApps(this,'all')">All Licensed Apps</button>
       </div>
       <span class="filter-hint" id="app-count" style="color:var(--t4);">Showing 14 critical applications</span>
+    </div>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" placeholder="Search application, BU..." oninput="searchApps(this.value)">
     </div>
   </div>
   <div class="widget-body">
@@ -364,33 +326,76 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg0);color:var(--t1);-web
   </div>
 </div>
 
-<!-- 6. LICENSE UTILIZATION (Tabs) -->
-<div class="sec"><span class="sec-title collapsible-header" onclick="toggleSection('util-section',this)">License Utilization <span class="chevron">&#9660;</span></span><span class="sec-line"></span><div class="sec-actions"><a class="report-btn" href="#" title="Report a data issue with license utilization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Report Issue</a></div></div>
+<!-- 5. BUSINESS UNIT & LICENSE UTILIZATION (merged) -->
+<div class="sec"><span class="sec-title collapsible-header" onclick="toggleSection('util-section',this)">Business Unit & License Utilization <span class="chevron">&#9660;</span></span><span class="sec-line"></span><div class="sec-actions"><a class="report-btn" href="#" title="Report a data issue with utilization data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Report Issue</a></div></div>
 <div id="util-section" class="collapsible-body">
 <div class="widget">
-  <div class="sn-tabs">
-    <button class="sn-tab active" onclick="switchTab(this,'tab-bu')">Business Unit Profile</button>
-    <button class="sn-tab" onclick="switchTab(this,'tab-sku')">Product Utilization</button>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:var(--bg2);">
+    <div class="sn-tabs" style="border-bottom:none;">
+      <button class="sn-tab active" onclick="switchTab(this,'tab-bu')">Business Unit Profile</button>
+      <button class="sn-tab" onclick="switchTab(this,'tab-sku')">Product Utilization</button>
+    </div>
+    <div class="search-wrap" style="margin:8px 0;">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" placeholder="Search BU, product..." oninput="searchUtil(this.value)">
+    </div>
   </div>
-  <!-- TAB: Business Unit Profile -->
-  <div id="tab-bu" class="tab-body active" style="padding:0;">
-  <table class="util-tbl">
-    <thead><tr><th>BU</th><th class="r">Net Value</th><th class="r">% Net License</th><th class="r">% Underutilization</th><th class="r">% Overutilization</th></tr></thead>
+  <div style="border-top:2px solid var(--bdr);"></div>
+  <!-- TAB: Business Unit Profile (merged with BU breakdown data) -->
+  <div id="tab-bu" class="tab-body active" style="padding:0;overflow-x:auto;">
+  <div class="legend" style="padding:10px 14px 0;margin-bottom:0;">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ok);"></div>High</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--teal);"></div>Med</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--warn);"></div>Low</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--crit);opacity:0.6;"></div>No Use</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--t4);opacity:0.4;"></div>Not In Use</div>
+  </div>
+  <table class="util-tbl" id="bu-table">
+    <thead><tr><th>Business Unit</th><th class="r">ACV</th><th class="c">Apps</th><th>Usage Distribution</th><th class="r">Undeployed %</th><th class="r">% NLU</th><th class="r">% Under</th><th class="r">% Over</th><th class="c">Trend</th><th>Signal</th></tr></thead>
     <tbody>
-      <tr class="grp open" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Technology Workflow</td><td class="r" style="font-weight:600;">$3,480K</td><td class="r">78%</td><td class="r" style="color:var(--crit);">-22%</td><td class="r">0</td></tr>
-      <tr class="child"><td>ITSM</td><td class="r">$2,800K</td><td class="r">92%</td><td class="r" style="color:var(--ok);">-8%</td><td class="r">0</td></tr>
-      <tr class="child"><td>ITOM</td><td class="r">$680K</td><td class="r">64%</td><td class="r" style="color:var(--crit);">-36%</td><td class="r">0</td></tr>
-      <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>Core Business</td><td class="r" style="font-weight:600;">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">+6%</td></tr>
-      <tr class="child hidden"><td>HRSD</td><td class="r">$520K</td><td class="r">106%</td><td class="r">0</td><td class="r" style="color:var(--int);">+6%</td></tr>
-      <tr class="grp" onclick="toggleGroup(this)"><td><span class="arrow">&#9654;</span>CRM and Industry</td><td class="r" style="font-weight:600;">$200K</td><td class="r">38%</td><td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td></tr>
-      <tr class="child hidden"><td>CSM</td><td class="r">$200K</td><td class="r">38%</td><td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td></tr>
+      <tr>
+        <td style="font-weight:700;">ITSM</td><td class="r">$2.8M</td><td class="c">6</td>
+        <td><div class="sbar"><div class="h" style="width:33%;"></div><div class="m" style="width:17%;"></div><div class="l" style="width:17%;"></div><div class="n" style="width:17%;"></div><div class="x" style="width:16%;"></div></div></td>
+        <td class="r" style="color:var(--warn);font-weight:700;">33%</td>
+        <td class="r" style="font-weight:600;">92%</td>
+        <td class="r" style="color:var(--ok);">-8%</td><td class="r">0</td>
+        <td class="c"><div class="spark" style="justify-content:center;"><div style="height:10px;background:var(--ok);"></div><div style="height:13px;background:var(--ok);"></div><div style="height:16px;background:var(--ok);"></div><div style="height:18px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:19px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div></div></td>
+        <td><span class="risk-tag watch">2 critical undeployed</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">ITOM</td><td class="r">$680K</td><td class="c">4</td>
+        <td><div class="sbar"><div class="h" style="width:25%;"></div><div class="l" style="width:25%;"></div><div class="n" style="width:25%;"></div><div class="x" style="width:25%;"></div></div></td>
+        <td class="r" style="color:var(--crit);font-weight:700;">50%</td>
+        <td class="r" style="font-weight:600;">64%</td>
+        <td class="r" style="color:var(--crit);">-36%</td><td class="r">0</td>
+        <td class="c"><div class="spark" style="justify-content:center;"><div style="height:8px;background:var(--t4);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:8px;background:var(--crit);"></div><div style="height:7px;background:var(--t4);"></div><div style="height:9px;background:var(--ok);"></div><div style="height:8px;background:var(--t4);"></div><div style="height:10px;background:var(--ok);"></div><div style="height:12px;background:var(--ok);"></div></div></td>
+        <td><span class="risk-tag focus">1 critical undeployed</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">HRSD</td><td class="r">$520K</td><td class="c">3</td>
+        <td><div class="sbar"><div class="h" style="width:33%;"></div><div class="m" style="width:34%;"></div><div class="m" style="width:33%;"></div></div></td>
+        <td class="r" style="color:var(--ok);font-weight:700;">0%</td>
+        <td class="r" style="font-weight:600;color:var(--int);">106%</td>
+        <td class="r">0</td><td class="r" style="color:var(--int);">+6%</td>
+        <td class="c"><div class="spark" style="justify-content:center;"><div style="height:10px;background:var(--ok);"></div><div style="height:16px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div><div style="height:20px;background:var(--ok);"></div></div></td>
+        <td><span class="risk-tag on-track">Fully deployed</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">CSM</td><td class="r">$200K</td><td class="c">2</td>
+        <td><div class="sbar"><div class="l" style="width:50%;"></div><div class="n" style="width:50%;"></div></div></td>
+        <td class="r" style="color:var(--crit);font-weight:700;">50%</td>
+        <td class="r" style="font-weight:600;color:var(--crit);">38%</td>
+        <td class="r" style="color:var(--crit);">-62%</td><td class="r">0</td>
+        <td class="c"><div class="spark" style="justify-content:center;"><div style="height:4px;background:var(--t4);"></div><div style="height:3px;background:var(--crit);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:3px;background:var(--crit);"></div><div style="height:3px;background:var(--t4);"></div><div style="height:4px;background:var(--t4);"></div><div style="height:5px;background:var(--t4);"></div></div></td>
+        <td><span class="risk-tag focus">Stalled adoption</span></td>
+      </tr>
     </tbody>
   </table>
   </div>
 
   <!-- TAB: Product Utilization (flat list) -->
   <div id="tab-sku" class="tab-body" style="padding:0;max-height:420px;overflow-y:auto;">
-  <table class="util-tbl">
+  <table class="util-tbl" id="sku-table">
     <thead style="position:sticky;top:0;z-index:2;"><tr><th>Business Unit</th><th>Product</th><th class="r">Purchase Date</th><th class="r">Product ACV</th><th class="r">Usage ACV</th><th class="r">% NLU</th><th class="r">% Under</th><th class="r">% Over</th></tr></thead>
     <tbody>
       <tr><td style="color:var(--t3);">ITSM</td><td>Approver User</td><td class="r" style="color:var(--t3);">2026-03-02</td><td class="r">$8,705K</td><td class="r">$4,386K</td><td class="r" style="font-weight:600;">50%</td><td class="r" style="background:rgba(229,62,62,0.06);color:var(--crit);">-53%</td><td class="r" style="background:rgba(49,130,206,0.05);color:var(--int);">+3%</td></tr>
@@ -489,6 +494,47 @@ function toggleSection(id,header){
 }
 
 renderApps('critical');
+
+// Search: Application Detail
+let currentFilter = 'critical';
+function searchApps(q) {
+  const rows = document.querySelectorAll('#app-body tr');
+  const term = q.toLowerCase();
+  rows.forEach(r => {
+    if (r.classList.contains('bu-group')) {
+      r.style.display = '';
+      return;
+    }
+    const text = r.textContent.toLowerCase();
+    r.style.display = text.includes(term) ? '' : 'none';
+  });
+  // Show BU groups only if they have visible children
+  let lastGroup = null;
+  let groupHasVisible = false;
+  rows.forEach(r => {
+    if (r.classList.contains('bu-group')) {
+      if (lastGroup && !groupHasVisible) lastGroup.style.display = 'none';
+      lastGroup = r;
+      groupHasVisible = false;
+    } else if (r.style.display !== 'none') {
+      groupHasVisible = true;
+    }
+  });
+  if (lastGroup && !groupHasVisible) lastGroup.style.display = 'none';
+}
+
+// Search: Utilization tables
+function searchUtil(q) {
+  const term = q.toLowerCase();
+  // Search BU table
+  document.querySelectorAll('#bu-table tbody tr').forEach(r => {
+    r.style.display = r.textContent.toLowerCase().includes(term) ? '' : 'none';
+  });
+  // Search SKU table
+  document.querySelectorAll('#sku-table tbody tr').forEach(r => {
+    r.style.display = r.textContent.toLowerCase().includes(term) ? '' : 'none';
+  });
+}
 </script>
 <!-- DOCS OVERLAY + PANEL -->
 <div class="docs-overlay" id="docsOverlay" onclick="closeDocs()"></div>
